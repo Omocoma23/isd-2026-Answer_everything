@@ -1,0 +1,7 @@
+{
+  "source": "OCR curriculum extraction",
+  "description": "Extracted academic plan from OCR for DSBA (no_coop)",
+  "program": "DSBA",
+  "plan": "no_coop",
+  "courses": []
+}
