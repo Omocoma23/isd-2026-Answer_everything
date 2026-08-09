@@ -1,0 +1,2371 @@
+{
+  "total_ground_truth_courses": 90,
+  "total_prediction_courses": 89,
+  "ignored_ground_truth_rows": [
+    {
+      "index": 90,
+      "reason": "invalid/non-course code",
+      "row": {
+        "code": "หมายเหตุ: คอลัมน์ \"ตัวเลือกปี/เทอม (flexible)\" กรอกเฉพาะแถวที่ ปี=0 และ เทอม=0 เท่านั้น (เซลล์จะเปลี่ยนเป็นสีเหลืองอัตโนมัติ) — ใส่เป็น \"ปี/เทอม\" คั่นด้วยจุลภาค เช่น \"3/2, 4/1, 4/2\"",
+        "name_th": null,
+        "name_en": null,
+        "credits": null,
+        "year": null,
+        "semester": null,
+        "category": null,
+        "type": null,
+        "prerequisite": null,
+        "flexible_year_semester": null,
+        "note": null
+      }
+    }
+  ],
+  "ignored_prediction_rows": [],
+  "matched_courses": 89,
+  "missing_courses": 1,
+  "extra_prediction_courses": 0,
+  "course_match_rate": 0.9888888888888889,
+  "exact_course_matches": 71,
+  "exact_course_accuracy": 0.7888888888888889,
+  "field_correct": {
+    "code": 89,
+    "name_th": 74,
+    "name_en": 89,
+    "credits": 89,
+    "year": 89,
+    "semester": 89,
+    "category": 88,
+    "type": 89,
+    "prerequisite": 89,
+    "flexible_year_semester": 89,
+    "note": 87
+  },
+  "field_total": {
+    "code": 90,
+    "name_th": 90,
+    "name_en": 90,
+    "credits": 90,
+    "year": 90,
+    "semester": 90,
+    "category": 90,
+    "type": 90,
+    "prerequisite": 90,
+    "flexible_year_semester": 90,
+    "note": 90
+  },
+  "field_accuracy": {
+    "code": 0.9888888888888889,
+    "name_th": 0.8222222222222222,
+    "name_en": 0.9888888888888889,
+    "credits": 0.9888888888888889,
+    "year": 0.9888888888888889,
+    "semester": 0.9888888888888889,
+    "category": 0.9777777777777777,
+    "type": 0.9888888888888889,
+    "prerequisite": 0.9888888888888889,
+    "flexible_year_semester": 0.9888888888888889,
+    "note": 0.9666666666666667
+  },
+  "overall_field_accuracy": 0.9707070707070707,
+  "details": [
+    {
+      "gt_index": 0,
+      "occurrence": 1,
+      "code": "06016401",
+      "year": "1",
+      "semester": "1",
+      "matched": false,
+      "prediction_index": null,
+      "fields": {
+        "code": false,
+        "name_th": false,
+        "name_en": false,
+        "credits": false,
+        "year": false,
+        "semester": false,
+        "category": false,
+        "type": false,
+        "prerequisite": false,
+        "flexible_year_semester": false,
+        "note": false
+      },
+      "differences": {
+        "code": {
+          "ground_truth": "06016401",
+          "prediction": null
+        },
+        "name_th": {
+          "ground_truth": "คณิตศาสตร์สำหรับเทคโนโลยีสารสนเทศ",
+          "prediction": null
+        },
+        "name_en": {
+          "ground_truth": "MATHEMATICS FOR INFORMATION TECHNOLOGY",
+          "prediction": null
+        },
+        "credits": {
+          "ground_truth": "3(3-0-6)",
+          "prediction": null
+        },
+        "year": {
+          "ground_truth": "1",
+          "prediction": null
+        },
+        "semester": {
+          "ground_truth": "1",
+          "prediction": null
+        },
+        "category": {
+          "ground_truth": "หมวดวิชาเฉพาะ",
+          "prediction": null
+        },
+        "type": {
+          "ground_truth": "บังคับ",
+          "prediction": null
+        },
+        "prerequisite": {
+          "ground_truth": "ไม่มี",
+          "prediction": null
+        },
+        "flexible_year_semester": {
+          "ground_truth": null,
+          "prediction": null
+        },
+        "note": {
+          "ground_truth": null,
+          "prediction": null
+        }
+      }
+    },
+    {
+      "gt_index": 1,
+      "occurrence": 1,
+      "code": "06026200",
+      "year": 1,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 0,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 2,
+      "occurrence": 1,
+      "code": "06026202",
+      "year": 1,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 1,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 3,
+      "occurrence": 1,
+      "code": "06066101",
+      "year": 1,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 2,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 4,
+      "occurrence": 1,
+      "code": "06066303",
+      "year": 1,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 3,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "การแก้ปัญหาและโปรแกรมคอมพิวเตอร์",
+          "prediction": "การแก้ปัญหาและการโปรแกรมคอมพิวเตอร์"
+        }
+      }
+    },
+    {
+      "gt_index": 5,
+      "occurrence": 1,
+      "code": "90641001",
+      "year": 1,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 4,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "โรงเรียนสร้างเสน่าห์",
+          "prediction": "โรงเรียนสร้างเสน่ห์"
+        }
+      }
+    },
+    {
+      "gt_index": 6,
+      "occurrence": 1,
+      "code": "90641003",
+      "year": 1,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 5,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 7,
+      "occurrence": 1,
+      "code": "90644007",
+      "year": 1,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 6,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 8,
+      "occurrence": 1,
+      "code": "06026201",
+      "year": 1,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 7,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 9,
+      "occurrence": 1,
+      "code": "06026203",
+      "year": 1,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 8,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 10,
+      "occurrence": 1,
+      "code": "06026205",
+      "year": 1,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 9,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "การตลาดเบื้อต้น",
+          "prediction": "การตลาดเบื้องต้น"
+        }
+      }
+    },
+    {
+      "gt_index": 11,
+      "occurrence": 1,
+      "code": "06066001",
+      "year": 1,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 10,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 12,
+      "occurrence": 1,
+      "code": "90641002",
+      "year": 1,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 11,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "ความฉลาดทางดิจิทัล",
+          "prediction": "ความฉลาดทางติจิทัล"
+        }
+      }
+    },
+    {
+      "gt_index": 13,
+      "occurrence": 1,
+      "code": "90642033",
+      "year": 1,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 12,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 14,
+      "occurrence": 1,
+      "code": "90644008",
+      "year": 1,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 13,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 15,
+      "occurrence": 1,
+      "code": "06026206",
+      "year": 2,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 14,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 16,
+      "occurrence": 1,
+      "code": "06066000",
+      "year": 2,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 15,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 17,
+      "occurrence": 1,
+      "code": "06066300",
+      "year": 2,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 16,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 18,
+      "occurrence": 1,
+      "code": "06066302",
+      "year": 2,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 17,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 19,
+      "occurrence": 1,
+      "code": "06066304",
+      "year": 2,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 18,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "การวิเคราะห์และอออกแบบระบบสารสนเทศ",
+          "prediction": "การวิเคราะห์และออกแบบระบบสารสนเทศ"
+        }
+      }
+    },
+    {
+      "gt_index": 20,
+      "occurrence": 1,
+      "code": "90644xxx",
+      "year": 2,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 19,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "วิชาเลือกภาษาและการสื่อสาร",
+          "prediction": "วิชาเลือกด้านภาษาและการสื่อสาร"
+        }
+      }
+    },
+    {
+      "gt_index": 21,
+      "occurrence": 1,
+      "code": "06026204",
+      "year": 2,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 20,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "เครือข่ายและความมั่นคงทางไซเบอร์เบื่องต้น",
+          "prediction": "เครือข่ายและความมั่นคงทางไซเบอร์เบื้องต้น"
+        }
+      }
+    },
+    {
+      "gt_index": 22,
+      "occurrence": 1,
+      "code": "06026207",
+      "year": 2,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 21,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 23,
+      "occurrence": 1,
+      "code": "06026208",
+      "year": 2,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 22,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 24,
+      "occurrence": 1,
+      "code": "06026209",
+      "year": 2,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 23,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 25,
+      "occurrence": 1,
+      "code": "06026210",
+      "year": 2,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 24,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 26,
+      "occurrence": 1,
+      "code": "06066102",
+      "year": 2,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 25,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 27,
+      "occurrence": 1,
+      "code": "06066301",
+      "year": 2,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 26,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "โครงสร้างข้อมูลและอัลกอริทึม",
+          "prediction": "โครงสร้างข้อมูลและอัลกอริทีม"
+        }
+      }
+    },
+    {
+      "gt_index": 28,
+      "occurrence": 1,
+      "code": "06026211",
+      "year": 3,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 27,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 29,
+      "occurrence": 1,
+      "code": "06026212",
+      "year": 3,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 28,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 30,
+      "occurrence": 1,
+      "code": "06026xxx",
+      "year": 3,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 29,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 31,
+      "occurrence": 2,
+      "code": "06026xxx",
+      "year": 3,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 30,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 32,
+      "occurrence": 1,
+      "code": "9064xxxx",
+      "year": 3,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 31,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": false,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "category": {
+          "ground_truth": "หมวดวิชาเฉพาะ",
+          "prediction": "หมวดวิชาศึกษาทั่วไป"
+        }
+      }
+    },
+    {
+      "gt_index": 33,
+      "occurrence": 1,
+      "code": "90644042",
+      "year": 3,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 32,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 34,
+      "occurrence": 1,
+      "code": "06026213",
+      "year": 3,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 33,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 35,
+      "occurrence": 1,
+      "code": "06026214",
+      "year": 3,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 34,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 36,
+      "occurrence": 1,
+      "code": "06026xxx",
+      "year": 3,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 35,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 37,
+      "occurrence": 2,
+      "code": "06026xxx",
+      "year": 3,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 36,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 38,
+      "occurrence": 1,
+      "code": "06066100",
+      "year": 3,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 37,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 39,
+      "occurrence": 1,
+      "code": "90643021",
+      "year": 3,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 38,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 40,
+      "occurrence": 1,
+      "code": "06026215",
+      "year": 4,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 39,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 41,
+      "occurrence": 1,
+      "code": "9064xxxx",
+      "year": 4,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 40,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 42,
+      "occurrence": 1,
+      "code": "xxxxxxxx",
+      "year": 4,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 43,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 43,
+      "occurrence": 2,
+      "code": "xxxxxxxx",
+      "year": 4,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 41,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 44,
+      "occurrence": 1,
+      "code": "06026259|06026260",
+      "year": 4,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 42,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 45,
+      "occurrence": 1,
+      "code": "06026216",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 44,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 46,
+      "occurrence": 1,
+      "code": "06026217",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 45,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 47,
+      "occurrence": 1,
+      "code": "06026218",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 46,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 48,
+      "occurrence": 1,
+      "code": "06026219",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 47,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 49,
+      "occurrence": 1,
+      "code": "06026220",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 48,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 50,
+      "occurrence": 1,
+      "code": "06026221",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 49,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 51,
+      "occurrence": 1,
+      "code": "06026222",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 50,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 52,
+      "occurrence": 1,
+      "code": "06026223",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 51,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 53,
+      "occurrence": 1,
+      "code": "06026224",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 52,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 54,
+      "occurrence": 1,
+      "code": "06026225",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 53,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "การเรียนรู้เชิงลึกสำหรับการวิเคราะห์ภาพและวิดีโอทางการแพทย์",
+          "prediction": "การเรียนรู้เชิงลึกสำหรับการวิเคราะห์ภาพและวีดิโอทางการ แพทย์"
+        }
+      }
+    },
+    {
+      "gt_index": 55,
+      "occurrence": 1,
+      "code": "06026226",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 54,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 56,
+      "occurrence": 1,
+      "code": "06026227",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 55,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 57,
+      "occurrence": 1,
+      "code": "06026228",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 56,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "ปฏิบัติการพิเศษทางวิทยาการข้อมูล 1",
+          "prediction": "ปปฏิบัติการพิเศษทางวิทยาการข้อมูล 1"
+        }
+      }
+    },
+    {
+      "gt_index": 58,
+      "occurrence": 1,
+      "code": "06026229",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 57,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "ปฏิบัติการพิเศษทางวิทยาการข้อมูล 2",
+          "prediction": "ปปฏิบัติการพิเศษทางวิทยาการข้อมูล 2"
+        }
+      }
+    },
+    {
+      "gt_index": 59,
+      "occurrence": 1,
+      "code": "06026230",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 58,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 60,
+      "occurrence": 1,
+      "code": "06026231",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 59,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 61,
+      "occurrence": 1,
+      "code": "06026232",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 60,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 62,
+      "occurrence": 1,
+      "code": "06026233",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 61,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "การวิเคราะห์ข้อมูลหลายตัวแปร",
+          "prediction": "การวิเคราห์ข้อมูลหลายตัวแปร"
+        }
+      }
+    },
+    {
+      "gt_index": 63,
+      "occurrence": 1,
+      "code": "06026234",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 62,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 64,
+      "occurrence": 1,
+      "code": "06026235",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 63,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 65,
+      "occurrence": 1,
+      "code": "06026236",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 64,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 66,
+      "occurrence": 1,
+      "code": "06026237",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 65,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 67,
+      "occurrence": 1,
+      "code": "06026238",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 66,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 68,
+      "occurrence": 1,
+      "code": "06026239",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 67,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "สถิาปัตยกรรมข้อมูลแบบไปป์ไลน์",
+          "prediction": "สถาปัตยกรรมข้อมูลแบบไปป์ไลน์"
+        }
+      }
+    },
+    {
+      "gt_index": 69,
+      "occurrence": 1,
+      "code": "06026240",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 68,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 70,
+      "occurrence": 1,
+      "code": "06026241",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 69,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 71,
+      "occurrence": 1,
+      "code": "06026242",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 70,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 72,
+      "occurrence": 1,
+      "code": "06026243",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 71,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 73,
+      "occurrence": 1,
+      "code": "06026244",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 72,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 74,
+      "occurrence": 1,
+      "code": "06026245",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 73,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "ระบบข้อมูลแบบกระจาย",
+          "prediction": "ระบบฐานข้อมูลแบบกระจาย"
+        }
+      }
+    },
+    {
+      "gt_index": 75,
+      "occurrence": 1,
+      "code": "06026246",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 74,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 76,
+      "occurrence": 1,
+      "code": "06026247",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 75,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 77,
+      "occurrence": 1,
+      "code": "06026248",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 76,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "ปฏิบัติการพิเศษทางวิศวกรรมข้อมูล 1",
+          "prediction": "ปปฏิบัติการพิเศษทางวิศวกรรมข้อมูล 1"
+        }
+      }
+    },
+    {
+      "gt_index": 78,
+      "occurrence": 1,
+      "code": "06026249",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 77,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 79,
+      "occurrence": 1,
+      "code": "06026250",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 78,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 80,
+      "occurrence": 1,
+      "code": "06026251",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 79,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 81,
+      "occurrence": 1,
+      "code": "06026252",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 80,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 82,
+      "occurrence": 1,
+      "code": "06026253",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 81,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 83,
+      "occurrence": 1,
+      "code": "06026254",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 82,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 84,
+      "occurrence": 1,
+      "code": "06026255",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 83,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 85,
+      "occurrence": 1,
+      "code": "06026256",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 84,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 86,
+      "occurrence": 1,
+      "code": "06026257",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 85,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 87,
+      "occurrence": 1,
+      "code": "06026258",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 86,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 88,
+      "occurrence": 1,
+      "code": "06026259",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 87,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": false
+      },
+      "differences": {
+        "note": {
+          "ground_truth": "เฉพาะโครงการเข้าร่วมสหกิจ",
+          "prediction": null
+        }
+      }
+    },
+    {
+      "gt_index": 89,
+      "occurrence": 1,
+      "code": "06026260",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 88,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": false
+      },
+      "differences": {
+        "note": {
+          "ground_truth": "เฉพาะโครงการเข้าร่วมสหกิจ",
+          "prediction": null
+        }
+      }
+    }
+  ],
+  "extra_predictions": [],
+  "ground_truth_file": "data\\ground_truth\\DSBA_academic_plan_coop.json",
+  "prediction_file": "outputs\\DSBA_extracted.json",
+  "program_match": true,
+  "plan_match": true
+}
