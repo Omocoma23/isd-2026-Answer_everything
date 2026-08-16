@@ -1,0 +1,1850 @@
+{
+  "total_ground_truth_courses": 63,
+  "total_prediction_courses": 63,
+  "ignored_ground_truth_rows": [],
+  "ignored_prediction_rows": [],
+  "matched_courses": 63,
+  "missing_courses": 0,
+  "extra_prediction_courses": 0,
+  "course_match_rate": 1.0,
+  "exact_course_matches": 20,
+  "exact_course_accuracy": 0.31746031746031744,
+  "field_correct": {
+    "code": 63,
+    "name_th": 32,
+    "name_en": 46,
+    "credits": 60,
+    "year": 63,
+    "semester": 63,
+    "category": 63,
+    "type": 63,
+    "prerequisite": 60,
+    "flexible_year_semester": 63,
+    "note": 58
+  },
+  "field_total": {
+    "code": 63,
+    "name_th": 63,
+    "name_en": 63,
+    "credits": 63,
+    "year": 63,
+    "semester": 63,
+    "category": 63,
+    "type": 63,
+    "prerequisite": 63,
+    "flexible_year_semester": 63,
+    "note": 63
+  },
+  "field_accuracy": {
+    "code": 1.0,
+    "name_th": 0.5079365079365079,
+    "name_en": 0.7301587301587301,
+    "credits": 0.9523809523809523,
+    "year": 1.0,
+    "semester": 1.0,
+    "category": 1.0,
+    "type": 1.0,
+    "prerequisite": 0.9523809523809523,
+    "flexible_year_semester": 1.0,
+    "note": 0.9206349206349206
+  },
+  "overall_field_accuracy": 0.9148629148629148,
+  "details": [
+    {
+      "gt_index": 0,
+      "occurrence": 1,
+      "code": "06036100",
+      "year": 1,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 0,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 1,
+      "occurrence": 1,
+      "code": "06036101",
+      "year": 1,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 1,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "คณิตศาสตร์สำหรับธุรกิจ",
+          "prediction": "การแก้ปัญหาทางด้านเทคโนโลยีสารสนเทศ"
+        }
+      }
+    },
+    {
+      "gt_index": 2,
+      "occurrence": 1,
+      "code": "06036118",
+      "year": 1,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 2,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": false,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "การแก้ปัญหาทางด้านเทคโนโลยีสารสนเทศ",
+          "prediction": "โก้ปัญหาทฏิงต ้วโน"
+        },
+        "name_en": {
+          "ground_truth": "PROBLEM SOLVING IN INFORMATION TECHNOLOGY",
+          "prediction": "PROBLEM-SOLVING IN INFORMATION TECHNOLOGY"
+        }
+      }
+    },
+    {
+      "gt_index": 3,
+      "occurrence": 1,
+      "code": "96641001",
+      "year": 1,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 3,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 4,
+      "occurrence": 1,
+      "code": "96641003",
+      "year": 1,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 4,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "กีฬาและนันทนาการ",
+          "prediction": "เฟ 2"
+        }
+      }
+    },
+    {
+      "gt_index": 5,
+      "occurrence": 1,
+      "code": "96644007",
+      "year": 1,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 5,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": false
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "ภาษาอังกฤษพื้นฐาน 1",
+          "prediction": "ปักรู"
+        },
+        "note": {
+          "ground_truth": null,
+          "prediction": "กลุ่มวิชาที่กำหนดโดยคณะ"
+        }
+      }
+    },
+    {
+      "gt_index": 6,
+      "occurrence": 1,
+      "code": "96644042",
+      "year": 1,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 6,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": false
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "การสื่อสารและการนำเสนออย่างมืออาชีพ",
+          "prediction": "เวพ 6"
+        },
+        "note": {
+          "ground_truth": "กลุ่มวิชาที่กำหนดโดยคณะ",
+          "prediction": null
+        }
+      }
+    },
+    {
+      "gt_index": 7,
+      "occurrence": 1,
+      "code": "06036102",
+      "year": 1,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 7,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 8,
+      "occurrence": 1,
+      "code": "06036109",
+      "year": 1,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 8,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "กระบวนการและโมเดลทางธุรกิจ",
+          "prediction": "ผู"
+        }
+      }
+    },
+    {
+      "gt_index": 9,
+      "occurrence": 1,
+      "code": "06036119",
+      "year": 1,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 9,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "พื้นฐานการเขียนโปรแกรม",
+          "prediction": "ยรหัศัศศศิฑิ"
+        }
+      }
+    },
+    {
+      "gt_index": 10,
+      "occurrence": 1,
+      "code": "06036125",
+      "year": 1,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 10,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "สถาปัตยกรรมคอมพิวเตอร์และระบบปฏิบัติการ",
+          "prediction": "ญูแบง"
+        }
+      }
+    },
+    {
+      "gt_index": 11,
+      "occurrence": 1,
+      "code": "96641002",
+      "year": 1,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 12,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "ความฉลาดทางดิจิทัล",
+          "prediction": "บ"
+        }
+      }
+    },
+    {
+      "gt_index": 12,
+      "occurrence": 1,
+      "code": "96644008",
+      "year": 1,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 11,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "ภาษาอังกฤษพื้นฐาน 2",
+          "prediction": "2"
+        }
+      }
+    },
+    {
+      "gt_index": 13,
+      "occurrence": 1,
+      "code": "06036103",
+      "year": 2,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 13,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": false,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "บูรณาการเทคนิคเชิงสถิติสำหรับธุรกิจ",
+          "prediction": "ไลล"
+        },
+        "name_en": {
+          "ground_truth": "INTEGRATION OF STATISTICALTECHNIQUES FOR\nBUSINESS",
+          "prediction": "INTEGRATION OF STATISTICAL TECHNIQUES FOR BUSINESS"
+        }
+      }
+    },
+    {
+      "gt_index": 14,
+      "occurrence": 1,
+      "code": "06036104",
+      "year": 2,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 14,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 15,
+      "occurrence": 1,
+      "code": "06036105",
+      "year": 2,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 15,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 16,
+      "occurrence": 1,
+      "code": "06036117",
+      "year": 2,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 16,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "อัจฉริยะทางธุรกิจและข้อมูลขนาดใหญ่",
+          "prediction": "อัจูฉรูยะทว์งรวิกิจแจะข้อมูลขนาดใหญ่ลจ๊ก"
+        }
+      }
+    },
+    {
+      "gt_index": 17,
+      "occurrence": 1,
+      "code": "06036120",
+      "year": 2,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 17,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "หลักการโครงสร้างข้อมูลและอัลกอริทึม",
+          "prediction": "หลักการคัรงสร้วงข้อมูลและอัลกอร์ทีม"
+        }
+      }
+    },
+    {
+      "gt_index": 18,
+      "occurrence": 1,
+      "code": "06036122",
+      "year": 2,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 18,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": false,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "การสื่อสารด้วยภาพสำหรับธุรกิจ",
+          "prediction": "ผู"
+        },
+        "name_en": {
+          "ground_truth": "VISUAL COMMUNICATION FORBUSINESS",
+          "prediction": "VISUAL COMMUNICATION FOR BUSINESS"
+        }
+      }
+    },
+    {
+      "gt_index": 19,
+      "occurrence": 1,
+      "code": "06036108",
+      "year": 2,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 19,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 20,
+      "occurrence": 1,
+      "code": "06036111",
+      "year": 2,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 20,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "เทคโนโลยีดิจิทัลสำหรับธุรกิจ",
+          "prediction": "แนวคิดระบฐาน"
+        }
+      }
+    },
+    {
+      "gt_index": 21,
+      "occurrence": 1,
+      "code": "06036112",
+      "year": 2,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 21,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "แนวคิดระบบฐานข้อมูล",
+          "prediction": "วิชาบังคับัก่อป๊"
+        }
+      }
+    },
+    {
+      "gt_index": 22,
+      "occurrence": 1,
+      "code": "06036113",
+      "year": 2,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 22,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "การออกแบบส่วนต่อประสานกับมนุษย์",
+          "prediction": "เครือข่ายคอมพิวเตอร์และความมั้นคงทางไซเบอร์เบื้องต้น"
+        }
+      }
+    },
+    {
+      "gt_index": 23,
+      "occurrence": 1,
+      "code": "06036124",
+      "year": 2,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 23,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": false,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_en": {
+          "ground_truth": "INTRODUCTION TO COMPUTER NETWORK AND\nCYBERSECURITY",
+          "prediction": "NTROBUCTION TO COMPUTER NETWORK AND CYBERSECURITY"
+        }
+      }
+    },
+    {
+      "gt_index": 24,
+      "occurrence": 1,
+      "code": "9664xxxx",
+      "year": 2,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 24,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 25,
+      "occurrence": 1,
+      "code": "06036107",
+      "year": 3,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 25,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "การบริหารโครงการเทคโนโลยีสารสนเทศ",
+          "prediction": "การวางแผนทรัพยากรองค์กร"
+        }
+      }
+    },
+    {
+      "gt_index": 26,
+      "occurrence": 1,
+      "code": "06036110",
+      "year": 3,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 26,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 27,
+      "occurrence": 1,
+      "code": "06036114",
+      "year": 3,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 27,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": false,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "การพัฒนาเว็บแอปพลิเคชันโดยใช้เฟรมเวิร์ก",
+          "prediction": "การวิเคราะห์และออกแบบระบบสารสนเทศทางธุรกิจ"
+        },
+        "prerequisite": {
+          "ground_truth": "06036119 หรือ 06036122",
+          "prediction": "ไม่มี"
+        }
+      }
+    },
+    {
+      "gt_index": 28,
+      "occurrence": 1,
+      "code": "06036121",
+      "year": 3,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 28,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "การวิเคราะห์และออกแบบระบบสารสนเทศทางธุรกิจ",
+          "prediction": "เทคโนโลยีกลุ่มเมฆ"
+        }
+      }
+    },
+    {
+      "gt_index": 29,
+      "occurrence": 1,
+      "code": "06036123",
+      "year": 3,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 29,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 30,
+      "occurrence": 1,
+      "code": "96644xxx",
+      "year": 3,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 30,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": false,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_en": {
+          "ground_truth": "ELECTIVE IN LANGUAGE AND COMMUNICATION",
+          "prediction": "XXX ELECTIVE IN LANGUAGE AND COMMUNICATION"
+        }
+      }
+    },
+    {
+      "gt_index": 31,
+      "occurrence": 1,
+      "code": "06036106",
+      "year": 3,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 31,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 32,
+      "occurrence": 1,
+      "code": "06036116",
+      "year": 3,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 32,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": false,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": false
+      },
+      "differences": {
+        "credits": {
+          "ground_truth": null,
+          "prediction": "3(2-2-5)"
+        },
+        "note": {
+          "ground_truth": null,
+          "prediction": "กลุ่มวิชาที่กำหนดโดยคณะ"
+        }
+      }
+    },
+    {
+      "gt_index": 33,
+      "occurrence": 1,
+      "code": "96643021",
+      "year": 3,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 33,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": false
+      },
+      "differences": {
+        "note": {
+          "ground_truth": "กลุ่มวิชาที่กำหนดโดยคณะ",
+          "prediction": null
+        }
+      }
+    },
+    {
+      "gt_index": 34,
+      "occurrence": 1,
+      "code": "06036xxx",
+      "year": 3,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 34,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": false,
+        "credits": false,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "วิชาเลือกทางเทคโนโลยีสารสนเทศทางธุรกิจ 1 หรือ กลุ่มวิชาที่ 1-4",
+          "prediction": null
+        },
+        "name_en": {
+          "ground_truth": "ELECTIVE COURSE IN BUSINESS INFORMATION TECHNOLOGY1 \nOR\nCOURSE GROUP1-4",
+          "prediction": "ELECTIVE COURSE IN BUSINESS INFORMATION TECHNOLOGY 1 OR COURSE GROUP 1 4"
+        },
+        "credits": {
+          "ground_truth": "3(3-0-6) \nหรือ \n3(2-2-5)",
+          "prediction": "3(2-2-5)"
+        }
+      }
+    },
+    {
+      "gt_index": 35,
+      "occurrence": 1,
+      "code": "xxxxxxxx",
+      "year": 3,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 35,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "วิชาเลือกเสรี 1",
+          "prediction": null
+        }
+      }
+    },
+    {
+      "gt_index": 36,
+      "occurrence": 1,
+      "code": "06036115",
+      "year": 4,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 36,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": false
+      },
+      "differences": {
+        "note": {
+          "ground_truth": null,
+          "prediction": "กลุ่มวิชาที่กำหนดโดยคณะ"
+        }
+      }
+    },
+    {
+      "gt_index": 37,
+      "occurrence": 1,
+      "code": "96642033",
+      "year": 4,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 37,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 38,
+      "occurrence": 1,
+      "code": "06036xxx",
+      "year": 4,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 38,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": false,
+        "credits": false,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "วิชาเลือกทางเทคโนโลยีสารสนเทศทางธุรกิจ 2 หรือ กลุ่มวิชาที่ 1-4",
+          "prediction": "กลุ่มวิชาที่ 1-4 5เ 56ไป2 ออบลรธี เพ"
+        },
+        "name_en": {
+          "ground_truth": "ELECTIVE COURSE IN BUSINESS INFORMATION TECHNOLOGY 2\nOR\nCOURSE GROUP1-4",
+          "prediction": "5 56 2 BUSINESS INFORMATION TECHNOLOGY 2 OR COURSE GROUP 1 4"
+        },
+        "credits": {
+          "ground_truth": "3(3-0-6) \nหรือ \n3(2-2-5)",
+          "prediction": "3(2-2-5)"
+        }
+      }
+    },
+    {
+      "gt_index": 39,
+      "occurrence": 1,
+      "code": "xxxxxxxx",
+      "year": 4,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 39,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": false,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "วิชาเลือกเสรี 2",
+          "prediction": null
+        },
+        "name_en": {
+          "ground_truth": "FREE ELECTIVE COURSE 2",
+          "prediction": "XXXXXKKK FREE ELECTIVE COURSE 2"
+        }
+      }
+    },
+    {
+      "gt_index": 40,
+      "occurrence": 1,
+      "code": "9664xxxx",
+      "year": 4,
+      "semester": 1,
+      "matched": true,
+      "prediction_index": 40,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": false,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_en": {
+          "ground_truth": "GE ELECTIVE COURSE REQUIREMENT 2",
+          "prediction": "XXXX GE ELECTIVE COURSE REQUIREMENT 2"
+        }
+      }
+    },
+    {
+      "gt_index": 41,
+      "occurrence": 1,
+      "code": "06036147|06036148",
+      "year": 4,
+      "semester": 2,
+      "matched": true,
+      "prediction_index": 41,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": false,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "สหกิจศึกษา\nหรือ\nสหกิจศึกษาต่างประเทศ",
+          "prediction": "สหกิจศึกษา\nสหกิจศึกษาต่างประเทศ"
+        },
+        "name_en": {
+          "ground_truth": "COOPERATIVE EDUCATION\nOR\nOVERSEA COOPERATIVE EDUCATION",
+          "prediction": "COOPERATIVE EDUCATION\nOVERSEA COOPERATIVE EDUCATION"
+        }
+      }
+    },
+    {
+      "gt_index": 42,
+      "occurrence": 1,
+      "code": "06036126",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 42,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 43,
+      "occurrence": 1,
+      "code": "06036127",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 43,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": false,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "prerequisite": {
+          "ground_truth": "06036112",
+          "prediction": "ไม่มี"
+        }
+      }
+    },
+    {
+      "gt_index": 44,
+      "occurrence": 1,
+      "code": "06036128",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 44,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 45,
+      "occurrence": 1,
+      "code": "06036129",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 45,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 46,
+      "occurrence": 1,
+      "code": "06036130",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 46,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "เทคโนโลยีเชิงอ็อบเจกต์",
+          "prediction": "เทคโนโลยีเชิงอือบเจกต์"
+        }
+      }
+    },
+    {
+      "gt_index": 47,
+      "occurrence": 1,
+      "code": "06036131",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 47,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 48,
+      "occurrence": 1,
+      "code": "06036132",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 48,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": false,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_en": {
+          "ground_truth": "SPECIALTOPICS IN BUSINESS INFORMATION TECHNOLOGY1",
+          "prediction": "SPECIAL TOPICS IN BUSINESS INFORMATION TECHNOLOGY 1"
+        }
+      }
+    },
+    {
+      "gt_index": 49,
+      "occurrence": 1,
+      "code": "06036133",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 49,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": false,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_en": {
+          "ground_truth": "SPECIALTOPICS IN BUSINESS INFORMATION TECHNOLOGY2",
+          "prediction": "SPECIAL TOPICS IN BUSINESS INFORMATION TECHNOLOGY 2"
+        }
+      }
+    },
+    {
+      "gt_index": 50,
+      "occurrence": 1,
+      "code": "06036134",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 50,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": false,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "ปฏิบัติการพิเศษทางด้านเทคโนโลยีสารสนเทศทางธุรกิจ 1",
+          "prediction": "ปฏิบัติ"
+        },
+        "name_en": {
+          "ground_truth": "SPECIAL WORKSHOP IN BUSINESS INFORMATION TECHNOLOGY1",
+          "prediction": "SPECIAL WORKSHOP IN BUSINESS INFORMATION TECHNOLOGY 1"
+        }
+      }
+    },
+    {
+      "gt_index": 51,
+      "occurrence": 1,
+      "code": "06036135",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 51,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": false,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_en": {
+          "ground_truth": "SPECIAL WORKSHOP IN BUSINESS INFORMATION TECHNOLOGY2",
+          "prediction": "SPECIAL WORKSHOP IN BUSINESS INFORMATION TECHNOLOGY 2"
+        }
+      }
+    },
+    {
+      "gt_index": 52,
+      "occurrence": 1,
+      "code": "06036136",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 52,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 53,
+      "occurrence": 1,
+      "code": "06036137",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 53,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": false,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_en": {
+          "ground_truth": "BUSINESS ANALYSIS AND DEVELOPING REQUIREMENTS",
+          "prediction": "BUSINESS ANALYSIS AND DEVELOPING REQUIREMENTS 2 ENTERPRISE SYSTEM BUSINESS PROCESS IMPROVEMENT"
+        }
+      }
+    },
+    {
+      "gt_index": 54,
+      "occurrence": 1,
+      "code": "06036138",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 54,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 55,
+      "occurrence": 1,
+      "code": "06036139",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 55,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "การบริหารระบบลูกค้าสัมพันธ์",
+          "prediction": "วิชาบังคับก่ อน"
+        }
+      }
+    },
+    {
+      "gt_index": 56,
+      "occurrence": 1,
+      "code": "06036140",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 56,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "การจัดการโซ่อุปทานและโลจิสติกส์",
+          "prediction": "การจัดการาจผาทกรดร"
+        }
+      }
+    },
+    {
+      "gt_index": 57,
+      "occurrence": 1,
+      "code": "06036141",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 57,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 58,
+      "occurrence": 1,
+      "code": "06036142",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 58,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 59,
+      "occurrence": 1,
+      "code": "06036143",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 59,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": false,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "การเก็บความต้องการและสร้างต้นแบบในด้านยูเอ็กซ์ยูไอ",
+          "prediction": "กจรเก็บความต้องการและสร้างต้นแบบในด้านยูเอ็กซ์ยูไอ"
+        },
+        "name_en": {
+          "ground_truth": "UX/UI REQUIREMENT AND PROTOTYPING",
+          "prediction": "UX UI-REQUIREMENT AND PROTOTYPING"
+        }
+      }
+    },
+    {
+      "gt_index": 60,
+      "occurrence": 1,
+      "code": "06036144",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 60,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": false,
+        "name_en": false,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "name_th": {
+          "ground_truth": "การประเมินส่วนต่อประสานผู้ใช้",
+          "prediction": "ไล ตะ"
+        },
+        "name_en": {
+          "ground_truth": "EVALUATING USERINTERFACE",
+          "prediction": "EVALUATING USER INTERFACE"
+        }
+      }
+    },
+    {
+      "gt_index": 61,
+      "occurrence": 1,
+      "code": "06036145",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 61,
+      "exact_match": true,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": true,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {}
+    },
+    {
+      "gt_index": 62,
+      "occurrence": 1,
+      "code": "06036146",
+      "year": 0,
+      "semester": 0,
+      "matched": true,
+      "prediction_index": 62,
+      "exact_match": false,
+      "fields": {
+        "code": true,
+        "name_th": true,
+        "name_en": true,
+        "credits": true,
+        "year": true,
+        "semester": true,
+        "category": true,
+        "type": true,
+        "prerequisite": false,
+        "flexible_year_semester": true,
+        "note": true
+      },
+      "differences": {
+        "prerequisite": {
+          "ground_truth": "06036145",
+          "prediction": "ไม่มี"
+        }
+      }
+    }
+  ],
+  "extra_predictions": [],
+  "ground_truth_file": "data\\ground_truth\\BIT_academic_plan_coop.json",
+  "prediction_file": "outputs\\BIT\\BIT_extracted.json",
+  "program_match": true,
+  "plan_match": true
+}

@@ -26,12 +26,10 @@ THAI_DIGIT_TRANS = str.maketrans(
     "0123456789",
 )
 
-VALID_SIMPLE_CODES = {
-    "06026xxx",
-    "90644xxx",
-    "9064xxxx",
-    "xxxxxxxx",
-}
+COURSE_CODE_RE = re.compile(
+    r"^(?:\d{8}|\d{6}x{2}|\d{5}x{3}|\d{4}x{4}|x{8}|\d{8}\|\d{8})$",
+    re.IGNORECASE,
+)
 
 
 def _normalize_text(value: Any) -> str:
@@ -63,47 +61,24 @@ def _normalize_code(value: Any) -> str:
     return re.sub(r"[\s|:;,_\-./\\]+", "", text)
 
 
-def _normalize_credits(
-    value: Any,
-) -> str:
-
+def _normalize_credits(value: Any) -> str:
     text = _normalize_text(value)
-
     if not text:
         return ""
-
     matches = re.findall(
-        r"(\d+)\s*"
-        r"\(\s*"
-        r"(\d+)\s*-\s*"
-        r"(\d+)\s*-\s*"
-        r"(\d+)\s*"
-        r"\)",
+        r"(\d+)\s*\(\s*([0-9x]+)\s*-\s*([0-9x]+)\s*-\s*([0-9x]+)\s*\)",
         text,
+        flags=re.IGNORECASE,
     )
-
     if not matches:
-        return re.sub(
-            r"\s+",
-            "",
-            text,
-        )
-
-    credits = []
-
+        return re.sub(r"\s+", "", text)
+    credits: list[str] = []
     for a, b, c, d in matches:
-
-        credit = (
-            f"{a}({b}-{c}-{d})"
-        )
-
+        credit = f"{a}({b.lower()}-{c.lower()}-{d.lower()})"
         if credit not in credits:
             credits.append(credit)
+    return "หรือ".join(sorted(credits))
 
-    # alternative credits ไม่มีลำดับ
-    credits = sorted(credits)
-
-    return "หรือ".join(credits)
 
 
 def _normalize_flexible(value: Any) -> str:
@@ -172,14 +147,8 @@ def normalize_value(
 
 def _is_valid_course_code(value: Any) -> bool:
     code = _normalize_code(value)
+    return COURSE_CODE_RE.fullmatch(code) is not None
 
-    if re.fullmatch(r"\d{8}", code):
-        return True
-    if code in VALID_SIMPLE_CODES:
-        return True
-    if re.fullmatch(r"\d{8}\|\d{8}", code):
-        return True
-    return False
 
 
 def _filter_course_rows(
