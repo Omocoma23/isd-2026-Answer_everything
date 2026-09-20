@@ -89,6 +89,20 @@ def parse_args():
         default="cpu"
     )
 
+    ocr.add_argument(
+        "--program",
+        choices=["DSBA", "AI", "IT", "BIT"],
+        default="DSBA",
+        help="Curriculum program profile used after OCR"
+    )
+
+    ocr.add_argument(
+        "--plan",
+        choices=["coop", "no_coop"],
+        default="coop",
+        help="Academic plan to extract"
+    )
+
     # -------------------------
     # EVALUATE
     # -------------------------
@@ -160,8 +174,8 @@ def main():
         # -------------------------------------------------
         curriculum = extract_curriculum_from_file(
             ocr_prediction_path,
-            program="DSBA",
-            plan="coop",
+            program=args.program,
+            plan=args.plan,
         )
 
         curriculum_path = (
