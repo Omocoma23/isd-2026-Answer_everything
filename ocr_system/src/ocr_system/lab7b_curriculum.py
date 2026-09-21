@@ -292,7 +292,7 @@ COURSE_SCHEMA: dict = {
             "items": {
                 "type": "object",
                 "properties": {
-                    "code": _S,
+                    "code": {"type": "string", "pattern": r"^[0-9xX]{8}(?:\s*(?:หรือ|/)\s*[0-9xX]{8})*$"},
                     "name_th": _SN,
                     "name_en": _SN,
                     "credits": _SN,
@@ -353,6 +353,40 @@ EXTRACT_PROMPT = """ต่อไปนี้คือข้อความจา
         --> แล้วระบุตัวเลือกใน flexible_year_semester เช่น "3/1, 3/2, 4/1"
     ห้ามเดาปี/ภาคให้วิชาเลือกที่เอกสารไม่ได้ระบุ
 
+[2A] ⭐ แยก "Course Catalog" ออกจาก "Academic Plan" ให้ชัดเจน
+
+    ข้อความแต่ละหน้าจะมี marker ลักษณะ:
+
+        === PDF_PAGE 19 ROLE=COURSE_CATALOG ===
+
+    หรือ
+
+        === PDF_PAGE 30 ROLE=ACADEMIC_PLAN ===
+
+    ถ้า ROLE=COURSE_CATALOG:
+        - หน้านี้เป็น "รายการรายวิชา" ไม่ใช่ตารางแผนการศึกษา
+        - ห้ามเดา year และ semester
+        - ให้ใส่ year = 0 และ semester = 0
+        - ห้ามใช้ 1/1 เป็นค่า default เด็ดขาด
+        - flexible_year_semester ให้ใส่เฉพาะเมื่อเอกสารระบุชัด
+          ถ้าเอกสารไม่ได้ระบุ ให้ใส่ null
+
+    ถ้า ROLE=ACADEMIC_PLAN:
+        - ต้องอ่านหัวข้อ "ปีที่ X ภาคการศึกษาที่ Y"
+        - ให้ใช้ X เป็น year และ Y เป็น semester
+        - ค่านี้มีผลกับรายวิชาที่อยู่ใต้หัวข้อนั้น
+        - ห้ามนำ year/semester จากหน้าก่อนหน้ามาใช้ถ้าหน้าปัจจุบัน
+          มีหัวข้อใหม่
+        - ต้องเก็บทุกแถวในตารางแผนการศึกษา แม้รหัสวิชาจะไม่ใช่ตัวเลข 8 หลัก
+        - รหัส placeholder เช่น 90644xxx, 06026xxx ต้องเก็บตามเอกสาร ห้ามทิ้ง
+        - ถ้าแถวแรกของตารางอยู่ติดกับหัวตาราง ต้องไม่ข้าม
+        - ถ้ารหัสวิชามี x หรือ X ให้ถือว่าเป็นรหัสกลุ่มวิชา ไม่ใช่ข้อมูลผิด
+        - ห้ามละเว้นรายวิชาเพียงเพราะไม่มีคำอธิบายรายวิชาใน Course Catalog
+
+    สำคัญ:
+        การที่ course catalog ปรากฏก่อน academic plan
+        ไม่ได้แปลว่ารายวิชานั้นอยู่ปี 1 เทอม 1
+
 [3] prerequisite (วิชาบังคับก่อน)
     - ถ้ามี ให้ใส่ "รหัสวิชา" ของวิชาบังคับก่อน เช่น "06026200"
     - ถ้าไม่มี ให้ใส่คำว่า "ไม่มี"  (ห้ามใส่ null ห้ามใส่ [])
@@ -401,7 +435,7 @@ EXTRACT_PROMPT = """ต่อไปนี้คือข้อความจา
     ใช้ year=0, semester=0 เฉพาะกรณีที่เอกสารไม่ได้กำหนดปี/ภาคตายตัว
     และระบุว่าวิชานั้นสามารถเลือกลงได้หลายปี/หลายภาคเท่านั้น
 
-[12] ⭐ หนึ่งรหัสวิชา = หนึ่ง object
+[12] ⭐ หนึ่งแถวในตาราง = หนึ่ง object (รหัสซ้ำต่างชื่อหรือลำดับต้องแยกแถว)
     ถ้ารหัส placeholder เช่น 06026xxx ปรากฏเพียงหนึ่งครั้ง
     แล้วตามด้วยชื่อวิชาเลือกหลายทางเลือก ให้ถือว่าทั้งหมดเป็นข้อมูลของแถวเดียว
     ห้ามแยกแต่ละทางเลือกออกเป็นคนละ course object
@@ -417,6 +451,11 @@ EXTRACT_PROMPT = """ต่อไปนี้คือข้อความจา
 [13] บรรทัดชื่อวิชาที่ไม่มีรหัสวิชาใหม่อยู่ข้างหน้า
     ให้ถือว่าเป็นข้อความต่อเนื่องของรหัสวิชาล่าสุด
     ห้ามสร้าง course object ใหม่จนกว่าจะพบรหัสวิชาใหม่
+
+[14] ถ้าสองรหัสเป็นทางเลือกเชื่อมด้วยคำว่า "หรือ" และใช้หน่วยกิตร่วมกัน
+    ให้รวมเป็น object เดียว code = "รหัสแรก หรือ รหัสที่สอง"
+    รวมชื่อของทั้งสองทางเลือก ห้ามนับหน่วยกิตซ้ำ
+    ตัวอย่างรูปแบบ: "12345678 หรือ 12345679" (ห้ามนำรหัสตัวอย่างไปตอบ)
 
 === ข้อความจากเอกสาร ===
 {document_text}
@@ -490,7 +529,7 @@ def ollama_chat(model: str, messages: list[dict], *, fmt: dict | None = None,
 
 
 def parse_json(text: str) -> dict:
-    t = re.sub(r"<think>.*?</think>", "", text.strip(), flags=re.DOTALL)
+    t = re.sub(r"\<think>.*?\</think>", "", text.strip(), flags=re.DOTALL)
     t = re.sub(r"^```(?:json)?\s*|\s*```$", "", t.strip(), flags=re.MULTILINE)
     starts = [p for p in (t.find("{"), t.find("[")) if p != -1]
     if not starts:
@@ -510,43 +549,147 @@ def merge_chunks(chunks: list[dict]) -> dict:
 
     ⚠️ ปัญหาที่ต้องแก้: วิชาซ้ำ
        ถ้าหน้าที่ 5 และหน้าที่ 6 มีตารางที่คาบเกี่ยวกัน วิชาเดียวกันจะถูก
-       สกัดออกมาสองครั้ง  ถ้าไม่กรอง จำนวนวิชาจะเกินจริง
+       สกัดออกมาสองครั้ง ถ้าไม่กรอง จำนวนวิชาจะเกินจริง
 
     ⚠️ แต่ระวัง! ในหลักสูตร DSBA จริง รหัส 06026259 (สหกิจศึกษา)
        ปรากฏ 2 แถวโดยตั้งใจ:
          แถวหนึ่ง เป็นวิชาบังคับ ปี 4 ภาค 2
          อีกแถวหนึ่ง เป็นวิชาเลือก ที่ยังไม่กำหนดปี/ภาค (year=0)
-       --> กุญแจสำหรับกันซ้ำจึงต้องเป็น (รหัส, ปี, ภาค) ไม่ใช่รหัสอย่างเดียว
-           ถ้าใช้รหัสอย่างเดียว เราจะ "ลบข้อมูลจริง" ทิ้งไปโดยไม่รู้ตัว
 
-    บทเรียน: การกันซ้ำที่ก้าวร้าวเกินไป อันตรายกว่าการปล่อยให้ซ้ำ
+       --> กุญแจสำหรับกันซ้ำจึงต้องเป็น (รหัส, ปี, ภาค)
+           ไม่ใช่รหัสอย่างเดียว
+
+    บทเรียน:
+    การกันซ้ำที่ก้าวร้าวเกินไป อันตรายกว่าการปล่อยให้ซ้ำ
     """
+
     seen: set[tuple] = set()
     courses: list[dict] = []
     n_dup = 0
 
+    # ==========================================================
+    # 1. กรอง duplicate ปกติ
+    # ==========================================================
+
     for ch in chunks:
         for c in ch.get("courses") or []:
-            # ⚠️ ต้องรวม name_th ในกุญแจด้วย ไม่งั้นแถว "06026xxx" ที่มีสองแถว
-            #    ในภาคเดียวกัน (วิชาเลือกกลุ่มฯ 1 และ 2) จะถูกลบทิ้งไปหนึ่ง
+
+            # ต้องรวม name_th ในกุญแจด้วย
+            # เพราะบางรหัสอาจมีหลายแถวในภาคเดียวกัน
             key = (
                 M.normalize(c.get("code"), "strict"),
                 str(c.get("year")),
                 str(c.get("semester")),
                 M.normalize(c.get("name_th"), "strict"),
             )
+
             if key in seen:
                 n_dup += 1
                 continue
+
             seen.add(key)
             courses.append(c)
 
     if n_dup:
-        print(f"      กรองวิชาซ้ำออก {n_dup} รายการ (คีย์ = รหัส+ปี+ภาค+ชื่อ)")
+        print(
+            f"      กรองวิชาซ้ำออก {n_dup} รายการ "
+            f"(คีย์ = รหัส+ปี+ภาค+ชื่อ)"
+        )
+
+    # ==========================================================
+    # 2. reconcile Course Catalog กับ Academic Plan
+    # ==========================================================
+    #
+    # ตัวอย่าง:
+    #
+    # Course Catalog:
+    # 06026216, year=0, semester=0
+    #
+    # Academic Plan:
+    # 06026216, year=3, semester=1
+    #
+    # ถ้ามี Academic Plan ที่ระบุปี/เทอมจริงแล้ว
+    # เราไม่ต้องเก็บ catalog 0/0 ซ้ำอีก
+    #
+    # ยกเว้นวิชาประเภท "เลือก"
+    # เพราะบางวิชาตั้งใจให้มีทั้ง fixed plan และ flexible elective
+    # ==========================================================
+
+    fixed_codes: set[str] = set()
+
+    for c in courses:
+        try:
+            year = int(c.get("year"))
+            semester = int(c.get("semester"))
+        except (TypeError, ValueError):
+            continue
+
+        if year > 0 and semester > 0:
+            code = M.normalize(c.get("code"), "strict")
+
+            if code:
+                fixed_codes.add(code)
+
+    reconciled: list[dict] = []
+    n_catalog_removed = 0
+
+    for c in courses:
+
+        code = M.normalize(c.get("code"), "strict")
+
+        try:
+            year = int(c.get("year"))
+            semester = int(c.get("semester"))
+        except (TypeError, ValueError):
+            year = 0
+            semester = 0
+
+        # ถ้าเป็นข้อมูลจาก catalog (0/0)
+        # และมี course code เดียวกันใน academic plan แล้ว
+        # ให้เอา catalog row ออก
+        #
+        # แต่ถ้าเป็น "วิชาเลือก" ให้เก็บไว้
+        if (
+            year == 0
+            and semester == 0
+            and code
+            and code in fixed_codes
+            and c.get("type") != "เลือก"
+        ):
+            n_catalog_removed += 1
+            continue
+
+        reconciled.append(c)
+
+    courses = reconciled
+
+    if n_catalog_removed:
+        print(
+            f"      ตัด Course Catalog 0/0 ที่มี Academic Plan แล้ว "
+            f"{n_catalog_removed} รายการ"
+        )
+
+    # ==========================================================
+    # 3. คืนผลลัพธ์
+    # ==========================================================
 
     return {
-        "program": next((ch.get("program") for ch in chunks if ch.get("program")), None),
-        "plan": next((ch.get("plan") for ch in chunks if ch.get("plan")), None),
+        "program": next(
+            (
+                ch.get("program")
+                for ch in chunks
+                if ch.get("program")
+            ),
+            None,
+        ),
+        "plan": next(
+            (
+                ch.get("plan")
+                for ch in chunks
+                if ch.get("plan")
+            ),
+            None,
+        ),
         "courses": courses,
     }
 
@@ -662,69 +805,582 @@ def pipeline_vlm(pages: list[bytes], outdir: Path) -> dict:
     return _text_to_json_chunked(md_pages)
 
 
-def _text_to_json_chunked(md_pages: list[str]) -> dict:
-    """แบ่งหน้าเป็นก้อน แล้วเรียก text LLM ทีละก้อน"""
-    chunks: list[dict] = []
-    n_chunks = (len(md_pages) + PAGES_PER_CHUNK - 1) // PAGES_PER_CHUNK
+def _get_page_role(text: str) -> str:
+    m = re.search(r"ROLE=([A-Z_]+)", text)
+    if not m:
+        return "UNKNOWN"
+    return m.group(1)
 
-    for ci in range(n_chunks):
-        part = md_pages[ci * PAGES_PER_CHUNK:(ci + 1) * PAGES_PER_CHUNK]
-        print(f"    [ขั้น 2/2] จัด JSON ก้อนที่ {ci + 1}/{n_chunks} "
-              f"({len(part)} หน้า)")
+def _find_course_codes(text: str) -> list[str]:
+    """
+    หารหัสที่มีรูปแบบเหมือนรหัสวิชาจากข้อความในหน้า
+
+    รองรับ:
+        06016401
+        06026xxx
+        90644xxx
+        9064xxxx
+        xxxxxxxx
+
+    ไม่บังคับว่ารหัสต้องอยู่ต้นบรรทัด
+    เพราะ pdfplumber อาจรักษา layout แล้วมีข้อความ/ช่องว่างอยู่ข้างหน้า
+    """
+
+    found: set[str] = set()
+
+    for m in re.finditer(
+        r"(?<![0-9A-Za-z])([0-9xX]{8})(?![0-9A-Za-z])",
+        text,
+    ):
+        code = M.normalize(
+            m.group(1),
+            "strict",
+        )
+
+        if re.fullmatch(r"[0-9x]{8}", code):
+            found.add(code)
+
+    return sorted(found)
+
+
+_PLAN_TERM_RE = re.compile(
+    r"ป[^\n\d]{0,12}ที่\s*(\d+)\s*ภาคการศึกษาที่\s*(\d+)"
+)
+
+
+def _split_plan_terms(pages: list[str]) -> list[str]:
+    """Keep every explicit semester in its own extraction unit."""
+    result = []
+    for page in pages:
+        terms = list(_PLAN_TERM_RE.finditer(page))
+        if _get_page_role(page) != "ACADEMIC_PLAN" or not terms:
+            result.append(page)
+            continue
+        prefix = page[:terms[0].start()]
+        for i, term in enumerate(terms):
+            end = terms[i + 1].start() if i + 1 < len(terms) else len(page)
+            result.append(prefix + page[term.start():end])
+    return result
+
+
+def _apply_plan_term(courses: list[dict], text: str, role: str) -> None:
+    terms = {(int(m[1]), int(m[2])) for m in _PLAN_TERM_RE.finditer(text)}
+    if role == "ACADEMIC_PLAN" and len(terms) == 1:
+        year, semester = next(iter(terms))
+        for course in courses:
+            course["year"] = year
+            course["semester"] = semester
+            course["flexible_year_semester"] = None
+
+
+def _restore_literal_fields(courses: list[dict], text: str) -> None:
+    """Restore unambiguous row credits and English names from source text."""
+    rows = list(re.finditer(r"(?m)^\s*([0-9xX]{8})[ \t]+", text))
+    counts = Counter(row[1].lower() for row in rows)
+    credit_re = r"\d+\s*\(\s*\d+\s*-\s*\d+\s*-\s*\d+\s*\)"
+    for index, row in enumerate(rows):
+        code = row[1].lower()
+        end = rows[index + 1].start() if index + 1 < len(rows) else len(text)
+        block = text[row.end():end]
+        block = re.split(r"(?m)^\s*(?:รวม|วท\.บ|คณะ|3\.1\.5|ป[^\n\d]{0,12}ที่\s*\d)", block)[0]
+        candidates = [c for c in courses if M.normalize(c.get("code"), "strict") == code]
+        if counts[code] > 1:
+            # Repeated placeholders must match the printed slot number.
+            title = re.sub(credit_re, "", block.splitlines()[0]).strip()
+            number = re.search(r"\b(\d+)\s*$", title)
+            if not number:
+                continue
+            candidates = [c for c in candidates if re.search(
+                r"\b" + re.escape(number[1]) + r"\b", str(c.get("name_th") or "")
+            )]
+        if len(candidates) != 1:
+            continue
+        course = candidates[0]
+        credits = list(dict.fromkeys(re.sub(r"\s+", "", m[0])
+                                    for m in re.finditer(credit_re, block)))
+        if len(credits) == 1 or (credits and "หรือ" in block):
+            course["credits"] = " หรือ ".join(credits)
+        english = []
+        for line in block.splitlines():
+            line = re.sub(credit_re, "", line).strip()
+            line = re.sub(r"(?:^หรือ\s*|\s*หรือ$)", "", line).strip()
+            if re.fullmatch(r"[A-Z][A-Z0-9\s&/,().:'’+\-]*", line):
+                english.append(re.sub(r"\s+", " ", line))
+        if english:
+            course["name_en"] = " ".join(english)
+
+
+def _repair_source_rows(courses: list[dict], text: str) -> list[dict]:
+    source_codes = set(_find_course_codes(text))
+    for course in courses:
+        code = M.normalize(course.get("code"), "strict")
+        # Only repair an all-x placeholder when the exact source has eight x's.
+        if re.fullmatch(r"x+", code) and "xxxxxxxx" in source_codes:
+            course["code"] = "xxxxxxxx"
+
+    _restore_literal_fields(courses, text)
+
+    # An explicit standalone 'or' between adjacent codes with one shared
+    # credit cell denotes alternatives, not two courses to count twice.
+    rows = list(re.finditer(r"(?m)^\s*([0-9xX]{8})[ \t]+", text))
+    for i in range(len(rows) - 1):
+        left, right = rows[i], rows[i + 1]
+        between = text[left.end():right.start()]
+        end = rows[i + 2].start() if i + 2 < len(rows) else len(text)
+        after = text[right.end():end]
+        if not re.search(r"(?m)^\s*หรือ(?:[ \t]+[A-Z][A-Z \t]*)?\s*$", between):
+            continue
+        credit_pattern = r"\d+\s*\(\s*\d+\s*-\s*\d+\s*-\s*\d+\s*\)"
+        shared_credit = re.search(credit_pattern, between)
+        if not shared_credit or re.search(credit_pattern, after):
+            continue
+        a_code, b_code = left[1].lower(), right[1].lower()
+        a = [c for c in courses if M.normalize(c.get("code"), "strict") == a_code]
+        b = [c for c in courses if M.normalize(c.get("code"), "strict") == b_code]
+        if len(a) != 1 or len(b) != 1:
+            continue
+        combined = dict(a[0])
+        combined["code"] = a_code + " หรือ " + b_code
+        combined["credits"] = re.sub(r"\s+", "", shared_credit[0])
+        for field in ("name_th", "name_en"):
+            combined[field] = " หรือ ".join(
+                re.sub(credit_pattern, "", str(c.get(field) or "")).strip()
+                for c in (a[0], b[0])
+            )
+        courses = [c for c in courses if c is not a[0] and c is not b[0]]
+        courses.append(combined)
+
+    seen = set()
+    unique = []
+    for course in courses:
+        key = tuple(M.normalize(course.get(field), "strict")
+                    for field in ("code", "name_th", "year", "semester"))
+        if key not in seen:
+            seen.add(key)
+            unique.append(course)
+    return unique
+
+
+def _source_row_counts(text: str) -> Counter:
+    # Only table rows: a code followed by a name, not prerequisite mentions.
+    return Counter(
+        m[1].lower() for m in re.finditer(
+            r"(?m)^\s*([0-9xX]{8})[ \t]+(?=[^\W\d_])", text
+        )
+    )
+
+
+def _text_to_json_chunked(md_pages: list[str], catalog_metadata: dict | None = None) -> dict:
+    """
+    แบ่ง chunk โดยห้ามเอา COURSE_CATALOG
+    ไปปนกับ ACADEMIC_PLAN
+    """
+
+    chunks_pages: list[list[str]] = []
+
+    current: list[str] = []
+    current_role: str | None = None
+
+    for page in _split_plan_terms(md_pages):
+        role = _get_page_role(page)
+
+        # ถ้า role เปลี่ยน หรือครบจำนวนหน้าต่อ chunk
+        # ให้ปิด chunk เดิมก่อน
+        if current and (
+            role != current_role
+            or role == "ACADEMIC_PLAN"
+            or current_role == "ACADEMIC_PLAN"
+            or len(current) >= PAGES_PER_CHUNK
+        ):
+            chunks_pages.append(current)
+            current = []
+
+        if not current:
+            current_role = role
+
+        current.append(page)
+
+    if current:
+        chunks_pages.append(current)
+
+    results: list[dict] = []
+
+    for ci, part in enumerate(chunks_pages):
+        role = _get_page_role(part[0])
+
+        print(
+            f"    [จัด JSON] ก้อนที่ {ci + 1}/{len(chunks_pages)} "
+            f"({len(part)} หน้า, {role})"
+        )
+
+        document_text = "\n\n".join(part)
+
         try:
             raw = ollama_chat(
                 MODEL_TEXT,
-                [{"role": "system", "content": SYSTEM_PROMPT},
-                 {"role": "user", "content": EXTRACT_PROMPT.format(
-                     document_text="\n\n".join(part))}],
+                [
+                    {
+                        "role": "system",
+                        "content": SYSTEM_PROMPT,
+                    },
+                    {
+                        "role": "user",
+                        "content": EXTRACT_PROMPT.format(
+                            document_text=document_text
+                        ),
+                    },
+                ],
                 fmt=COURSE_SCHEMA,
             )
+
             d = parse_json(raw)
-            print(f"      ได้ {len(d.get('courses') or [])} วิชา")
-            chunks.append(d)
+
+            courses = d.get("courses") or []
+            courses = _repair_source_rows(courses, document_text)
+            _apply_plan_term(courses, document_text, role)
+            _apply_catalog_metadata(courses, catalog_metadata or {})
+
+            # --------------------------------------------------
+            # SAFETY GUARD
+            # --------------------------------------------------
+            # Course catalog ไม่มีข้อมูลปี/เทอม
+            # จึงห้ามโมเดล invent 1/1
+            if role == "COURSE_CATALOG":
+                for course in courses:
+                    course["year"] = 0
+                    course["semester"] = 0
+
+                    # อย่า invent flexible term
+                    if not course.get("flexible_year_semester"):
+                        course["flexible_year_semester"] = None
+
+            # ==================================================
+            # ตรวจว่ามีรหัสในข้อความต้นฉบับ
+            # แต่ Qwen ยังไม่ได้สกัดออกมาหรือไม่
+            #
+            # ตรวจทั้ง COURSE_CATALOG และ ACADEMIC_PLAN
+            # ==================================================
+
+            source_codes = set(
+                _find_course_codes(document_text)
+            )
+
+            predicted_codes = {
+                code
+                for course in courses
+                for code in _find_course_codes(str(course.get("code") or ""))
+            }
+
+            missing_codes = sorted(
+                code
+                for code in source_codes
+                if code not in predicted_codes
+            )
+
+            expected_counts = _source_row_counts(document_text)
+            actual_counts = Counter(
+                code for c in courses
+                for code in _find_course_codes(str(c.get("code") or ""))
+            )
+            missing_codes = sorted(set(missing_codes) | {
+                code for code, count in expected_counts.items()
+                if actual_counts[code] < count
+            })
+
+            if missing_codes:
+
+                print(
+                    "      ⚠ พบรหัสที่ยังไม่ได้สกัด: "
+                    + ", ".join(missing_codes)
+                )
+
+                retry_prompt = f"""
+ตรวจเอกสารหน้านี้อีกครั้งอย่างละเอียด
+
+ROLE ของหน้านี้คือ:
+{role}
+
+รหัสต่อไปนี้ปรากฏอยู่ในข้อความต้นฉบับ
+แต่รอบแรกยังไม่ได้ถูกสกัดเป็น course object:
+
+{", ".join(missing_codes)}
+
+ให้ตรวจรหัสเหล่านี้ทีละตัว และคืนทุกแถวของรหัสในรายการข้างต้น
+หากรหัสซ้ำแต่ชื่อมีเลขลำดับต่างกัน ต้องคืนแยกแถว เช่น วิชาเลือกเสรี 1 และ 2
+จำนวนแถวที่ตรวจพบจากต้นฉบับ: {dict(expected_counts)}
+ห้ามลดจำนวน x: xxxxxxxx ต้องมี x แปดตัว
+
+กติกาสำคัญ:
+- คืนเฉพาะรหัสที่เป็น "แถวรายวิชา" จริงในตาราง
+- ถ้ารหัสปรากฏแค่ใน prerequisite, หมายเหตุ,
+  คำอธิบาย หรือข้อความอ้างอิง ห้ามสร้าง course object
+- รองรับรหัส placeholder เช่น:
+  06026xxx
+  90644xxx
+  9064xxxx
+  xxxxxxxx
+- ห้ามทิ้งรหัสเพียงเพราะมีตัว x
+- ถ้าเป็น ACADEMIC_PLAN:
+    อ่าน year และ semester จากหัวข้อปี/ภาคในเอกสาร
+- ถ้าเป็น COURSE_CATALOG:
+    ไม่ต้องเดาปีและภาค
+- คัดลอกชื่อไทย ชื่ออังกฤษ และหน่วยกิตจากเอกสาร
+- prerequisite ถ้าไม่มีให้ใส่ "ไม่มี"
+- ห้ามสร้างรายวิชาที่ไม่มีอยู่ในเอกสาร
+- ตอบ JSON ตาม schema เท่านั้น
+
+=== เอกสาร ===
+
+{document_text}
+
+=== สิ้นสุดเอกสาร ===
+"""
+
+                try:
+
+                    retry_raw = ollama_chat(
+                        MODEL_TEXT,
+                        [
+                            {
+                                "role": "system",
+                                "content": SYSTEM_PROMPT,
+                            },
+                            {
+                                "role": "user",
+                                "content": retry_prompt,
+                            },
+                        ],
+                        fmt=COURSE_SCHEMA,
+                    )
+
+                    retry_data = parse_json(
+                        retry_raw
+                    )
+
+                    retry_courses = (
+                        retry_data.get("courses")
+                        or []
+                    )
+
+                    retry_courses = _repair_source_rows(retry_courses, document_text)
+                    _apply_plan_term(retry_courses, document_text, role)
+
+                    missing_set = set(
+                        missing_codes
+                    )
+
+                    # กัน duplicate กับของที่มีอยู่แล้ว
+                    existing_keys = {
+                        (
+                            M.normalize(
+                                c.get("code"),
+                                "strict",
+                            ),
+                            M.normalize(
+                                c.get("name_th"),
+                                "strict",
+                            ),
+                            str(c.get("year")),
+                            str(c.get("semester")),
+                        )
+                        for c in courses
+                    }
+
+                    n_added = 0
+
+                    for course in retry_courses:
+
+                        code = M.normalize(
+                            course.get("code"),
+                            "strict",
+                        )
+
+                        # รับเฉพาะรหัสที่กำลังตามหา
+                        if code not in missing_set:
+                            continue
+
+                        # Course Catalog ห้าม invent ปี/เทอม
+                        if role == "COURSE_CATALOG":
+                            course["year"] = 0
+                            course["semester"] = 0
+
+                            if not course.get(
+                                "flexible_year_semester"
+                            ):
+                                course[
+                                    "flexible_year_semester"
+                                ] = None
+
+                        key = (
+                            code,
+                            M.normalize(
+                                course.get("name_th"),
+                                "strict",
+                            ),
+                            str(course.get("year")),
+                            str(course.get("semester")),
+                        )
+
+                        if key in existing_keys:
+                            continue
+
+                        existing_keys.add(key)
+                        courses.append(course)
+                        n_added += 1
+
+                    if n_added:
+                        print(
+                            f"      ✓ retry เก็บเพิ่ม "
+                            f"{n_added} รายการ"
+                        )
+                    else:
+                        print(
+                            "      ○ รหัสที่พบไม่ใช่แถวรายวิชา "
+                            "หรือ Qwen ไม่พบข้อมูลเพิ่ม"
+                        )
+
+                except Exception as retry_error:
+                    print(
+                        "      ⚠ retry ล้มเหลว: "
+                        f"{retry_error}"
+                    )
+
+
+            courses = _repair_source_rows(courses, document_text)
+            _apply_catalog_metadata(courses, catalog_metadata or {})
+            d["courses"] = courses
+
+            print(f"      ได้ {len(courses)} วิชา")
+
+            results.append(d)
+
         except Exception as e:
-            # ก้อนหนึ่งพัง ไม่ควรทำให้ทั้งงานพัง — ข้ามไปทำก้อนถัดไป
             print(f"      ❌ ก้อนที่ {ci + 1} ล้มเหลว: {e}")
 
-    return merge_chunks(chunks)
+    return merge_chunks(results)
+
+
+def _catalog_metadata(pdf_path: str, stop_page: int) -> dict:
+    """Read catalog headings before selected pages; never add new courses."""
+    metadata = {}
+    category = None
+    course_type = None
+    active = False
+    pdfplumber = _need("pdfplumber")
+    with pdfplumber.open(pdf_path) as pdf:
+        for page in pdf.pages[:stop_page]:
+            for line in (page.extract_text() or "").splitlines():
+                if re.search(r"3\.1\.3\s+รายวิชา", line):
+                    active = True
+                if active and re.search(r"3\.1\.4\b", line):
+                    return metadata
+                if not active:
+                    continue
+                heading = re.match(r"\s*[กขคงจ]\s*\.\s*(หมวดวิชาศึกษาทั่วไป|หมวดวิชาเฉพาะ|หมวดวิชาเลือกเสรี)", line)
+                if heading:
+                    category = heading[1]
+                    course_type = None
+                if re.match(r"\s*\d+\)", line):
+                    if any(label in line for label in ("วิชาแกน", "พื้นฐานวิชาชีพ", "วิชาพื้นฐาน", "เกณฑ")):
+                        course_type = "บังคับ"
+                    elif any(label in line for label in ("วิชาชีพเฉพาะด", "วิชาเลือก", "การศึกษาทางเลือก")):
+                        course_type = "เลือก"
+                    else:
+                        course_type = None
+                row = re.match(r"\s*([0-9xX]{8})\s+(.+)", line)
+                if row and category:
+                    entry = {"category": category}
+                    if "วิชาเลือก" in row[2]:
+                        entry["type"] = "เลือก"
+                    elif course_type:
+                        entry["type"] = course_type
+                    metadata[row[1].lower()] = entry
+    return metadata
+
+
+def _apply_catalog_metadata(courses: list[dict], metadata: dict) -> None:
+    for course in courses:
+        codes = _find_course_codes(str(course.get("code") or ""))
+        entries = [metadata[code] for code in codes if code in metadata]
+        categories = {entry["category"] for entry in entries}
+        if len(entries) == len(codes) and len(categories) == 1:
+            course["category"] = next(iter(categories))
+        code = M.normalize(course.get("code"), "strict")
+        if code in metadata and "type" in metadata[code]:
+            course["type"] = metadata[code]["type"]
 
 
 def pipeline_text(pdf_path: str, page_spec: str | None) -> dict:
     """
-    ⭐ pipeline พิเศษของกลุ่ม B: ข้าม OCR ไปเลย
+    Digital-PDF pipeline
 
-    ถ้า PDF มีข้อความฝังอยู่แล้ว การดึงข้อความตรง ๆ จะ:
-      - เร็วกว่า 50-100 เท่า (ไม่ต้องรัน VLM)
-      - แม่นกว่า (ไม่มีโอกาสอ่านตัวอักษรผิดเลย)
-
-    บทเรียน: เครื่องมือที่ทันสมัยที่สุดไม่ใช่เครื่องมือที่ดีที่สุดเสมอไป
-             ต้องดูก่อนว่าปัญหาที่แท้จริงคืออะไร
+    จุดสำคัญ:
+    - เก็บหมายเลขหน้าไว้
+    - แยก Course Catalog กับ Academic Plan
+    - ไม่ให้ model เดา year/semester จากหน้า catalog
     """
+
     print("    ดึงข้อความจาก PDF โดยตรง (ไม่ผ่าน OCR)...")
     text = extract_pdf_text(pdf_path, page_spec)
 
-    # แยกเป็นรายหน้าตามเครื่องหมายที่ extract_pdf_text ใส่ไว้
-    pages_text = re.split(r"\n=== หน้า \d+ ===\n", text)
-    pages_text = [p for p in pages_text if p.strip()]
-    n_all = len(re.findall(r"=== หน้า \d+ ===", text))
-    n_empty = n_all - len(pages_text)
+    # ดึง page number + content โดยไม่ทิ้งหมายเลขหน้า
+    matches = re.findall(
+        r"\n=== หน้า (\d+) ===\n(.*?)(?=\n=== หน้า \d+ ===\n|\Z)",
+        text,
+        flags=re.DOTALL,
+    )
 
-    print(f"    ได้ข้อความ {len(text):,} ตัวอักษร จาก {len(pages_text)}/{n_all} หน้า")
+    pages_text: list[str] = []
+
+    for page_no, body in matches:
+        body = body.strip()
+
+        if not body:
+            continue
+
+        # ถ้ามีหัวข้อภาคการศึกษา แปลว่าเป็น Academic Plan
+        #
+        # รองรับตัวอักษรเพี้ยนจาก PDF เช่น
+        #   ปีที่
+        #   ปที่
+        is_plan = bool(
+            re.search(
+                r"ภาคการศึกษาที่\s*[1-3]",
+                body,
+                flags=re.IGNORECASE,
+            )
+        )
+
+        role = "ACADEMIC_PLAN" if is_plan else "COURSE_CATALOG"
+
+        tagged = (
+            f"=== PDF_PAGE {page_no} ROLE={role} ===\n"
+            f"{body}"
+        )
+
+        pages_text.append(tagged)
+
+        print(f"      หน้า {page_no}: {role}")
+
+    n_all = len(matches)
+    n_good = len(pages_text)
+    n_empty = n_all - n_good
+
+    print(
+        f"    ได้ข้อความ {len(text):,} ตัวอักษร "
+        f"จาก {n_good}/{n_all} หน้า"
+    )
 
     if not pages_text:
         print("    ⚠ ไม่มีหน้าไหนดึงข้อความได้เลย — เล่มนี้เป็น PDF สแกน")
         print("      ให้ใช้ --pipeline vlm แทน")
         return {}
 
-    # ⚠️ จุดสำคัญ: ถ้ามีหน้าที่ดึงข้อความไม่ได้ปนอยู่ ต้องเตือนให้ดัง
-    #    ไม่ใช่ข้ามไปเงียบ ๆ เพราะวิชาในหน้านั้นจะหายทั้งหมด
-    #    แล้วนักศึกษาจะเห็นแค่ Recall ต่ำ โดยไม่รู้ว่าข้อมูลไม่เคยถูกส่งเข้าไป
     if n_empty:
-        print(f"    ⚠ มี {n_empty} หน้าที่ดึงข้อความไม่ได้ (น่าจะเป็นหน้าสแกน)")
-        print("      วิชาในหน้าเหล่านั้นจะหายไป --> Recall จะต่ำกว่าความจริง")
-        print("      ถ้าเล่มมีหน้าสแกนปน ให้ใช้ --pipeline vlm แทน")
+        print(f"    ⚠ มี {n_empty} หน้าที่ดึงข้อความไม่ได้")
 
-    return _text_to_json_chunked(pages_text)
+    metadata = _catalog_metadata(pdf_path, max(int(number) for number, _ in matches))
+    return _text_to_json_chunked(pages_text, catalog_metadata=metadata)
 
 
 
