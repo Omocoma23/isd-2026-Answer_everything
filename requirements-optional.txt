@@ -1,9 +1,0 @@
-# Optional engines from the original OCR project.
-# Not required by run_all.py because the default baseline uses Tesseract
-# and Lab 7B uses Ollama local models.
-pdf2image>=1.17
-paddleocr
-paddlepaddle
-transformers
-torch
-torchvision
