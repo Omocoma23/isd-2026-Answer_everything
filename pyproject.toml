@@ -1,0 +1,8 @@
+[project]
+name = "isd-curriculum-ocr"
+version = "1.0.0"
+description = "Raw curriculum PDFs -> OCR/LLM extraction -> Lab 8B SQLite -> Lab 9 evaluation"
+requires-python = ">=3.10"
+
+[tool.setuptools.packages.find]
+where = ["src"]
