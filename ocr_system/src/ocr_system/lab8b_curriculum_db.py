@@ -1081,6 +1081,14 @@ def clean_sql_output(s: str) -> str:
     return m.group(0).strip() if m else s
 
 
+def strip_course_question_prefix(question: str) -> str:
+    """ตัดคำเกริ่นหน้าชื่อเฉพาะคำถามรูปแบบ วิชา…มีรหัสอะไร"""
+    match = re.fullmatch(r"\s*วิชา\s*(.+?)\s*มีรหัสอะไร\s*[?？]?\s*", question)
+    if match:
+        return f"{match.group(1).strip()}มีรหัสอะไร"
+    return question
+
+
 def ask(conn: sqlite3.Connection, question: str,
         verbose: bool = True) -> dict:
     """
@@ -1095,7 +1103,8 @@ def ask(conn: sqlite3.Connection, question: str,
         "error": None, "sql_model_output": None, "answer_model_output": None,
     }
     ddl = DDL.strip()
-    prompt = SQL_PROMPT.format(ddl=ddl, question=question)
+    sql_question = strip_course_question_prefix(question)
+    prompt = SQL_PROMPT.format(ddl=ddl, question=sql_question)
 
     for attempt in range(2):
         try:
@@ -1125,7 +1134,7 @@ def ask(conn: sqlite3.Connection, question: str,
             if attempt == 1:
                 result["answer"] = "ไม่สามารถตอบคำถามนี้ได้ กรุณาตรวจสอบเอง"
                 return result
-            prompt = (SQL_PROMPT.format(ddl=ddl, question=question)
+            prompt = (SQL_PROMPT.format(ddl=ddl, question=sql_question)
                       + f"\n\nSQL ที่ลองไปแล้วมีข้อผิดพลาด: {e}\nเขียนใหม่ให้ถูก\nSQL:")
 
     # ปฏิเสธที่จะเดา เมื่อไม่มีข้อมูล — จุดนี้สำคัญกว่าที่คิด

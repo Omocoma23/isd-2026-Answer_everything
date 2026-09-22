@@ -224,6 +224,15 @@ def load_pages(path: str, page_spec: str | None = None) -> list[bytes]:
     return pages
 
 
+def _normalize_pdf_thai_marks(text: str) -> str:
+    """Decode legacy Thai font marks observed in the source PDF, without guessing words."""
+    return text.translate(str.maketrans({
+        "\uf70a": "\u0e48",  # mai ek
+        "\uf70b": "\u0e49",  # mai tho
+        "\uf70e": "\u0e4c",  # thanthakhat
+    }))
+
+
 def extract_pdf_text(path: str, page_spec: str | None = None) -> str:
     """
     ดึงข้อความจาก PDF โดยตรง (ถ้าเป็น PDF ที่ฝังข้อความไว้ ไม่ใช่ภาพสแกน)
@@ -251,7 +260,7 @@ def extract_pdf_text(path: str, page_spec: str | None = None) -> str:
                 t = pdf.pages[i].extract_text(layout=True) or ""
             else:
                 t = pdf.pages[i].extract_text() or ""
-            out.append(f"\n=== หน้า {i + 1} ===\n{t}")
+            out.append(f"\n=== หน้า {i + 1} ===\n{_normalize_pdf_thai_marks(t)}")
     return "\n".join(out)
 
 
@@ -874,7 +883,7 @@ def _apply_plan_term(courses: list[dict], text: str, role: str) -> None:
 
 
 def _restore_literal_fields(courses: list[dict], text: str) -> None:
-    """Restore unambiguous row credits and English names from source text."""
+    """Restore unambiguous row credits and names from source text."""
     rows = list(re.finditer(r"(?m)^\s*([0-9xX]{8})[ \t]+", text))
     counts = Counter(row[1].lower() for row in rows)
     credit_re = r"\d+\s*\(\s*\d+\s*-\s*\d+\s*-\s*\d+\s*\)"
@@ -896,6 +905,16 @@ def _restore_literal_fields(courses: list[dict], text: str) -> None:
         if len(candidates) != 1:
             continue
         course = candidates[0]
+        # A single Thai title followed by its English title is unambiguous.
+        # Keep the source spelling, including vowel/tone marks the LLM may drop.
+        title_lines = [re.sub(credit_re, "", line).strip()
+                       for line in block.splitlines() if line.strip()]
+        title_lines = [line for line in title_lines if line]
+        if (len(title_lines) >= 2
+                and re.fullmatch(r"[\u0e00-\u0e7f0-9 \t()./\-]+", title_lines[0])
+                and re.search(r"[\u0e01-\u0e2e]", title_lines[0])
+                and re.fullmatch(r"[A-Z][A-Z0-9\s&/,().:'’+\-]*", title_lines[1])):
+            course["name_th"] = re.sub(r"[ \t]+", " ", title_lines[0])
         credits = list(dict.fromkeys(re.sub(r"\s+", "", m[0])
                                     for m in re.finditer(credit_re, block)))
         if len(credits) == 1 or (credits and "หรือ" in block):

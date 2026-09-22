@@ -1,5 +1,8 @@
 # ISD 2026 — Raw PDF → OCR/LLM → Database → Lab 9
 
+คู่มือโครงสร้างไฟล์และคำสั่ง PowerShell ที่ไม่ต้อง Activate: [PROJECT_GUIDE.md](../PROJECT_GUIDE.md)
+สคริปต์ช่วยงานย้ายไป `scripts/` แล้ว ให้เรียกจากโฟลเดอร์นี้ เช่น `python scripts/build_page_maps.py --help`
+
 ชุดนี้จบที่ **Lab 9 (Evaluation and Overfitting)** เท่านั้น — **ไม่มี Web App / FastAPI / frontend**
 
 เป้าหมายคือให้เริ่มจากไฟล์หลักสูตร **PDF ดิบฉบับเต็มจริง** ทั้ง 4 หลักสูตร แล้วรันคำสั่งเดียวจนได้ฐานข้อมูลของแต่ละหลักสูตรและรายงานประเมิน Lab 9
