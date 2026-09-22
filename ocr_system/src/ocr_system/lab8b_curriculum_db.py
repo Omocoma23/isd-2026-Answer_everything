@@ -1179,13 +1179,18 @@ def cmd_ask(args) -> None:
 #  การเทียบที่ค่าตัวเลข/ชุดรหัสวิชาจึงยุติธรรมและทำอัตโนมัติได้จริง
 # ═══════════════════════════════════════════════════════════════════════
 
+def _normalize_answer_value(value: Any) -> str:
+    """Ignore layout whitespace while preserving spelling, case and course codes."""
+    return " ".join(str(value).split())
+
+
 def _values_of(rows: list[dict]) -> set[str]:
     """ดึงค่าทั้งหมดในผลลัพธ์ออกมาเป็นชุดข้อความ เพื่อเทียบแบบไม่สนลำดับคอลัมน์"""
     out = set()
     for r in rows:
         for v in r.values():
             if v is not None:
-                out.add(str(v).strip())
+                out.add(_normalize_answer_value(v))
     return out
 
 
@@ -1198,6 +1203,8 @@ def score_one(expect: dict, got: dict) -> tuple[bool, str]:
     count  — จำนวนแถวต้องเท่ากับที่คาด
     none   — ต้องตอบว่าไม่พบ (ใช้ทดสอบว่าระบบยอมรับได้ว่าไม่รู้)
     """
+    if got.get("error"):
+        return False, f"SQL ไม่สำเร็จ: {got['error']}"
     kind = expect.get("type", "value")
     rows = got.get("rows") or []
     vals = _values_of(rows)
@@ -1211,12 +1218,13 @@ def score_one(expect: dict, got: dict) -> tuple[bool, str]:
         return ok, f"ได้ {len(rows)} แถว คาด {expect['value']}"
 
     if kind == "set":
-        want = {str(x).strip() for x in expect["value"]}
-        ok = want.issubset(vals)
+        want = {_normalize_answer_value(x) for x in expect["value"]}
+        ok = want == vals
         missing = want - vals
-        return ok, "ครบ" if ok else f"ขาด {', '.join(sorted(missing)[:5])}"
+        extra = vals - want
+        return ok, "ครบ" if ok else f"ขาด {sorted(missing)[:5]}; เกิน {sorted(extra)[:5]}"
 
-    want = str(expect["value"]).strip()
+    want = _normalize_answer_value(expect["value"])
     ok = want in vals
     return ok, "ตรง" if ok else f"ไม่พบค่า {want} (ได้ {sorted(vals)[:5]})"
 
@@ -1237,6 +1245,7 @@ def cmd_eval(args) -> None:
         n_ok += ok
         n_sql_ok += sql_ok
         rows_out.append({**q, "sql": got["sql"], "n_rows": len(got["rows"]),
+                         "rows": got["rows"],
                          "error": got["error"],
                          "sql_model_output": got["sql_model_output"],
                          "answer_model_output": got["answer_model_output"],
@@ -1251,7 +1260,7 @@ def cmd_eval(args) -> None:
     print(f"  ตอบถูก        {n_ok}/{n}  ({n_ok / n:.0%})")
     print()
     print("  แยกสองตัวเลขนี้เสมอ เพราะมันบอกคนละเรื่อง")
-    print("    SQL รันผ่านแต่ตอบผิด = โมเดลเข้าใจคำถามผิด (แก้ที่ prompt/ตัวอย่าง)")
+    print("    SQL รันผ่านแต่ตอบผิด = ตรวจ SQL, ข้อมูลที่สกัด/นำเข้า และการเทียบเฉลย")
     print("    SQL รันไม่ผ่าน       = โมเดลเขียน SQL ไม่เป็น (แก้ที่ schema/VIEW)")
 
     if args.output:

@@ -29,3 +29,4 @@ src/ocr_system/engines/tesseract_engine.py
 src/ocr_system/engines/trocr_engine.py
 src/ocr_system/utils/__init__.py
 src/ocr_system/utils/io.py
+tests/test_qa_scoring.py
