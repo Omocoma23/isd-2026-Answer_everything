@@ -1,0 +1,8 @@
+{
+  "program": "IT",
+  "source_pdf": "data\\raw\\IT.pdf",
+  "source_size_bytes": 257458903,
+  "source_sha256": "aca97dc8b57308b30355e74e384c042d27d005310c6b4a9b72ecf79514543afa",
+  "selected_pages": "26-29,38-44",
+  "note": "Input is the original full PDF. Page selection is performed only inside the pipeline."
+}

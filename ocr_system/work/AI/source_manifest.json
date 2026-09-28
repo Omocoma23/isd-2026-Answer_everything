@@ -1,0 +1,8 @@
+{
+  "program": "AI",
+  "source_pdf": "data\\raw\\AI.pdf",
+  "source_size_bytes": 236667633,
+  "source_sha256": "268065523712db993eec9699b106cc84c283898cd720b70ed56fe73afe80561f",
+  "selected_pages": "21-26",
+  "note": "Input is the original full PDF. Page selection is performed only inside the pipeline."
+}

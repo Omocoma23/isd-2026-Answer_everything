@@ -1,0 +1,29 @@
+{
+  "program": null,
+  "plan": null,
+  "courses": [
+    {
+      "code": "06026213",
+      "name_th": "ระบบข้อมูลมหัต",
+      "name_en": null,
+      "credits": "3(225)",
+      "year": null,
+      "semester": null,
+      "category": null,
+      "type": null,
+      "prerequisite": "ไม่มี",
+      "flexible_year_semester": null,
+      "note": null
+    }
+  ],
+  "_meta": {
+    "pipeline": "baseline",
+    "elapsed_sec": 11.8,
+    "models": {
+      "ocr": "scb10x/typhoon-ocr1.5-3b",
+      "text": "qwen3:4b"
+    },
+    "dpi": 150,
+    "pages_per_chunk": 1
+  }
+}

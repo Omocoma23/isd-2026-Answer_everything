@@ -1,0 +1,4 @@
+﻿category,gt_courses,matched_courses,missing_courses,course_match_rate,exact_course_matches,exact_course_accuracy,overall_field_accuracy,code_accuracy,name_th_accuracy,name_en_accuracy,credits_accuracy,year_accuracy,semester_accuracy,category_accuracy,type_accuracy,prerequisite_accuracy,flexible_year_semester_accuracy,note_accuracy
+หมวดวิชาศึกษาทั่วไป,11,8,3,0.7272727272727273,0,0.0,0.3305785123966942,0.7272727272727273,0.0,0.0,0.7272727272727273,0.0,0.0,0.18181818181818182,0.0,0.7272727272727273,0.7272727272727273,0.5454545454545454
+หมวดวิชาเฉพาะ,50,47,3,0.94,0,0.0,0.44545454545454544,0.94,0.7,0.0,0.92,0.0,0.0,0.0,0.0,0.88,0.56,0.9
+หมวดวิชาเลือกเสรี,2,0,2,0.0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0

@@ -1,0 +1,212 @@
+[
+  {
+    "question": "หลักสูตรนี้มีทั้งหมดกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 129
+    }
+  },
+  {
+    "question": "หลักสูตรนี้ใช้เวลาเรียนกี่ปี",
+    "expect": {
+      "type": "value",
+      "value": 4
+    }
+  },
+  {
+    "question": "วิชา 06016401 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 3
+    }
+  },
+  {
+    "question": "วิชาคณิตศาสตร์สำหรับเทคโนโลยีสารสนเทศมีรหัสอะไร",
+    "expect": {
+      "type": "value",
+      "value": "06016401"
+    }
+  },
+  {
+    "question": "วิชา 06016401 ชื่อภาษาอังกฤษว่าอะไร",
+    "expect": {
+      "type": "value",
+      "value": "MATHEMATICS FOR INFORMATION TECHNOLOGY"
+    }
+  },
+  {
+    "question": "วิชา 06016402 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 3
+    }
+  },
+  {
+    "question": "วิชาพื้นฐานทางด้านเทคโนโลยีสารสนเทศมีรหัสอะไร",
+    "expect": {
+      "type": "value",
+      "value": "06016402"
+    }
+  },
+  {
+    "question": "วิชา 06016402 ชื่อภาษาอังกฤษว่าอะไร",
+    "expect": {
+      "type": "value",
+      "value": "INFORMATION TECHNOLOGY FUNDAMENTALS"
+    }
+  },
+  {
+    "question": "วิชา 06016411 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 3
+    }
+  },
+  {
+    "question": "วิชาระบบคอมพิวเตอร์เบื้องต้นมีรหัสอะไร",
+    "expect": {
+      "type": "value",
+      "value": "06016411"
+    }
+  },
+  {
+    "question": "วิชา 06016411 ชื่อภาษาอังกฤษว่าอะไร",
+    "expect": {
+      "type": "value",
+      "value": "INTRODUCTION TO COMPUTER SYSTEMS"
+    }
+  },
+  {
+    "question": "วิชา 06066303 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 3
+    }
+  },
+  {
+    "question": "วิชาการแก้ปัญหาและการโปรแกรมคอมพิวเตอร์มีรหัสอะไร",
+    "expect": {
+      "type": "value",
+      "value": "06066303"
+    }
+  },
+  {
+    "question": "วิชา 06066303 ชื่อภาษาอังกฤษว่าอะไร",
+    "expect": {
+      "type": "value",
+      "value": "PROBLEM SOLVING AND COMPUTER PROGRAMMING"
+    }
+  },
+  {
+    "question": "วิชา 90641001 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 2
+    }
+  },
+  {
+    "question": "วิชาโรงเรียนสร้างเสน่ห์มีรหัสอะไร",
+    "expect": {
+      "type": "value",
+      "value": "90641001"
+    }
+  },
+  {
+    "question": "วิชา 90641001 ชื่อภาษาอังกฤษว่าอะไร",
+    "expect": {
+      "type": "value",
+      "value": "CHARM SCHOOL"
+    }
+  },
+  {
+    "question": "วิชา 90641003 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 1
+    }
+  },
+  {
+    "question": "วิชากีฬาและนันทนาการมีรหัสอะไร",
+    "expect": {
+      "type": "value",
+      "value": "90641003"
+    }
+  },
+  {
+    "question": "วิชา 90641003 ชื่อภาษาอังกฤษว่าอะไร",
+    "expect": {
+      "type": "value",
+      "value": "SPORTS AND RECREATIONAL ACTIVITIES"
+    }
+  },
+  {
+    "question": "วิชา 90644007 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 3
+    }
+  },
+  {
+    "question": "วิชาภาษาอังกฤษพื้นฐาน 1มีรหัสอะไร",
+    "expect": {
+      "type": "value",
+      "value": "90644007"
+    }
+  },
+  {
+    "question": "วิชา 90644007 ชื่อภาษาอังกฤษว่าอะไร",
+    "expect": {
+      "type": "value",
+      "value": "FOUNDATION ENGLISH 1"
+    }
+  },
+  {
+    "question": "วิชา 06016408 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 3
+    }
+  },
+  {
+    "question": "วิชาการสร้างโปรแกรมเชิงวัตถุมีรหัสอะไร",
+    "expect": {
+      "type": "value",
+      "value": "06016408"
+    }
+  },
+  {
+    "question": "วิชา 06016408 ชื่อภาษาอังกฤษว่าอะไร",
+    "expect": {
+      "type": "value",
+      "value": "OBJECT-ORIENTED PROGRAMMING"
+    }
+  },
+  {
+    "question": "วิชา 06066001 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 3
+    }
+  },
+  {
+    "question": "วิชาความน่าจะเป็นและสถิติมีรหัสอะไร",
+    "expect": {
+      "type": "value",
+      "value": "06066001"
+    }
+  },
+  {
+    "question": "วิชา 06066001 ชื่อภาษาอังกฤษว่าอะไร",
+    "expect": {
+      "type": "value",
+      "value": "PROBABILITY AND STATISTICS"
+    }
+  },
+  {
+    "question": "วิชา 06066101 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 3
+    }
+  }
+]

@@ -1,0 +1,296 @@
+{
+  "lab": 9,
+  "program": "IT",
+  "scope": "Evaluation of the completed curriculum OCR -> structured JSON -> SQLite -> NL-to-SQL pipeline",
+  "lab7_extraction": {
+    "selected_pipeline": "text",
+    "alignment": {
+      "matched": 104,
+      "missed": 2,
+      "spurious": 6,
+      "precision": 0.9455,
+      "recall": 0.9811,
+      "f1": 0.963,
+      "ground_truth_total": 106,
+      "prediction_total": 110
+    },
+    "overall_micro_cer": 0.141571,
+    "attributes": {
+      "code": {
+        "label": "รหัสวิชา",
+        "n_items": 106,
+        "cer": 0.032558,
+        "wer": null,
+        "exact_match_accuracy": 0.981132,
+        "missing": 2,
+        "hallucinated": 0
+      },
+      "name_th": {
+        "label": "ชื่อวิชา (ไทย) ⭐",
+        "n_items": 106,
+        "cer": 0.038561,
+        "wer": 0.265306,
+        "exact_match_accuracy": 0.688679,
+        "missing": 2,
+        "hallucinated": 0
+      },
+      "name_en": {
+        "label": "ชื่อวิชา (อังกฤษ) ⭐",
+        "n_items": 106,
+        "cer": 0.045743,
+        "wer": 0.046117,
+        "exact_match_accuracy": 0.943396,
+        "missing": 2,
+        "hallucinated": 0
+      },
+      "credits": {
+        "label": "หน่วยกิต",
+        "n_items": 106,
+        "cer": 0.029782,
+        "wer": null,
+        "exact_match_accuracy": 0.95283,
+        "missing": 2,
+        "hallucinated": 0
+      },
+      "year_sem": {
+        "label": "ปี/ภาค",
+        "n_items": 106,
+        "cer": 0.018868,
+        "wer": null,
+        "exact_match_accuracy": 0.981132,
+        "missing": 2,
+        "hallucinated": 0
+      },
+      "category": {
+        "label": "หมวดวิชา",
+        "n_items": 106,
+        "cer": 0.643251,
+        "wer": null,
+        "exact_match_accuracy": 0.122642,
+        "missing": 2,
+        "hallucinated": 0
+      },
+      "ctype": {
+        "label": "บังคับ/เลือก",
+        "n_items": 106,
+        "cer": 0.020797,
+        "wer": null,
+        "exact_match_accuracy": 0.981132,
+        "missing": 2,
+        "hallucinated": 0
+      },
+      "prereq": {
+        "label": "วิชาบังคับก่อน",
+        "n_items": 104,
+        "cer": 0.212389,
+        "wer": null,
+        "exact_match_accuracy": 0.855769,
+        "missing": 0,
+        "hallucinated": 0
+      },
+      "flexible": {
+        "label": "ปี/ภาคยืดหยุ่น",
+        "n_items": 104,
+        "cer": 1.0,
+        "wer": null,
+        "exact_match_accuracy": 0.490385,
+        "missing": 53,
+        "hallucinated": 0
+      }
+    },
+    "internal_check": {
+      "ok": false,
+      "n_courses": 110,
+      "n_duplicate_keys": 0,
+      "credits_by_term": {
+        "1/1": 18,
+        "1/2": 18,
+        "2/1": 18,
+        "2/2": 30,
+        "3/1": 33,
+        "3/2": 6,
+        "4/1": 24,
+        "4/2": 15
+      },
+      "total_credits_fixed_terms": 162,
+      "issues": [
+        "06016428: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016429: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016430: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016431: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016432: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016433: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016434: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016435: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016436: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016437: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016438: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016439: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016440: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016441: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016442: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016443: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016444: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016445: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016446: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016447: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016448: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016449: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016450: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016451: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016452: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016453: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016454: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016455: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016456: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016457: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016458: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016459: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016460: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016461: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016462: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016463: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016464: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016465: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016466: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016467: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016468: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016469: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016470: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016471: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016472: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016473: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016474: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016475: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016476: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016477: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016478: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016479: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016480: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016428: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016430: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016439: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "06016447: ปี/ภาค = 0 แต่ไม่ได้ระบุ flexible_year_semester",
+        "หน่วยกิตผิดรูปแบบ: xxxxxxxx -> '3(x-x-x)'",
+        "หน่วยกิตผิดรูปแบบ: xxxxxxxx -> '3(x-x-x)'",
+        "ภาค 2/2 มีถึง 30 หน่วยกิต — น่าจะมีวิชาซ้ำ",
+        "ภาค 3/1 มีถึง 33 หน่วยกิต — น่าจะมีวิชาซ้ำ"
+      ]
+    },
+    "interpretation_note": "CER/WER and exact-match are reported per extracted attribute; alignment precision/recall/F1 measures missing/spurious course rows."
+  },
+  "lab8_structured_data_and_db": {
+    "json_valid_rate_final": 1.0,
+    "schema_pass_final": true,
+    "conversion": {
+      "source_courses": 110,
+      "converted_courses": 100,
+      "plan_items": 53,
+      "prerequisites": 0,
+      "skipped_wildcards": 6,
+      "skipped_flexible_plan_items": 57,
+      "warning_count": 64
+    },
+    "verify_7_checks": {
+      "passed": 5,
+      "total": 7,
+      "pass_rate": 0.714286,
+      "checks": [
+        {
+          "id": "CHK1",
+          "name": "หน่วยกิตรวมของแผน = หน่วยกิตที่หลักสูตรประกาศ",
+          "ok": false,
+          "detail": "แผนรวม 162 · ประกาศไว้ 129 · มีวิชาเลือกเสรี 3 รายการ"
+        },
+        {
+          "id": "CHK2",
+          "name": "ทุกรหัสวิชาในแผน มีคำอธิบายรายวิชา",
+          "ok": true,
+          "detail": "ครบทุกรหัส"
+        },
+        {
+          "id": "CHK3",
+          "name": "รหัสวิชาและช่องวิชาในแผนมีรูปแบบถูกต้อง",
+          "ok": true,
+          "detail": "ถูกต้องทุกรายการ"
+        },
+        {
+          "id": "CHK4",
+          "name": "หน่วยกิตในแผน ตรงกับคำอธิบายรายวิชา",
+          "ok": true,
+          "detail": "ตรงกันทุกรายการ"
+        },
+        {
+          "id": "CHK5",
+          "name": "วิชาบังคับก่อน อยู่ภาคเรียนก่อนวิชาที่อ้างถึง",
+          "ok": true,
+          "detail": "ลำดับถูกต้องทุกคู่"
+        },
+        {
+          "id": "CHK6",
+          "name": "ไม่มีวิชาซ้ำในภาคเรียนเดียวกัน",
+          "ok": true,
+          "detail": "ไม่มีรายการซ้ำ"
+        },
+        {
+          "id": "CHK7",
+          "name": "หน่วยกิตต่อภาคเรียนอยู่ระหว่าง 9–22",
+          "ok": false,
+          "detail": "ปี 2/2 = 30 หน่วยกิต; ปี 3/1 = 33 หน่วยกิต"
+        }
+      ]
+    },
+    "repair_rate": {
+      "status": "not_applicable",
+      "reason": "This pipeline uses deterministic import-lab7b conversion for Lab 8B rather than the LLM JSON repair loop, so a repair-loop rate is not generated."
+    }
+  },
+  "lab9_qa_evaluation": {
+    "questions": 30,
+    "valid_sql_count": 30,
+    "valid_sql_rate": 1.0,
+    "execution_correct_count": 28,
+    "execution_accuracy": 0.933333,
+    "mean_seconds_per_question": 1.113333,
+    "median_seconds_per_question": 0.9,
+    "failed_sql_questions": [],
+    "wrong_answer_questions": [
+      {
+        "question": "วิชาระบบคอมพิวเตอร์เบื้องต้นมีรหัสอะไร",
+        "why": "ไม่พบค่า 06016411 (ได้ [])",
+        "sql": "SELECT code FROM course WHERE name_th LIKE '%ระบบคอมพิวเตอร์เบื้องต้น%' LIMIT 200"
+      },
+      {
+        "question": "วิชาความน่าจะเป็นและสถิติมีรหัสอะไร",
+        "why": "ไม่พบค่า 06066001 (ได้ [])",
+        "sql": "SELECT code FROM course WHERE name_th LIKE '%ความน่าจะเป็นและสถิติ%' LIMIT 200"
+      }
+    ],
+    "metric_note": "For this Group-B NL-to-SQL task, Execution Accuracy is the key end-to-end correctness metric; Valid SQL Rate is reported separately because syntactically executable SQL can still answer the wrong question."
+  },
+  "metrics_not_claimed": {
+    "exact_match_and_token_f1_for_natural_language_answer": "not_measured: gold questions store structured expected SQL results, not a single canonical Thai answer string.",
+    "faithfulness_groundedness": "not_measured: the current Lab 8B answer log does not contain sentence-level evidence annotations.",
+    "citation_coverage": "not_measured: the current answer path does not emit page/row citations.",
+    "coverage_abstain_rate": "not_measured: eval_result.json has no explicit abstain flag."
+  },
+  "overfitting": {
+    "status": "not_assessable_from_this_pipeline",
+    "reason": "No model is trained or fine-tuned in this project run, so there are no train/validation learning curves from which to diagnose underfitting/overfitting. The local models are used for inference only.",
+    "data_leakage_guard": "Gold questions are generated from curated ground truth, while the evaluated database is built from the OCR/LLM prediction. Do not tune prompts against the same 30 final questions if you want them to remain a final test set."
+  },
+  "artifacts": {
+    "selected_prediction": "C:\\Users\\Thiti\\Downloads\\Real_Ocr_system\\isd-2026-Answer_everything\\ocr_system\\work\\IT\\03_lab7b\\selected_prediction.json",
+    "lab7_evaluation": "C:\\Users\\Thiti\\Downloads\\Real_Ocr_system\\isd-2026-Answer_everything\\ocr_system\\work\\IT\\03_lab7b\\evaluation.json",
+    "curriculum_json": "C:\\Users\\Thiti\\Downloads\\Real_Ocr_system\\isd-2026-Answer_everything\\ocr_system\\work\\IT\\04_lab8b\\curriculum.json",
+    "curriculum_db": "C:\\Users\\Thiti\\Downloads\\Real_Ocr_system\\isd-2026-Answer_everything\\ocr_system\\work\\IT\\04_lab8b\\curriculum.db",
+    "verify_json": "C:\\Users\\Thiti\\Downloads\\Real_Ocr_system\\isd-2026-Answer_everything\\ocr_system\\work\\IT\\04_lab8b\\verify.json",
+    "gold_questions": "C:\\Users\\Thiti\\Downloads\\Real_Ocr_system\\isd-2026-Answer_everything\\ocr_system\\work\\IT\\04_lab8b\\gold_questions.json",
+    "eval_result": "C:\\Users\\Thiti\\Downloads\\Real_Ocr_system\\isd-2026-Answer_everything\\ocr_system\\work\\IT\\04_lab8b\\eval_result.json"
+  },
+  "curriculum_counts": {
+    "courses": 100,
+    "plan_items": 53,
+    "prerequisites": 0
+  }
+}

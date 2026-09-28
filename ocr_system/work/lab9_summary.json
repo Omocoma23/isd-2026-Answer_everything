@@ -1,0 +1,42 @@
+{
+  "lab": 9,
+  "programs": [
+    {
+      "program": "AI",
+      "selected_lab7_pipeline": "text",
+      "lab7_alignment_f1": 0.9483,
+      "lab7_micro_cer": 0.126897,
+      "verify_pass_rate": 0.857143,
+      "valid_sql_rate": 1.0,
+      "execution_accuracy": 0.9
+    },
+    {
+      "program": "BIT",
+      "selected_lab7_pipeline": "text",
+      "lab7_alignment_f1": 0.8906,
+      "lab7_micro_cer": 0.137679,
+      "verify_pass_rate": 0.857143,
+      "valid_sql_rate": 1.0,
+      "execution_accuracy": 0.966667
+    },
+    {
+      "program": "IT",
+      "selected_lab7_pipeline": "text",
+      "lab7_alignment_f1": 0.963,
+      "lab7_micro_cer": 0.141571,
+      "verify_pass_rate": 0.714286,
+      "valid_sql_rate": 1.0,
+      "execution_accuracy": 0.933333
+    },
+    {
+      "program": "DSBA",
+      "selected_lab7_pipeline": "text",
+      "lab7_alignment_f1": 0.9944,
+      "lab7_micro_cer": 0.103219,
+      "verify_pass_rate": 1.0,
+      "valid_sql_rate": 1.0,
+      "execution_accuracy": 0.9
+    }
+  ],
+  "note": "Per-stage metrics; no single overall score is manufactured."
+}

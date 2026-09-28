@@ -1,0 +1,212 @@
+[
+  {
+    "question": "หลักสูตรนี้มีทั้งหมดกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 120
+    }
+  },
+  {
+    "question": "หลักสูตรนี้ใช้เวลาเรียนกี่ปี",
+    "expect": {
+      "type": "value",
+      "value": 4
+    }
+  },
+  {
+    "question": "วิชา 06046400 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 3
+    }
+  },
+  {
+    "question": "วิชาแคลคูลัส 1มีรหัสอะไร",
+    "expect": {
+      "type": "value",
+      "value": "06046400"
+    }
+  },
+  {
+    "question": "วิชา 06046400 ชื่อภาษาอังกฤษว่าอะไร",
+    "expect": {
+      "type": "value",
+      "value": "CALCULUS 1"
+    }
+  },
+  {
+    "question": "วิชา 06046402 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 3
+    }
+  },
+  {
+    "question": "วิชาพีชคณิตเชิงเส้นมีรหัสอะไร",
+    "expect": {
+      "type": "value",
+      "value": "06046402"
+    }
+  },
+  {
+    "question": "วิชา 06046402 ชื่อภาษาอังกฤษว่าอะไร",
+    "expect": {
+      "type": "value",
+      "value": "LINEAR ALGEBRA"
+    }
+  },
+  {
+    "question": "วิชา 06066000 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 3
+    }
+  },
+  {
+    "question": "วิชาคณิตศาสตร์ไม่ต่อเนื่องมีรหัสอะไร",
+    "expect": {
+      "type": "value",
+      "value": "06066000"
+    }
+  },
+  {
+    "question": "วิชา 06066000 ชื่อภาษาอังกฤษว่าอะไร",
+    "expect": {
+      "type": "value",
+      "value": "DISCRETE MATHEMATICS"
+    }
+  },
+  {
+    "question": "วิชา 06066001 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 3
+    }
+  },
+  {
+    "question": "วิชาความน่าจะเป็นและสถิติมีรหัสอะไร",
+    "expect": {
+      "type": "value",
+      "value": "06066001"
+    }
+  },
+  {
+    "question": "วิชา 06066001 ชื่อภาษาอังกฤษว่าอะไร",
+    "expect": {
+      "type": "value",
+      "value": "PROBABILITY AND STATISTICS"
+    }
+  },
+  {
+    "question": "วิชา 06066303 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 3
+    }
+  },
+  {
+    "question": "วิชาการแก้ปัญหาและการโปรแกรมคอมพิวเตอร์มีรหัสอะไร",
+    "expect": {
+      "type": "value",
+      "value": "06066303"
+    }
+  },
+  {
+    "question": "วิชา 06066303 ชื่อภาษาอังกฤษว่าอะไร",
+    "expect": {
+      "type": "value",
+      "value": "PROBLEM SOLVING AND COMPUTER PROGRAMMING\nPROGRAMMING"
+    }
+  },
+  {
+    "question": "วิชา 90641008 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 0
+    }
+  },
+  {
+    "question": "วิชาพื้นฐานทักษะการสื่อสารภาษาอังกฤษมีรหัสอะไร",
+    "expect": {
+      "type": "value",
+      "value": "90641008"
+    }
+  },
+  {
+    "question": "วิชา 90641008 ชื่อภาษาอังกฤษว่าอะไร",
+    "expect": {
+      "type": "value",
+      "value": "INTRODUCTION TO ENGLISH COMMUNICATION SKILLS"
+    }
+  },
+  {
+    "question": "วิชา 06046401 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 3
+    }
+  },
+  {
+    "question": "วิชาแคลคูลัส 2มีรหัสอะไร",
+    "expect": {
+      "type": "value",
+      "value": "06046401"
+    }
+  },
+  {
+    "question": "วิชา 06046401 ชื่อภาษาอังกฤษว่าอะไร",
+    "expect": {
+      "type": "value",
+      "value": "CALCULUS 2"
+    }
+  },
+  {
+    "question": "วิชา 06046403 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 3
+    }
+  },
+  {
+    "question": "วิชาการโปรแกรมคอมพิวเตอร์มีรหัสอะไร",
+    "expect": {
+      "type": "value",
+      "value": "06046403"
+    }
+  },
+  {
+    "question": "วิชา 06046403 ชื่อภาษาอังกฤษว่าอะไร",
+    "expect": {
+      "type": "value",
+      "value": "COMPUTER PROGRAMMING"
+    }
+  },
+  {
+    "question": "วิชา 06066301 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 3
+    }
+  },
+  {
+    "question": "วิชาโครงสร้างข้อมูลและอัลกอริทึมมีรหัสอะไร",
+    "expect": {
+      "type": "value",
+      "value": "06066301"
+    }
+  },
+  {
+    "question": "วิชา 06066301 ชื่อภาษาอังกฤษว่าอะไร",
+    "expect": {
+      "type": "value",
+      "value": "DATA STRUCTURES AND ALGORITHMS"
+    }
+  },
+  {
+    "question": "วิชา 06046404 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 3
+    }
+  }
+]

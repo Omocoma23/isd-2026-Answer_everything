@@ -1,0 +1,8 @@
+{
+  "program": "DSBA",
+  "source_pdf": "data\\raw\\DSBA.pdf",
+  "source_size_bytes": 54264534,
+  "source_sha256": "01ead4c636b04ce072064e5789332b89b678d12b9863f52a72d35a9d15b500a1",
+  "selected_pages": "19-22,30-36",
+  "note": "Input is the original full PDF. Page selection is performed only inside the pipeline."
+}

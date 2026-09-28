@@ -1,0 +1,1 @@
+Classic OCR baseline was skipped or unavailable. Lab 7B text/VLM and Lab 8B continue normally.

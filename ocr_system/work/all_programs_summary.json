@@ -1,0 +1,38 @@
+[
+  {
+    "program": "AI",
+    "status": "DONE",
+    "chosen_lab7_pipeline": "text",
+    "lab7_alignment_f1": 0.9483,
+    "seconds": 531.1,
+    "lab8_dir": "work\\AI\\04_lab8b",
+    "lab9_dir": "work\\AI\\05_lab9"
+  },
+  {
+    "program": "BIT",
+    "status": "DONE",
+    "chosen_lab7_pipeline": "text",
+    "lab7_alignment_f1": 0.8906,
+    "seconds": 318.6,
+    "lab8_dir": "work\\BIT\\04_lab8b",
+    "lab9_dir": "work\\BIT\\05_lab9"
+  },
+  {
+    "program": "IT",
+    "status": "DONE",
+    "chosen_lab7_pipeline": "text",
+    "lab7_alignment_f1": 0.963,
+    "seconds": 469.8,
+    "lab8_dir": "work\\IT\\04_lab8b",
+    "lab9_dir": "work\\IT\\05_lab9"
+  },
+  {
+    "program": "DSBA",
+    "status": "DONE",
+    "chosen_lab7_pipeline": "text",
+    "lab7_alignment_f1": 0.9944,
+    "seconds": 945.9,
+    "lab8_dir": "work\\DSBA\\04_lab8b",
+    "lab9_dir": "work\\DSBA\\05_lab9"
+  }
+]

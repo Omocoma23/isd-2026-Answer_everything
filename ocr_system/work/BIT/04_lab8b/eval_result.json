@@ -1,0 +1,628 @@
+[
+  {
+    "question": "หลักสูตรนี้มีทั้งหมดกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 126
+    },
+    "sql": "SELECT total_credits FROM program LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "total_credits": 126
+      }
+    ],
+    "error": null,
+    "sql_model_output": "{\"sql\": \"SELECT total_credits FROM program\"}",
+    "answer_model_output": "{\"answer\": \"126 หน่วยกิต\"}",
+    "answer": "126 หน่วยกิต",
+    "correct": true,
+    "why": "ตรง",
+    "seconds": 7.2
+  },
+  {
+    "question": "หลักสูตรนี้ใช้เวลาเรียนกี่ปี",
+    "expect": {
+      "type": "value",
+      "value": 4
+    },
+    "sql": "SELECT years FROM program LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "years": 4
+      }
+    ],
+    "error": null,
+    "sql_model_output": "{\"sql\": \"SELECT years FROM program\"}",
+    "answer_model_output": "{\"answer\": \"4 ปี\"}",
+    "answer": "4 ปี",
+    "correct": true,
+    "why": "ตรง",
+    "seconds": 0.8
+  },
+  {
+    "question": "วิชา 06036100 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 3
+    },
+    "sql": "SELECT credits FROM course WHERE code='06036100' LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "credits": 3
+      }
+    ],
+    "error": null,
+    "sql_model_output": "{\"sql\": \"SELECT credits FROM course WHERE code='06036100'\" }",
+    "answer_model_output": "{\"answer\": \"3 หน่วยกิต\"}",
+    "answer": "3 หน่วยกิต",
+    "correct": true,
+    "why": "ตรง",
+    "seconds": 0.9
+  },
+  {
+    "question": "วิชาพื้นฐานทางด้านเทคโนโลยีสารสนเทศมีรหัสอะไร",
+    "expect": {
+      "type": "value",
+      "value": "06036100"
+    },
+    "sql": "SELECT code FROM course WHERE name_th LIKE '%พื้นฐานทางด้านเทคโนโลยีสารสนเทศ%' LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "code": "06036100"
+      }
+    ],
+    "error": null,
+    "sql_model_output": "{\"sql\": \"SELECT code FROM course WHERE name_th LIKE '%พื้นฐานทางด้านเทคโนโลยีสารสนเทศ%'\" }",
+    "answer_model_output": "{\"answer\": \"06036100\"}",
+    "answer": "06036100",
+    "correct": true,
+    "why": "ตรง",
+    "seconds": 1.1
+  },
+  {
+    "question": "วิชา 06036100 ชื่อภาษาอังกฤษว่าอะไร",
+    "expect": {
+      "type": "value",
+      "value": "INFORMATION TECHNOLOGY FUNDAMENTALS"
+    },
+    "sql": "SELECT name_en FROM course WHERE code = '06036100' LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "name_en": "INFORMATION TECHNOLOGY FUNDAMENTALS"
+      }
+    ],
+    "error": null,
+    "sql_model_output": "{\"sql\": \"SELECT name_en FROM course WHERE code = '06036100'\" }",
+    "answer_model_output": "{\"answer\": \"INFORMATION TECHNOLOGY FUNDAMENTALS\"}",
+    "answer": "INFORMATION TECHNOLOGY FUNDAMENTALS",
+    "correct": true,
+    "why": "ตรง",
+    "seconds": 1.0
+  },
+  {
+    "question": "วิชา 06036101 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 3
+    },
+    "sql": "SELECT credits FROM course WHERE code='06036101' LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "credits": 3
+      }
+    ],
+    "error": null,
+    "sql_model_output": "{\"sql\": \"SELECT credits FROM course WHERE code='06036101'\" }",
+    "answer_model_output": "{\"answer\": \"3 หน่วยกิต\"}",
+    "answer": "3 หน่วยกิต",
+    "correct": true,
+    "why": "ตรง",
+    "seconds": 0.9
+  },
+  {
+    "question": "วิชาคณิตศาสตร์สำหรับธุรกิจมีรหัสอะไร",
+    "expect": {
+      "type": "value",
+      "value": "06036101"
+    },
+    "sql": "SELECT code FROM course WHERE name_th LIKE '%คณิตศาสตร์สำหรับธุรกิจ%' LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "code": "06036101"
+      }
+    ],
+    "error": null,
+    "sql_model_output": "{\"sql\": \"SELECT code FROM course WHERE name_th LIKE '%คณิตศาสตร์สำหรับธุรกิจ%'\" }",
+    "answer_model_output": "{\"answer\": \"06036101\"}",
+    "answer": "06036101",
+    "correct": true,
+    "why": "ตรง",
+    "seconds": 1.0
+  },
+  {
+    "question": "วิชา 06036101 ชื่อภาษาอังกฤษว่าอะไร",
+    "expect": {
+      "type": "value",
+      "value": "MATHEMATICS FOR BUSINESS"
+    },
+    "sql": "SELECT name_en FROM course WHERE code = '06036101' LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "name_en": "MATHEMATICS FOR BUSINESS"
+      }
+    ],
+    "error": null,
+    "sql_model_output": "{\"sql\": \"SELECT name_en FROM course WHERE code = '06036101'\" }",
+    "answer_model_output": "{\"answer\": \"MATHEMATICS FOR BUSINESS\"}",
+    "answer": "MATHEMATICS FOR BUSINESS",
+    "correct": true,
+    "why": "ตรง",
+    "seconds": 0.9
+  },
+  {
+    "question": "วิชา 06036118 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 3
+    },
+    "sql": "SELECT credits FROM course WHERE code='06036118' LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "credits": 3
+      }
+    ],
+    "error": null,
+    "sql_model_output": "{\"sql\": \"SELECT credits FROM course WHERE code='06036118'\" }",
+    "answer_model_output": "{\"answer\": \"3 หน่วยกิต\"}",
+    "answer": "3 หน่วยกิต",
+    "correct": true,
+    "why": "ตรง",
+    "seconds": 0.9
+  },
+  {
+    "question": "วิชาการแก้ปัญหาทางด้านเทคโนโลยีสารสนเทศมีรหัสอะไร",
+    "expect": {
+      "type": "value",
+      "value": "06036118"
+    },
+    "sql": "SELECT code FROM course WHERE name_th LIKE '%การแก้ปัญหาทางด้านเทคโนโลยีสารสนเทศ%' LIMIT 200",
+    "n_rows": 0,
+    "rows": [],
+    "error": null,
+    "sql_model_output": "{\"sql\": \"SELECT code FROM course WHERE name_th LIKE '%การแก้ปัญหาทางด้านเทคโนโลยีสารสนเทศ%'\" }",
+    "answer_model_output": null,
+    "answer": "ไม่พบข้อมูลนี้ในเล่มหลักสูตร",
+    "correct": false,
+    "why": "ไม่พบค่า 06036118 (ได้ [])",
+    "seconds": 0.6
+  },
+  {
+    "question": "วิชา 06036118 ชื่อภาษาอังกฤษว่าอะไร",
+    "expect": {
+      "type": "value",
+      "value": "PROBLEM SOLVING IN INFORMATION TECHNOLOGY"
+    },
+    "sql": "SELECT name_en FROM course WHERE code='06036118' LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "name_en": "PROBLEM SOLVING IN INFORMATION TECHNOLOGY"
+      }
+    ],
+    "error": null,
+    "sql_model_output": "{\"sql\": \"SELECT name_en FROM course WHERE code='06036118'\" }",
+    "answer_model_output": "{\"answer\": \"PROBLEM SOLVING IN INFORMATION TECHNOLOGY\"}",
+    "answer": "PROBLEM SOLVING IN INFORMATION TECHNOLOGY",
+    "correct": true,
+    "why": "ตรง",
+    "seconds": 0.9
+  },
+  {
+    "question": "วิชา 96641001 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 2
+    },
+    "sql": "SELECT credits FROM course WHERE code='96641001' LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "credits": 2
+      }
+    ],
+    "error": null,
+    "sql_model_output": "{\"sql\": \"SELECT credits FROM course WHERE code='96641001'\" }",
+    "answer_model_output": "{\"answer\": \"2 หน่วยกิต\"}",
+    "answer": "2 หน่วยกิต",
+    "correct": true,
+    "why": "ตรง",
+    "seconds": 0.9
+  },
+  {
+    "question": "วิชาโรงเรียนสร้างเสน่ห์มีรหัสอะไร",
+    "expect": {
+      "type": "value",
+      "value": "96641001"
+    },
+    "sql": "SELECT code FROM course WHERE name_th LIKE '%โรงเรียนสร้างเสน่ห์%' LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "code": "96641001"
+      }
+    ],
+    "error": null,
+    "sql_model_output": "{\"sql\": \"SELECT code FROM course WHERE name_th LIKE '%โรงเรียนสร้างเสน่ห์%'\" }",
+    "answer_model_output": "{\"answer\": \"96641001\"}",
+    "answer": "96641001",
+    "correct": true,
+    "why": "ตรง",
+    "seconds": 1.0
+  },
+  {
+    "question": "วิชา 96641001 ชื่อภาษาอังกฤษว่าอะไร",
+    "expect": {
+      "type": "value",
+      "value": "CHARM SCHOOL"
+    },
+    "sql": "SELECT name_en FROM course WHERE code = '96641001' LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "name_en": "CHARM SCHOOL"
+      }
+    ],
+    "error": null,
+    "sql_model_output": "{\"sql\": \"SELECT name_en FROM course WHERE code = '96641001'\" }",
+    "answer_model_output": "{\"answer\": \"CHARM SCHOOL\"}",
+    "answer": "CHARM SCHOOL",
+    "correct": true,
+    "why": "ตรง",
+    "seconds": 0.9
+  },
+  {
+    "question": "วิชา 96641003 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 1
+    },
+    "sql": "SELECT credits FROM course WHERE code='96641003' LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "credits": 1
+      }
+    ],
+    "error": null,
+    "sql_model_output": "{\"sql\": \"SELECT credits FROM course WHERE code='96641003'\" }",
+    "answer_model_output": "{\"answer\": \"1 หน่วยกิต\"}",
+    "answer": "1 หน่วยกิต",
+    "correct": true,
+    "why": "ตรง",
+    "seconds": 1.0
+  },
+  {
+    "question": "วิชากีฬาและนันทนาการมีรหัสอะไร",
+    "expect": {
+      "type": "value",
+      "value": "96641003"
+    },
+    "sql": "SELECT code FROM course WHERE name_th LIKE '%กีฬาและนันทนาการ%' LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "code": "96641003"
+      }
+    ],
+    "error": null,
+    "sql_model_output": "{\"sql\": \"SELECT code FROM course WHERE name_th LIKE '%กีฬาและนันทนาการ%'\" }",
+    "answer_model_output": "{\"answer\": \"96641003\"}",
+    "answer": "96641003",
+    "correct": true,
+    "why": "ตรง",
+    "seconds": 1.0
+  },
+  {
+    "question": "วิชา 96641003 ชื่อภาษาอังกฤษว่าอะไร",
+    "expect": {
+      "type": "value",
+      "value": "SPORTS AND RECREATIONAL ACTIVITIES"
+    },
+    "sql": "SELECT name_en FROM course WHERE code = '96641003' LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "name_en": "SPORTS AND RECREATIONAL ACTIVITIES"
+      }
+    ],
+    "error": null,
+    "sql_model_output": "{\"sql\": \"SELECT name_en FROM course WHERE code = '96641003'\" }",
+    "answer_model_output": "{\"answer\": \"SPORTS AND RECREATIONAL ACTIVITIES\"}",
+    "answer": "SPORTS AND RECREATIONAL ACTIVITIES",
+    "correct": true,
+    "why": "ตรง",
+    "seconds": 1.0
+  },
+  {
+    "question": "วิชา 96644007 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 3
+    },
+    "sql": "SELECT credits FROM course WHERE code='96644007' LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "credits": 3
+      }
+    ],
+    "error": null,
+    "sql_model_output": "{\"sql\": \"SELECT credits FROM course WHERE code='96644007'\" }",
+    "answer_model_output": "{\"answer\": \"3 หน่วยกิต\"}",
+    "answer": "3 หน่วยกิต",
+    "correct": true,
+    "why": "ตรง",
+    "seconds": 1.1
+  },
+  {
+    "question": "วิชาภาษาอังกฤษพื้นฐาน 1มีรหัสอะไร",
+    "expect": {
+      "type": "value",
+      "value": "96644007"
+    },
+    "sql": "SELECT code FROM course WHERE name_th LIKE '%ภาษาอังกฤษพื้นฐาน 1%' LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "code": "96644007"
+      }
+    ],
+    "error": null,
+    "sql_model_output": "{\"sql\": \"SELECT code FROM course WHERE name_th LIKE '%ภาษาอังกฤษพื้นฐาน 1%'\"}",
+    "answer_model_output": "{\"answer\": \"96644007\"}",
+    "answer": "96644007",
+    "correct": true,
+    "why": "ตรง",
+    "seconds": 1.7
+  },
+  {
+    "question": "วิชา 96644007 ชื่อภาษาอังกฤษว่าอะไร",
+    "expect": {
+      "type": "value",
+      "value": "FOUNDATION ENGLISH 1"
+    },
+    "sql": "SELECT name_en FROM course WHERE code = '96644007' LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "name_en": "FOUNDATION ENGLISH 1"
+      }
+    ],
+    "error": null,
+    "sql_model_output": "{\"sql\": \"SELECT name_en FROM course WHERE code = '96644007'\" }",
+    "answer_model_output": "{\"answer\": \"FOUNDATION ENGLISH 1\"}",
+    "answer": "FOUNDATION ENGLISH 1",
+    "correct": true,
+    "why": "ตรง",
+    "seconds": 1.4
+  },
+  {
+    "question": "วิชา 96644042 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 3
+    },
+    "sql": "SELECT credits FROM course WHERE code='96644042' LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "credits": 3
+      }
+    ],
+    "error": null,
+    "sql_model_output": "{\"sql\": \"SELECT credits FROM course WHERE code='96644042'\" }",
+    "answer_model_output": "{\"answer\": \"3 หน่วยกิต\"}",
+    "answer": "3 หน่วยกิต",
+    "correct": true,
+    "why": "ตรง",
+    "seconds": 1.0
+  },
+  {
+    "question": "วิชาการสื่อสารและการนำเสนออย่างมืออาชีพมีรหัสอะไร",
+    "expect": {
+      "type": "value",
+      "value": "96644042"
+    },
+    "sql": "SELECT code FROM course WHERE name_th LIKE '%การสื่อสารและการนำเสนออย่างมืออาชีพ%' LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "code": "96644042"
+      }
+    ],
+    "error": null,
+    "sql_model_output": "{\"sql\": \"SELECT code FROM course WHERE name_th LIKE '%การสื่อสารและการนำเสนออย่างมืออาชีพ%'\" }",
+    "answer_model_output": "{\"answer\": \"96644042\"}",
+    "answer": "96644042",
+    "correct": true,
+    "why": "ตรง",
+    "seconds": 1.0
+  },
+  {
+    "question": "วิชา 96644042 ชื่อภาษาอังกฤษว่าอะไร",
+    "expect": {
+      "type": "value",
+      "value": "PROFESSIONAL COMMUNICATION AND PRESENTATION"
+    },
+    "sql": "SELECT name_en FROM course WHERE code='96644042' LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "name_en": "PROFESSIONAL COMMUNICATION AND PRESENTATION"
+      }
+    ],
+    "error": null,
+    "sql_model_output": "{\"sql\": \"SELECT name_en FROM course WHERE code='96644042'\" }",
+    "answer_model_output": "{\"answer\": \"PROFESSIONAL COMMUNICATION AND PRESENTATION\"}",
+    "answer": "PROFESSIONAL COMMUNICATION AND PRESENTATION",
+    "correct": true,
+    "why": "ตรง",
+    "seconds": 1.0
+  },
+  {
+    "question": "วิชา 06036102 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 3
+    },
+    "sql": "SELECT credits FROM course WHERE code='06036102' LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "credits": 3
+      }
+    ],
+    "error": null,
+    "sql_model_output": "{\"sql\": \"SELECT credits FROM course WHERE code='06036102'\" }",
+    "answer_model_output": "{\"answer\": \"3 หน่วยกิต\"}",
+    "answer": "3 หน่วยกิต",
+    "correct": true,
+    "why": "ตรง",
+    "seconds": 0.9
+  },
+  {
+    "question": "วิชาการวิเคราะห์เชิงสถิติสำหรับธุรกิจมีรหัสอะไร",
+    "expect": {
+      "type": "value",
+      "value": "06036102"
+    },
+    "sql": "SELECT code FROM course WHERE name_th LIKE '%การวิเคราะห์เชิงสถิติสำหรับธุรกิจ%' LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "code": "06036102"
+      }
+    ],
+    "error": null,
+    "sql_model_output": "{\"sql\": \"SELECT code FROM course WHERE name_th LIKE '%การวิเคราะห์เชิงสถิติสำหรับธุรกิจ%'\" }",
+    "answer_model_output": "{\"answer\": \"06036102\"}",
+    "answer": "06036102",
+    "correct": true,
+    "why": "ตรง",
+    "seconds": 1.2
+  },
+  {
+    "question": "วิชา 06036102 ชื่อภาษาอังกฤษว่าอะไร",
+    "expect": {
+      "type": "value",
+      "value": "STATISTICAL ANALYSIS FOR BUSINESS"
+    },
+    "sql": "SELECT name_en FROM course WHERE code='06036102' LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "name_en": "STATISTICAL ANALYSIS FOR BUSINESS"
+      }
+    ],
+    "error": null,
+    "sql_model_output": "{\"sql\": \"SELECT name_en FROM course WHERE code='06036102'\" }",
+    "answer_model_output": "{\"answer\": \"STATISTICAL ANALYSIS FOR BUSINESS\"}",
+    "answer": "STATISTICAL ANALYSIS FOR BUSINESS",
+    "correct": true,
+    "why": "ตรง",
+    "seconds": 0.9
+  },
+  {
+    "question": "วิชา 06036109 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 3
+    },
+    "sql": "SELECT credits FROM course WHERE code='06036109' LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "credits": 3
+      }
+    ],
+    "error": null,
+    "sql_model_output": "{\"sql\": \"SELECT credits FROM course WHERE code='06036109'\" }",
+    "answer_model_output": "{\"answer\": \"3 หน่วยกิต\"}",
+    "answer": "3 หน่วยกิต",
+    "correct": true,
+    "why": "ตรง",
+    "seconds": 0.9
+  },
+  {
+    "question": "วิชากระบวนการและโมเดลทางธุรกิจมีรหัสอะไร",
+    "expect": {
+      "type": "value",
+      "value": "06036109"
+    },
+    "sql": "SELECT code FROM course WHERE name_th LIKE '%กระบวนการและโมเดลทางธุรกิจ%' LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "code": "06036109"
+      }
+    ],
+    "error": null,
+    "sql_model_output": "{\"sql\": \"SELECT code FROM course WHERE name_th LIKE '%กระบวนการและโมเดลทางธุรกิจ%'\" }",
+    "answer_model_output": "{\"answer\": \"06036109\"}",
+    "answer": "06036109",
+    "correct": true,
+    "why": "ตรง",
+    "seconds": 1.0
+  },
+  {
+    "question": "วิชา 06036109 ชื่อภาษาอังกฤษว่าอะไร",
+    "expect": {
+      "type": "value",
+      "value": "BUSINESS PROCESSES AND BUSINESS MODEL"
+    },
+    "sql": "SELECT name_en FROM course WHERE code='06036109' LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "name_en": "BUSINESS PROCESSES AND BUSINESS MODEL"
+      }
+    ],
+    "error": null,
+    "sql_model_output": "{\"sql\": \"SELECT name_en FROM course WHERE code='06036109'\" }",
+    "answer_model_output": "{\"answer\": \"BUSINESS PROCESSES AND BUSINESS MODEL\"}",
+    "answer": "BUSINESS PROCESSES AND BUSINESS MODEL",
+    "correct": true,
+    "why": "ตรง",
+    "seconds": 0.9
+  },
+  {
+    "question": "วิชา 06036119 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 3
+    },
+    "sql": "SELECT credits FROM course WHERE code='06036119' LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "credits": 3
+      }
+    ],
+    "error": null,
+    "sql_model_output": "{\"sql\": \"SELECT credits FROM course WHERE code='06036119'\" }",
+    "answer_model_output": "{\"answer\": \"3 หน่วยกิต\"}",
+    "answer": "3 หน่วยกิต",
+    "correct": true,
+    "why": "ตรง",
+    "seconds": 1.0
+  }
+]

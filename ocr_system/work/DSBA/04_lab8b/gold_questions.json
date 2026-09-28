@@ -1,0 +1,212 @@
+[
+  {
+    "question": "หลักสูตรนี้มีทั้งหมดกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 132
+    }
+  },
+  {
+    "question": "หลักสูตรนี้ใช้เวลาเรียนกี่ปี",
+    "expect": {
+      "type": "value",
+      "value": 4
+    }
+  },
+  {
+    "question": "วิชา 06016401 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 3
+    }
+  },
+  {
+    "question": "วิชาคณิตศาสตร์สำหรับเทคโนโลยีสารสนเทศมีรหัสอะไร",
+    "expect": {
+      "type": "value",
+      "value": "06016401"
+    }
+  },
+  {
+    "question": "วิชา 06016401 ชื่อภาษาอังกฤษว่าอะไร",
+    "expect": {
+      "type": "value",
+      "value": "MATHEMATICS FOR INFORMATION TECHNOLOGY"
+    }
+  },
+  {
+    "question": "วิชา 06026200 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 3
+    }
+  },
+  {
+    "question": "วิชาแคลคูลัส 1มีรหัสอะไร",
+    "expect": {
+      "type": "value",
+      "value": "06026200"
+    }
+  },
+  {
+    "question": "วิชา 06026200 ชื่อภาษาอังกฤษว่าอะไร",
+    "expect": {
+      "type": "value",
+      "value": "CALCULUS 1"
+    }
+  },
+  {
+    "question": "วิชา 06026202 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 3
+    }
+  },
+  {
+    "question": "วิชาพีชคณิตเชิงเส้นมีรหัสอะไร",
+    "expect": {
+      "type": "value",
+      "value": "06026202"
+    }
+  },
+  {
+    "question": "วิชา 06026202 ชื่อภาษาอังกฤษว่าอะไร",
+    "expect": {
+      "type": "value",
+      "value": "LINEAR ALGEBRA"
+    }
+  },
+  {
+    "question": "วิชา 06066101 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 3
+    }
+  },
+  {
+    "question": "วิชาพื้นฐานทางธุรกิจสำหรับเทคโนโลยีสารสนเทศมีรหัสอะไร",
+    "expect": {
+      "type": "value",
+      "value": "06066101"
+    }
+  },
+  {
+    "question": "วิชา 06066101 ชื่อภาษาอังกฤษว่าอะไร",
+    "expect": {
+      "type": "value",
+      "value": "BUSINESS FUNDAMENTALS FOR INFORMATION\nTECHNOLOGY"
+    }
+  },
+  {
+    "question": "วิชา 06066303 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 3
+    }
+  },
+  {
+    "question": "วิชาการแก้ปัญหาและการโปรแกรมคอมพิวเตอร์มีรหัสอะไร",
+    "expect": {
+      "type": "value",
+      "value": "06066303"
+    }
+  },
+  {
+    "question": "วิชา 06066303 ชื่อภาษาอังกฤษว่าอะไร",
+    "expect": {
+      "type": "value",
+      "value": "PROBLEM SOLVING AND COMPUTER\nPROGRAMMING"
+    }
+  },
+  {
+    "question": "วิชา 90641001 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 2
+    }
+  },
+  {
+    "question": "วิชาโรงเรียนสร้างเสน่ห์มีรหัสอะไร",
+    "expect": {
+      "type": "value",
+      "value": "90641001"
+    }
+  },
+  {
+    "question": "วิชา 90641001 ชื่อภาษาอังกฤษว่าอะไร",
+    "expect": {
+      "type": "value",
+      "value": "CHARM SCHOOL"
+    }
+  },
+  {
+    "question": "วิชา 90641003 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 1
+    }
+  },
+  {
+    "question": "วิชากีฬาและนันทนาการมีรหัสอะไร",
+    "expect": {
+      "type": "value",
+      "value": "90641003"
+    }
+  },
+  {
+    "question": "วิชา 90641003 ชื่อภาษาอังกฤษว่าอะไร",
+    "expect": {
+      "type": "value",
+      "value": "SPORTS AND RECREATIONAL ACTIVITIES"
+    }
+  },
+  {
+    "question": "วิชา 90644007 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 3
+    }
+  },
+  {
+    "question": "วิชาภาษาอังกฤษพื้นฐาน 1มีรหัสอะไร",
+    "expect": {
+      "type": "value",
+      "value": "90644007"
+    }
+  },
+  {
+    "question": "วิชา 90644007 ชื่อภาษาอังกฤษว่าอะไร",
+    "expect": {
+      "type": "value",
+      "value": "FOUNDATION ENGLISH 1"
+    }
+  },
+  {
+    "question": "วิชา 06026201 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 3
+    }
+  },
+  {
+    "question": "วิชาแคลคูลัส 2มีรหัสอะไร",
+    "expect": {
+      "type": "value",
+      "value": "06026201"
+    }
+  },
+  {
+    "question": "วิชา 06026201 ชื่อภาษาอังกฤษว่าอะไร",
+    "expect": {
+      "type": "value",
+      "value": "CALCULUS 2"
+    }
+  },
+  {
+    "question": "วิชา 06026203 มีกี่หน่วยกิต",
+    "expect": {
+      "type": "value",
+      "value": 3
+    }
+  }
+]
