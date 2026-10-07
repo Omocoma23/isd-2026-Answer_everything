@@ -1,70 +1,284 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="th">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Curriculum Assistant</title>
-  <style>
-    body { font-family: system-ui, sans-serif; max-width: 850px; margin: 40px auto; padding: 0 18px; line-height: 1.6; }
-    textarea { width: 100%; min-height: 90px; padding: 10px; box-sizing: border-box; }
-    button { margin-top: 10px; padding: 9px 18px; cursor: pointer; }
-    section { margin-top: 22px; padding: 16px; background: #f4f4f4; }
-    pre { overflow-x: auto; white-space: pre-wrap; }
-    .muted { color: #666; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Curriculum Assistant</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- CSS ของเรา -->
+    <link rel="stylesheet" href="/static/style.css">
 </head>
-<body>
-  <h1>Curriculum Book Assistant</h1>
-  <p>Qwen แปลงคำถามเป็น SQL, SQLite ค้นข้อมูล แล้ว Qwen สรุปคำตอบ</p>
-  <p class="muted">ตัวอย่าง: “ปี 1 เทอม 1 เรียนกี่หน่วยกิต”</p>
 
-  <form id="ask-form">
+<body class="bg-white text-gray-900">
 
-    <label for="program">
-      <strong>เลือกหลักสูตร</strong>
-    </label>
+<div class="min-h-screen flex flex-col">
 
-    <select id="program" required>
-      <option value="IT">IT - เทคโนโลยีสารสนเทศ</option>
-      <option value="AI">AI - เทคโนโลยีปัญญาประดิษฐ์</option>
-      <option value="BIT">BIT - เทคโนโลยีสารสนเทศทางธุรกิจ</option>
-      <option value="DSBA">DSBA - วิทยาการข้อมูลและการวิเคราะห์เชิงธุรกิจ</option>
-    </select>
+    <main
+        id="mainContent"
+        class="flex-1 w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-12"
+    >
 
-    <br><br>
+        <!-- =============================== -->
+        <!-- Idle State -->
+        <!-- =============================== -->
 
-    <textarea id="question" required>หลักสูตรนี้มีหน่วยกิตรวมทั้งหมดเท่าไร</textarea>
+        <section
+            id="welcomeView"
+            class="pt-24 sm:pt-32 lg:pt-44"
+        >
 
-    <button type="submit">ถาม</button>
+            <h1
+                class="text-center text-3xl sm:text-4xl font-bold mb-16"
+            >
+                วันนี้คุณสงสัยเรื่องอะไรครับ?
+            </h1>
 
-  </form>
+            <div class="space-y-3 max-w-6xl mx-auto">
 
-  <section>
-    <h2>คำตอบ</h2><div id="answer">รอคำถาม...</div>
-    <h3>ค่าที่ได้จากฐานข้อมูล</h3><pre id="rows">-</pre>
-    <h3>SQL ที่ใช้</h3><pre id="sql">-</pre>
-  </section>
+                <button
+                    type="button"
+                    class="suggestion-question"
+                    data-question="วิชาคณิตศาสตร์สำหรับเทคโนโลยีสารสนเทศมีรหัสอะไร"
+                >
+                    วิชาคณิตศาสตร์สำหรับเทคโนโลยีสารสนเทศมีรหัสอะไร
+                </button>
 
-  <script>
-    document.getElementById("ask-form").addEventListener("submit", async (event) => {
-      event.preventDefault();
-      const answer = document.getElementById("answer");
-      answer.textContent = "กำลังประมวลผล...";
-      try {
-        const response = await fetch("/api/ask", {
-          method: "POST", headers: {"Content-Type": "application/json"},
-          body: JSON.stringify({program: document.getElementById("program").value,question: document.getElementById("question").value})
-        });
-        const data = await response.json();
-        if (!response.ok) throw new Error(data.detail || "เกิดข้อผิดพลาด");
-        answer.textContent = data.answer;
-        document.getElementById("rows").textContent = JSON.stringify(data.rows, null, 2);
-        document.getElementById("sql").textContent = data.sql;
-      } catch (error) {
-        answer.textContent = `ผิดพลาด: ${error.message}`;
-      }
-    });
-  </script>
+
+                <button
+                    type="button"
+                    class="suggestion-question"
+                    data-question="วิชาพื้นฐานทางธุรกิจสำหรับเทคโนโลยีสารสนเทศมีรหัสอะไร"
+                >
+                    วิชาพื้นฐานทางธุรกิจสำหรับเทคโนโลยีสารสนเทศมีรหัสอะไร
+                </button>
+
+
+                <button
+                    type="button"
+                    class="suggestion-question"
+                    data-question="หลักสูตรนี้ใช้เวลาเรียนกี่ปี"
+                >
+                    หลักสูตรนี้ใช้เวลาเรียนกี่ปี
+                </button>
+
+
+                <button
+                    type="button"
+                    class="suggestion-question"
+                    data-question="หลักสูตรนี้มีทั้งหมดกี่หน่วยกิต"
+                >
+                    หลักสูตรนี้มีทั้งหมดกี่หน่วยกิต
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =============================== -->
+        <!-- Chat -->
+        <!-- =============================== -->
+
+        <section
+          id="chatView"
+          class="hidden pt-8 pb-44"
+        >
+
+            <div class="flex justify-between items-center mb-6">
+
+                <h2 class="text-xl font-bold text-gray-800">
+                    Curriculum Assistant
+                </h2>
+
+                <button
+                    id="newChatButton"
+                    type="button"
+                    class="
+                        px-4 py-2
+                        rounded-xl
+                        border border-gray-300
+                        text-sm font-semibold
+                        text-gray-700
+                        bg-white
+                        hover:bg-gray-50
+                        transition
+                    "
+                >
+                    เริ่มการสนทนาใหม่
+                </button>
+
+            </div>
+
+
+            <!-- กล่องข้อความ -->
+            <div
+                id="chatScrollArea"
+                class="
+                    h-[calc(100vh-250px)]
+                    overflow-y-auto
+                    pr-2
+                "
+            >
+
+                <div
+                    id="chatMessages"
+                    class="space-y-8"
+                ></div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =============================== -->
+    <!-- Input -->
+    <!-- =============================== -->
+
+    <div class="fixed bottom-0 left-0 right-0 bg-white px-4 sm:px-8 pb-5 pt-3">
+
+        <div
+            class="max-w-7xl mx-auto border border-gray-300 rounded-[28px] bg-white px-5 py-5"
+        >
+
+            <div
+                class="flex flex-col md:flex-row items-stretch md:items-center gap-4"
+            >
+
+                <textarea
+                    id="questionInput"
+                    rows="1"
+                    maxlength="500"
+                    placeholder="Write your message here..."
+                    class="
+                        flex-1
+                        min-h-[50px]
+                        max-h-40
+                        border
+                        border-gray-300
+                        rounded-xl
+                        px-4
+                        py-3
+                        outline-none
+                        focus:ring-2
+                        focus:ring-blue-200
+                        focus:border-blue-400
+                    "
+                ></textarea>
+
+
+                <div class="relative min-w-[160px]" id="programDropdownWrapper">
+
+                    <button
+                        id="programDropdownButton"
+                        type="button"
+                        class="
+                            w-full h-[50px]
+                            flex items-center justify-between
+                            px-4
+                            border border-blue-300
+                            bg-blue-50
+                            text-blue-700
+                            font-semibold
+                            rounded-2xl
+                            hover:bg-blue-100
+                            transition
+                        "
+                    >
+                        <span id="programDropdownLabel">เลือกสาขา</span>
+
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="w-5 h-5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="m19 9-7 7-7-7"
+                            />
+                        </svg>
+                    </button>
+
+                    <div
+                        id="programDropdownMenu"
+                        class="
+                            hidden
+                            absolute bottom-[60px] right-0
+                            w-full
+                            bg-white
+                            border border-gray-200
+                            rounded-2xl
+                            shadow-lg
+                            overflow-hidden
+                            z-50
+                        "
+                    >
+                        <button type="button" class="program-option w-full text-left px-4 py-3 hover:bg-blue-50" data-value="IT">IT</button>
+                        <button type="button" class="program-option w-full text-left px-4 py-3 hover:bg-blue-50" data-value="DSBA">DSBA</button>
+                        <button type="button" class="program-option w-full text-left px-4 py-3 hover:bg-blue-50" data-value="BIT">BIT</button>
+                        <button type="button" class="program-option w-full text-left px-4 py-3 hover:bg-blue-50" data-value="AI">AIT</button>
+                    </div>
+
+                </div>
+
+
+                <button
+                    id="sendButton"
+                    type="button"
+                    disabled
+                    class="send-button disabled"
+                    aria-label="ส่งคำถาม"
+                >
+
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="w-6 h-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                    >
+
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M12 19V5m0 0-6 6m6-6 6 6"
+                        />
+
+                    </svg>
+
+                </button>
+
+            </div>
+
+
+            <!-- Error State -->
+
+            <p
+                id="errorMessage"
+                class="hidden mt-3 text-sm text-red-600"
+                role="alert"
+            ></p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- JS ของเรา -->
+<script src="/static/app.js"></script>
+
 </body>
 </html>
-
