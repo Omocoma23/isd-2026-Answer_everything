@@ -18,7 +18,7 @@
     "answer": "120",
     "correct": true,
     "why": "ตรง",
-    "seconds": 6.5
+    "seconds": 7.0
   },
   {
     "question": "หลักสูตรนี้ใช้เวลาเรียนกี่ปี",
@@ -495,7 +495,7 @@
     "answer": "3 หน่วยกิต",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.1
+    "seconds": 1.2
   },
   {
     "question": "วิชาแคลคูลัส 1มีรหัสอะไร",
@@ -516,7 +516,7 @@
     "answer": "06046400",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.1
+    "seconds": 1.2
   },
   {
     "question": "วิชา 06046400 ชื่อภาษาอังกฤษว่าอะไร",
@@ -537,7 +537,7 @@
     "answer": "CALCULUS 1",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.1
+    "seconds": 1.9
   },
   {
     "question": "วิชา 06046402 มีกี่หน่วยกิต",
@@ -579,7 +579,7 @@
     "answer": "06046402",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.9
+    "seconds": 2.1
   },
   {
     "question": "วิชา 06046402 ชื่อภาษาอังกฤษว่าอะไร",
@@ -621,7 +621,7 @@
     "answer": "3 หน่วยกิต",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.1
+    "seconds": 1.9
   },
   {
     "question": "วิชาคณิตศาสตร์ไม่ต่อเนื่องมีรหัสอะไร",
@@ -642,7 +642,7 @@
     "answer": "06066000",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.4
+    "seconds": 1.3
   },
   {
     "question": "วิชา 06066000 ชื่อภาษาอังกฤษว่าอะไร",
@@ -663,7 +663,7 @@
     "answer": "DISCRETE MATHEMATICS",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.7
+    "seconds": 2.0
   },
   {
     "question": "วิชา 06066001 มีกี่หน่วยกิต",
@@ -684,7 +684,7 @@
     "answer": "3 หน่วยกิต",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.5
+    "seconds": 1.1
   },
   {
     "question": "วิชาความน่าจะเป็นและสถิติมีรหัสอะไร",
@@ -705,7 +705,7 @@
     "answer": "06066001",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.8
+    "seconds": 2.0
   },
   {
     "question": "วิชา 06066001 ชื่อภาษาอังกฤษว่าอะไร",
@@ -726,7 +726,7 @@
     "answer": "PROBABILITY AND STATISTICS",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.2
+    "seconds": 1.1
   },
   {
     "question": "วิชา 06066303 มีกี่หน่วยกิต",
@@ -747,7 +747,7 @@
     "answer": "3 หน่วยกิต",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.2
+    "seconds": 1.9
   },
   {
     "question": "วิชาการแก้ปัญหาและการโปรแกรมคอมพิวเตอร์มีรหัสอะไร",
@@ -768,7 +768,7 @@
     "answer": "06066303",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.4
+    "seconds": 1.3
   },
   {
     "question": "วิชา 06066303 ชื่อภาษาอังกฤษว่าอะไร",
@@ -789,7 +789,7 @@
     "answer": "PROBLEM SOLVING AND COMPUTER PROGRAMMING",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.3
+    "seconds": 1.2
   },
   {
     "question": "วิชา 90641008 มีกี่หน่วยกิต",
@@ -810,7 +810,7 @@
     "answer": "0 หน่วยกิต",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.9
+    "seconds": 1.2
   },
   {
     "question": "วิชาพื้นฐานทักษะการสื่อสารภาษาอังกฤษมีรหัสอะไร",
@@ -831,7 +831,7 @@
     "answer": "90641008",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.6
+    "seconds": 1.4
   },
   {
     "question": "วิชา 90641008 ชื่อภาษาอังกฤษว่าอะไร",
@@ -852,7 +852,7 @@
     "answer": "INTRODUCTION TO ENGLISH COMMUNICATION SKILLS",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.2
+    "seconds": 1.4
   },
   {
     "question": "วิชา 06046401 มีกี่หน่วยกิต",
@@ -873,7 +873,7 @@
     "answer": "3 หน่วยกิต",
     "correct": true,
     "why": "ตรง",
-    "seconds": 2.0
+    "seconds": 1.8
   },
   {
     "question": "วิชาแคลคูลัส 2มีรหัสอะไร",
@@ -894,7 +894,7 @@
     "answer": "06046401",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.4
+    "seconds": 1.3
   },
   {
     "question": "วิชา 06046401 ชื่อภาษาอังกฤษว่าอะไร",
@@ -915,6 +915,6 @@
     "answer": "CALCULUS 2",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.2
+    "seconds": 1.9
   }
 ]

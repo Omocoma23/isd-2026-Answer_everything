@@ -18,7 +18,7 @@
     "answer": "126",
     "correct": true,
     "why": "ตรง",
-    "seconds": 7.8
+    "seconds": 12.5
   },
   {
     "question": "หลักสูตรนี้ใช้เวลาเรียนกี่ปี",
@@ -39,7 +39,7 @@
     "answer": "4 ปี",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.0
+    "seconds": 1.1
   },
   {
     "question": "ตามแผนการศึกษา ปี 1 เทอม 1 มีวิชาอะไรบ้าง ขอรหัส ชื่อวิชา และหน่วยกิตของแต่ละวิชา",
@@ -507,7 +507,7 @@
     "answer": "3 หน่วยกิต",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.1
+    "seconds": 1.4
   },
   {
     "question": "วิชาพื้นฐานทางด้านเทคโนโลยีสารสนเทศมีรหัสอะไร",
@@ -528,7 +528,7 @@
     "answer": "06036100",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.4
+    "seconds": 1.5
   },
   {
     "question": "วิชา 06036100 ชื่อภาษาอังกฤษว่าอะไร",
@@ -549,7 +549,7 @@
     "answer": "INFORMATION TECHNOLOGY FUNDAMENTALS",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.9
+    "seconds": 1.4
   },
   {
     "question": "วิชา 06036101 มีกี่หน่วยกิต",
@@ -570,7 +570,7 @@
     "answer": "3 หน่วยกิต",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.1
+    "seconds": 1.4
   },
   {
     "question": "วิชาคณิตศาสตร์สำหรับธุรกิจมีรหัสอะไร",
@@ -591,7 +591,7 @@
     "answer": "06036101",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.2
+    "seconds": 1.4
   },
   {
     "question": "วิชา 06036101 ชื่อภาษาอังกฤษว่าอะไร",
@@ -612,7 +612,7 @@
     "answer": "MATHEMATICS FOR BUSINESS",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.1
+    "seconds": 1.2
   },
   {
     "question": "วิชา 06036118 มีกี่หน่วยกิต",
@@ -633,7 +633,7 @@
     "answer": "3 หน่วยกิต",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.1
+    "seconds": 1.4
   },
   {
     "question": "วิชาการแก้ปัญหาทางด้านเทคโนโลยีสารสนเทศมีรหัสอะไร",
@@ -654,7 +654,7 @@
     "answer": "06036118",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.3
+    "seconds": 1.4
   },
   {
     "question": "วิชา 06036118 ชื่อภาษาอังกฤษว่าอะไร",
@@ -675,7 +675,7 @@
     "answer": "PROBLEM SOLVING IN INFORMATION TECHNOLOGY",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.2
+    "seconds": 1.9
   },
   {
     "question": "วิชา 96641001 มีกี่หน่วยกิต",
@@ -696,7 +696,7 @@
     "answer": "2 หน่วยกิต",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.2
+    "seconds": 1.3
   },
   {
     "question": "วิชาโรงเรียนสร้างเสน่ห์มีรหัสอะไร",
@@ -717,7 +717,7 @@
     "answer": "96641001",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.7
+    "seconds": 2.0
   },
   {
     "question": "วิชา 96641001 ชื่อภาษาอังกฤษว่าอะไร",
@@ -759,7 +759,7 @@
     "answer": "1 หน่วยกิต",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.2
+    "seconds": 1.3
   },
   {
     "question": "วิชากีฬาและนันทนาการมีรหัสอะไร",
@@ -780,7 +780,7 @@
     "answer": "96641003",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.3
+    "seconds": 1.4
   },
   {
     "question": "วิชา 96641003 ชื่อภาษาอังกฤษว่าอะไร",
@@ -801,7 +801,7 @@
     "answer": "SPORTS AND RECREATIONAL ACTIVITIES",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.1
+    "seconds": 1.3
   },
   {
     "question": "วิชา 96644007 มีกี่หน่วยกิต",
@@ -822,7 +822,7 @@
     "answer": "3 หน่วยกิต",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.1
+    "seconds": 1.3
   },
   {
     "question": "วิชาภาษาอังกฤษพื้นฐาน 1มีรหัสอะไร",
@@ -843,7 +843,7 @@
     "answer": "96644007",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.3
+    "seconds": 1.4
   },
   {
     "question": "วิชา 96644007 ชื่อภาษาอังกฤษว่าอะไร",
@@ -864,7 +864,7 @@
     "answer": "FOUNDATION ENGLISH 1",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.2
+    "seconds": 1.4
   },
   {
     "question": "วิชา 96644042 มีกี่หน่วยกิต",
@@ -906,7 +906,7 @@
     "answer": "รหัสวิชาการสื่อสารและการนำเสนออย่างมืออาชีพคือ 96644042",
     "correct": true,
     "why": "ตรง",
-    "seconds": 2.4
+    "seconds": 1.9
   },
   {
     "question": "วิชา 96644042 ชื่อภาษาอังกฤษว่าอะไร",
@@ -927,6 +927,6 @@
     "answer": "PROFESSIONAL COMMUNICATION AND PRESENTATION",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.9
+    "seconds": 1.4
   }
 ]

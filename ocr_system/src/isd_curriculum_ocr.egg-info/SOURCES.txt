@@ -17,7 +17,6 @@ src/ocr_system/field_extraction.py
 src/ocr_system/lab6_evaluation.py
 src/ocr_system/lab7b_curriculum.py
 src/ocr_system/lab8b_curriculum_db.py
-src/ocr_system/lab8b_curriculum_db_backup.py
 src/ocr_system/pipeline.py
 src/ocr_system/preprocessing.py
 src/ocr_system/schemas.py
@@ -30,3 +29,4 @@ src/ocr_system/engines/trocr_engine.py
 src/ocr_system/utils/__init__.py
 src/ocr_system/utils/io.py
 tests/test_qa_scoring.py
+tests/test_thai_extraction.py

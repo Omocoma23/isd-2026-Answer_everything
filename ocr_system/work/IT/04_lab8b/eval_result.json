@@ -18,7 +18,7 @@
     "answer": "129 หน่วยกิต",
     "correct": true,
     "why": "ตรง",
-    "seconds": 7.0
+    "seconds": 11.1
   },
   {
     "question": "หลักสูตรนี้ใช้เวลาเรียนกี่ปี",
@@ -39,7 +39,7 @@
     "answer": "4 ปี",
     "correct": true,
     "why": "ตรง",
-    "seconds": 0.9
+    "seconds": 1.0
   },
   {
     "question": "ตามแผนการศึกษา ปี 1 เทอม 1 มีวิชาอะไรบ้าง ขอรหัส ชื่อวิชา และหน่วยกิตของแต่ละวิชา",
@@ -507,7 +507,7 @@
     "answer": "3 หน่วยกิต",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.1
+    "seconds": 1.2
   },
   {
     "question": "วิชาคณิตศาสตร์สำหรับเทคโนโลยีสารสนเทศมีรหัสอะไร",
@@ -528,7 +528,7 @@
     "answer": "06016401",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.2
+    "seconds": 2.2
   },
   {
     "question": "วิชา 06016401 ชื่อภาษาอังกฤษว่าอะไร",
@@ -549,7 +549,7 @@
     "answer": "MATHEMATICS FOR INFORMATION TECHNOLOGY",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.2
+    "seconds": 1.3
   },
   {
     "question": "วิชา 06016402 มีกี่หน่วยกิต",
@@ -570,7 +570,7 @@
     "answer": "3 หน่วยกิต",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.1
+    "seconds": 1.2
   },
   {
     "question": "วิชาพื้นฐานทางด้านเทคโนโลยีสารสนเทศมีรหัสอะไร",
@@ -591,7 +591,7 @@
     "answer": "06016402",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.3
+    "seconds": 2.1
   },
   {
     "question": "วิชา 06016402 ชื่อภาษาอังกฤษว่าอะไร",
@@ -612,7 +612,7 @@
     "answer": "INFORMATION TECHNOLOGY FUNDAMENTALS",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.1
+    "seconds": 1.3
   },
   {
     "question": "วิชา 06016411 มีกี่หน่วยกิต",
@@ -633,7 +633,7 @@
     "answer": "3 หน่วยกิต",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.1
+    "seconds": 1.2
   },
   {
     "question": "วิชาระบบคอมพิวเตอร์เบื้องต้นมีรหัสอะไร",
@@ -654,7 +654,7 @@
     "answer": "06016411",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.5
+    "seconds": 1.3
   },
   {
     "question": "วิชา 06016411 ชื่อภาษาอังกฤษว่าอะไร",
@@ -675,7 +675,7 @@
     "answer": "INTRODUCTION TO COMPUTER SYSTEMS",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.7
+    "seconds": 1.1
   },
   {
     "question": "วิชา 06066303 มีกี่หน่วยกิต",
@@ -696,7 +696,7 @@
     "answer": "3 หน่วยกิต",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.1
+    "seconds": 1.2
   },
   {
     "question": "วิชาการแก้ปัญหาและการโปรแกรมคอมพิวเตอร์มีรหัสอะไร",
@@ -738,7 +738,7 @@
     "answer": "PROBLEM SOLVING AND COMPUTER PROGRAMMING",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.4
+    "seconds": 1.8
   },
   {
     "question": "วิชา 90641001 มีกี่หน่วยกิต",
@@ -780,7 +780,7 @@
     "answer": "90641001",
     "correct": true,
     "why": "ตรง",
-    "seconds": 2.1
+    "seconds": 2.0
   },
   {
     "question": "วิชา 90641001 ชื่อภาษาอังกฤษว่าอะไร",
@@ -801,7 +801,7 @@
     "answer": "CHARM SCHOOL",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.4
+    "seconds": 1.2
   },
   {
     "question": "วิชา 90641003 มีกี่หน่วยกิต",
@@ -822,7 +822,7 @@
     "answer": "1 หน่วยกิต",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.4
+    "seconds": 1.9
   },
   {
     "question": "วิชากีฬาและนันทนาการมีรหัสอะไร",
@@ -843,7 +843,7 @@
     "answer": "90641003",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.6
+    "seconds": 1.3
   },
   {
     "question": "วิชา 90641003 ชื่อภาษาอังกฤษว่าอะไร",
@@ -864,7 +864,7 @@
     "answer": "SPORTS AND RECREATIONAL ACTIVITIES",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.5
+    "seconds": 2.0
   },
   {
     "question": "วิชา 90644007 มีกี่หน่วยกิต",
@@ -885,7 +885,7 @@
     "answer": "3 หน่วยกิต",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.3
+    "seconds": 1.2
   },
   {
     "question": "วิชาภาษาอังกฤษพื้นฐาน 1มีรหัสอะไร",
@@ -927,6 +927,6 @@
     "answer": "FOUNDATION ENGLISH 1",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.3
+    "seconds": 1.2
   }
 ]

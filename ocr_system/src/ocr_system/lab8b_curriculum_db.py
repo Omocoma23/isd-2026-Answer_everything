@@ -1178,14 +1178,16 @@ def _plan_display_name_sql(alias: str = "v") -> str:
 
 
 def structured_question_sql(question: str) -> str | None:
-    """Build deterministic SQL for the supported plan-list questions."""
+    """Build deterministic SQL for common program and study-plan questions."""
     text = re.sub(r"\s+", " ", str(question or "")).strip()
     year_match = re.search(r"ปี\s*(\d+)", text)
     year = int(year_match.group(1)) if year_match else None
     semesters = [int(value) for value in re.findall(r"เทอม\s*(\d+)", text)]
     display_name = _plan_display_name_sql("v")
-
     code_match = re.search(r"(?<!\d)(\d{8})(?!\d)", text)
+
+    # A plan-location question takes precedence when it explicitly asks
+    # which year/semester contains the course.
     if code_match and re.search(r"อยู่ในแผน|ปีไหน|เทอมไหน", text):
         code = code_match.group(1)
         return (
@@ -1195,6 +1197,44 @@ def structured_question_sql(question: str) -> str | None:
             f"WHERE v.code = '{code}' "
             "ORDER BY v.year, v.semester, v.code"
         )
+
+    # A question that names a course code is about that course. Handle it
+    # before the broad program-level "กี่หน่วยกิต" rule below.
+    if code_match:
+        code = code_match.group(1)
+        if re.search(r"กี่หน่วยกิต|จำนวนหน่วยกิต|หน่วยกิตเท่าไร", text):
+            return f"SELECT credits FROM course WHERE code = '{code}'"
+        if re.search(r"ชื่อภาษาอังกฤษ|ชื่ออังกฤษ|ภาษาอังกฤษว่าอะไร", text):
+            return f"SELECT name_en FROM course WHERE code = '{code}'"
+        if re.search(r"ชื่อภาษาไทย|ชื่อไทย|ชื่อวิชาอะไร", text):
+            return f"SELECT name_th FROM course WHERE code = '{code}'"
+
+    # Program-level facts should come directly from the program row instead
+    # of asking the LLM to infer a query from a short natural-language question.
+    if year is None and not semesters and re.search(
+        r"ใช้เวลาเรียน|ระยะเวลาเรียน|เรียนกี่ปี|กี่ปี", text
+    ):
+        return "SELECT years FROM program"
+
+    if year is None and not semesters and re.search(
+        r"กี่หน่วยกิต|หน่วยกิตรวม|รวมหน่วยกิต", text
+    ):
+        return "SELECT total_credits FROM program"
+
+    # Resolve the common legacy question "วิชา <name> มีรหัสอะไร" directly.
+    # This avoids relying on the LLM to map a Thai course name to SQL columns.
+    course_name_match = re.fullmatch(
+        r"\s*(?:ราย)?วิชา\s*(.+?)\s*(?:มี)?รหัสอะไร\s*[?？]?\s*", text
+    )
+    if course_name_match:
+        course_name = course_name_match.group(1).strip().replace("'", "''")
+        if course_name:
+            return (
+                "SELECT code FROM course "
+                f"WHERE name_th LIKE '%{course_name}%' "
+                f"OR name_en LIKE '%{course_name}%' "
+                "ORDER BY code"
+            )
 
     if year is None:
         return None
@@ -1257,7 +1297,7 @@ def structured_question_sql(question: str) -> str | None:
 
 
 def answer_structured_question(question: str, rows: list[dict]) -> str | None:
-    """Format the result of a supported plan query without an LLM summary."""
+    """Format common program and plan answers without an LLM summary."""
     sql = structured_question_sql(question)
     if sql is None:
         return None
@@ -1266,20 +1306,52 @@ def answer_structured_question(question: str, rows: list[dict]) -> str | None:
     year_match = re.search(r"ปี\s*(\d+)", text)
     year = year_match.group(1) if year_match else "?"
     semesters = re.findall(r"เทอม\s*(\d+)", text)
+    code_match = re.search(r"(?<!\d)(\d{8})(?!\d)", text)
+    asks_plan_location = bool(code_match and re.search(r"อยู่ในแผน|ปีไหน|เทอมไหน", text))
+    course_fact_pattern = (
+        r"กี่หน่วยกิต|จำนวนหน่วยกิต|หน่วยกิตเท่าไร|"
+        r"ชื่อภาษาอังกฤษ|ชื่ออังกฤษ|ภาษาอังกฤษว่าอะไร|"
+        r"ชื่อภาษาไทย|ชื่อไทย|ชื่อวิชาอะไร"
+    )
+    asks_course_fact = bool(
+        code_match and not asks_plan_location and re.search(course_fact_pattern, text)
+    )
 
     if not rows:
+        if asks_course_fact:
+            return f"ไม่พบรหัสวิชา {code_match.group(1)} ในฐานข้อมูลของหลักสูตรที่เลือก"
         if "วิชาเลือก" in text or "ตัวเลือก" in text:
             return f"ไม่พบรายการวิชาเลือกในแผนปี {year} เทอม {semesters[0]}"
+        if "รหัสอะไร" in text:
+            return "ไม่พบรหัสวิชาสำหรับชื่อที่ถามในฐานข้อมูลหลักสูตร"
         if "วิชาอะไร" in text or "ลงเรียน" in text or "ลงทะเบียน" in text or "รายชื่อ" in text:
             return "ไม่พบรายวิชาในแผนการศึกษาตามช่วงที่ถาม"
         return "ไม่พบข้อมูลนี้ในแผนการศึกษา"
 
     first = rows[0]
+    is_course_row = not {"year", "semester"}.intersection(first)
+    if code_match and is_course_row and "credits" in first:
+        return f"วิชา {code_match.group(1)} มี {first['credits']} หน่วยกิต"
+    if code_match and is_course_row and "name_en" in first:
+        return f"ชื่อภาษาอังกฤษของวิชา {code_match.group(1)} คือ {first['name_en']}"
+    if code_match and is_course_row and "name_th" in first:
+        return f"ชื่อภาษาไทยของวิชา {code_match.group(1)} คือ {first['name_th']}"
+
+    if "years" in first:
+        return f"หลักสูตรนี้ใช้เวลาเรียน {first['years']} ปี"
+
     if {"course_count", "total_credits"}.issubset(first):
         return (
             f"ปี {year} เทอม {semesters[0]} มี {first['course_count']} วิชา "
             f"รวม {first['total_credits']} หน่วยกิต"
         )
+
+    if "total_credits" in first:
+        return f"หลักสูตรนี้มีทั้งหมด {first['total_credits']} หน่วยกิต"
+
+    if "รหัสอะไร" in text and all("code" in row for row in rows):
+        codes = list(dict.fromkeys(str(row["code"]) for row in rows))
+        return "รหัสวิชา: " + ", ".join(codes)
 
     if {"term1_course_count", "term2_course_count", "semester_with_more", "difference"}.issubset(first):
         count_1 = first["term1_course_count"]

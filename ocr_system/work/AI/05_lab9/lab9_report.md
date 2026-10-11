@@ -15,7 +15,7 @@
 - Questions: 30
 - Valid SQL rate: 1.0 (30/30)
 - Execution Accuracy: 1.0 (30/30)
-- Mean latency: 1.23 s/question
+- Mean latency: 1.316667 s/question
 
 ## 4. Metrics intentionally not claimed
 - Natural-language Exact Match / Token-F1: not measured because the gold set stores structured expected SQL results, not one canonical Thai sentence.

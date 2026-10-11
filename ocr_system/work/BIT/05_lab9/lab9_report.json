@@ -213,8 +213,8 @@
     "valid_sql_rate": 1.0,
     "execution_correct_count": 30,
     "execution_accuracy": 1.0,
-    "mean_seconds_per_question": 1.243333,
-    "median_seconds_per_question": 1.2,
+    "mean_seconds_per_question": 1.466667,
+    "median_seconds_per_question": 1.4,
     "failed_sql_questions": [],
     "wrong_answer_questions": [],
     "metric_note": "For this Group-B NL-to-SQL task, Execution Accuracy is the key end-to-end correctness metric; Valid SQL Rate is reported separately because syntactically executable SQL can still answer the wrong question."
