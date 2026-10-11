@@ -1435,7 +1435,7 @@
   ],
   "_meta": {
     "pipeline": "text",
-    "elapsed_sec": 314.9,
+    "elapsed_sec": 330.2,
     "models": {
       "ocr": "scb10x/typhoon-ocr1.5-3b",
       "text": "qwen3:4b"

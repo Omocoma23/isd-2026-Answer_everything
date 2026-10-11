@@ -210,7 +210,7 @@
     },
     {
       "code": "06046402",
-      "name_th": "พีชคณิตเชิงเสน้",
+      "name_th": "พีชคณิตเชิงเส้น",
       "name_en": "LINEAR ALGEBRA",
       "credits": 3,
       "lecture_h": 3,
@@ -230,7 +230,7 @@
     },
     {
       "code": "06066001",
-      "name_th": "ความน่าจะเปน็ และสถิติ",
+      "name_th": "ความน่าจะเป็นและสถิติ",
       "name_en": "PROBABILITY AND STATISTICS",
       "credits": 3,
       "lecture_h": 3,

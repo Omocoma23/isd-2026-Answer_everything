@@ -154,9 +154,9 @@
       "warning_count": 30
     },
     "verify_7_checks": {
-      "passed": 6,
+      "passed": 7,
       "total": 7,
-      "pass_rate": 0.857143,
+      "pass_rate": 1.0,
       "checks": [
         {
           "id": "CHK1",
@@ -197,8 +197,8 @@
         {
           "id": "CHK7",
           "name": "หน่วยกิตต่อภาคเรียนอยู่ระหว่าง 9–22",
-          "ok": false,
-          "detail": "ปี 2/1 = 36 หน่วยกิต"
+          "ok": true,
+          "detail": "ผ่านทุกภาค (ยกเว้นภาคบล็อก 1 ภาค และภาคฤดูร้อน)"
         }
       ]
     },
@@ -211,18 +211,12 @@
     "questions": 30,
     "valid_sql_count": 30,
     "valid_sql_rate": 1.0,
-    "execution_correct_count": 29,
-    "execution_accuracy": 0.966667,
-    "mean_seconds_per_question": 1.2,
-    "median_seconds_per_question": 1.0,
+    "execution_correct_count": 30,
+    "execution_accuracy": 1.0,
+    "mean_seconds_per_question": 1.243333,
+    "median_seconds_per_question": 1.2,
     "failed_sql_questions": [],
-    "wrong_answer_questions": [
-      {
-        "question": "วิชาการแก้ปัญหาทางด้านเทคโนโลยีสารสนเทศมีรหัสอะไร",
-        "why": "ไม่พบค่า 06036118 (ได้ [])",
-        "sql": "SELECT code FROM course WHERE name_th LIKE '%การแก้ปัญหาทางด้านเทคโนโลยีสารสนเทศ%' LIMIT 200"
-      }
-    ],
+    "wrong_answer_questions": [],
     "metric_note": "For this Group-B NL-to-SQL task, Execution Accuracy is the key end-to-end correctness metric; Valid SQL Rate is reported separately because syntactically executable SQL can still answer the wrong question."
   },
   "metrics_not_claimed": {

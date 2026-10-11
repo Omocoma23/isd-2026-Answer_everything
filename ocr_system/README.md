@@ -1,209 +1,125 @@
-# ISD 2026 — Raw PDF → OCR/LLM → Database → Lab 9
+﻿# ขั้นตอนจาก PDF หลักสูตรถึงเว็บถามตอบ
 
-คู่มือโครงสร้างไฟล์และคำสั่ง PowerShell ที่ไม่ต้อง Activate: [PROJECT_GUIDE.md](../PROJECT_GUIDE.md)
-สคริปต์ช่วยงานย้ายไป `scripts/` แล้ว ให้เรียกจากโฟลเดอร์นี้ เช่น `python scripts/build_page_maps.py --help`
+คู่มือนี้พาทำตั้งแต่ติดตั้งโปรแกรมที่จำเป็น เตรียมไฟล์ PDF สกัดข้อมูล สร้างฐานข้อมูล ไปจนถึงเปิดเว็บถามตอบ เหมาะสำหรับ Windows และ PowerShell
 
-ชุดนี้จบที่ **Lab 9 (Evaluation and Overfitting)** เท่านั้น — **ไม่มี Web App / FastAPI / frontend**
+> เปิดโฟลเดอร์โปรเจกต์ ocr_system ใน VS Code แล้วเลือก Terminal → New Terminal
 
-เป้าหมายคือให้เริ่มจากไฟล์หลักสูตร **PDF ดิบฉบับเต็มจริง** ทั้ง 4 หลักสูตร แล้วรันคำสั่งเดียวจนได้ฐานข้อมูลของแต่ละหลักสูตรและรายงานประเมิน Lab 9
+## 1. ติดตั้งโปรแกรมพื้นฐาน
 
-```text
-data/raw/AI.pdf
-        BIT.pdf
-        IT.pdf
-        DSBA.pdf
-           │
-           ▼
-   เลือกหน้าจาก RAW PDF ตอน runtime
-           │
-           ▼
-   baseline OCR / Lab 6 evaluation
-           │
-           ▼
-   Lab 7B: PDF text + Typhoon VLM + Qwen
-           │
-           ▼
-   structured curriculum prediction
-           │
-           ▼
-   Lab 8B: schema → SQLite → verify 7 checks
-           │
-           ▼
-   30 gold questions → NL-to-SQL → eval_result.json
-           │
-           ▼
-   Lab 9: per-stage evaluation report
-           │
-           └── END
-```
+### 1.1 Python
 
-## ทำไม Lab 9 ไม่ใช่ Web App
+โปรเจกต์ต้องใช้ Python 3.10 ขึ้นไป คู่มือนี้ใช้ Python 3.11 สำหรับ environment ของโปรเจกต์ ดาวน์โหลดจาก [Python for Windows](https://www.python.org/downloads/windows/) แล้วตรวจใน PowerShell:
 
-Lab 9 ของวิชานี้เป็นเรื่อง **Evaluation and Overfitting** ดังนั้นขั้นสุดท้ายของชุดนี้คือการวัดคุณภาพของระบบที่ทำมาถึง Lab 8B ไม่ใช่การสร้าง UI ใหม่
+~~~powershell
+py -3.11 --version
+~~~
 
-สำหรับงานหลักสูตร / NL-to-SQL รายงาน Lab 9 แยกวัดทีละจุด เช่น
+ถ้าเครื่องติดตั้ง Python รุ่นอื่นที่รองรับอยู่แล้ว ให้ตรวจด้วย py --version
 
-- OCR / extraction: CER, WER, exact-match ราย field และ course alignment Precision / Recall / F1
-- structured data: JSON/schema validity และผล `verify` 7 checks
-- QA / NL-to-SQL: `Valid SQL Rate` และ `Execution Accuracy`
-- ไม่สร้าง metric ที่ไม่มีหลักฐาน เช่น Faithfulness/Citation ถ้า pipeline ยังไม่ได้ log evidence/citation จริง
-- Overfitting จะรายงานว่า **ประเมินจาก learning curve ไม่ได้** ในชุดนี้ เพราะใช้ pretrained local models แบบ inference ไม่มี train/validation history
+### 1.2 Tesseract OCR
 
-> สำหรับ Group B ในสไลด์ Lab 9, `Execution Accuracy (SQL)` เป็น metric สำคัญที่สุดของ NL-to-SQL ส่วน `Valid SQL Rate` ต้องรายงานแยก เพราะ SQL รันได้ไม่ได้แปลว่าตอบถูก
+Tesseract ใช้เป็น OCR baseline ต้องติดตั้งทั้งตัวโปรแกรมและข้อมูลภาษาไทยกับอังกฤษ
 
----
+1. อ่านคำแนะนำ Windows จาก [UB Mannheim Tesseract Windows Guide](https://github.com/UB-Mannheim/Tesseract_Dokumentation/blob/main/Tesseract_Doku_Windows.md)
+2. ระหว่างติดตั้ง ให้เลือก language data สำหรับ Thai (tha) และ English (eng)
+3. ปิดแล้วเปิด Terminal ใหม่ จากนั้นตรวจ:
 
-## 1. โครงสร้างสำคัญ
-
-```text
-ocr_system_lab9_ready/
-├── data/
-│   ├── raw/
-│   │   ├── AI.pdf
-│   │   ├── BIT.pdf
-│   │   ├── IT.pdf
-│   │   ├── DSBA.pdf
-│   │   └── SOURCES.json
-│   └── ground_truth/
-├── config/programs.json
-├── src/ocr_system/
-│   ├── lab7b_curriculum.py
-│   ├── lab8b_curriculum_db.py
-│   ├── lab6_evaluation.py
-│   └── ...
-├── generate_gold_questions.py
-├── lab9_evaluate.py
-├── run_all.py             # entry point หลัก
-├── run_all.bat
-├── requirements.txt
-└── README.md
-```
-
-`data/raw/*.pdf` คือไฟล์ต้นฉบับเต็ม ไม่ใช่ไฟล์ที่ตัดหน้ามาแล้ว ส่วนหน้าที่ใช้ OCR/LLM จะถูกเลือก **ตอนรัน** ตาม `config/programs.json` และบันทึกภาพไว้ให้ตรวจย้อนหลัง
-
----
-
-## 2. ติดตั้งบน Windows
-
-แนะนำ Python 3.10 หรือ 3.11
-
-```powershell
-py -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-pip install -r requirements.txt
-pip install -e .
-```
-
-### Tesseract
-
-ต้องมี `tesseract` และภาษา `tha`, `eng`
-
-```powershell
+~~~powershell
 tesseract --version
 tesseract --list-langs
-```
+~~~
 
-### Ollama
+ในผลคำสั่งที่สองควรเห็น tha และ eng หาก PowerShell แจ้งว่าไม่รู้จักคำสั่ง tesseract ให้เพิ่มโฟลเดอร์ติดตั้ง เช่น C:\Program Files\Tesseract-OCR ใน Windows PATH แล้วเปิด Terminal ใหม่
 
-ติดตั้ง/เปิด Ollama แล้ว pull model:
+### 1.3 Ollama และโมเดล
 
-```powershell
-ollama pull scb10x/typhoon-ocr1.5-3b
+1. ดาวน์โหลดและติดตั้ง [Ollama for Windows](https://ollama.com/download/windows)
+2. เปิดแอป Ollama จาก Start Menu ให้ทำงานอยู่เบื้องหลัง
+3. เปิด PowerShell ใหม่ แล้วดาวน์โหลดโมเดลที่โปรเจกต์ใช้:
+
+~~~powershell
 ollama pull qwen3:4b
-```
+ollama pull scb10x/typhoon-ocr1.5-3b
+~~~
 
-ถ้ายังไม่ได้เปิด service:
+4. ตรวจว่า Ollama เห็นโมเดลแล้ว:
 
-```powershell
-ollama serve
-```
+~~~powershell
+ollama list
+~~~
 
----
+การดาวน์โหลดโมเดลครั้งแรกต้องใช้อินเทอร์เน็ตและพื้นที่เก็บข้อมูล โมเดลจะทำงานบนเครื่องผ่าน Ollama หลังติดตั้งแล้ว หาก ollama ไม่ใช่คำสั่งที่รู้จัก ให้เปิด Terminal ใหม่หลังติดตั้ง
 
-## 3. ตรวจความพร้อม
+## 2. ตรวจไฟล์ของโปรเจกต์
 
-```powershell
+โปรเจกต์ต้องมี PDF, Ground Truth และ page map อยู่ในตำแหน่งตาม config/programs.json:
+
+~~~text
+data/
+├── raw/
+│   ├── AI.pdf
+│   ├── BIT.pdf
+│   ├── IT.pdf
+│   └── DSBA.pdf
+└── ground_truth/
+    ├── ... .json
+    └── ... _page_map.csv
+
+config/
+└── programs.json
+~~~
+
+ค่าเริ่มต้นเลือกหน้าเหล่านี้:
+
+| หลักสูตร | หน้าที่ประมวลผล |
+|---|---|
+| AI | 21–26 |
+| BIT | 22–25, 31–35 |
+| IT | 26–29, 38–44 |
+| DSBA | 19–22, 30–36 |
+
+หากไฟล์ต้นฉบับอยู่คนละตำแหน่ง ให้แก้ path ใน config/programs.json ก่อนเริ่มรัน
+
+## 3. สร้าง Python environment และติดตั้ง dependencies
+
+จาก PowerShell ที่อยู่ในโฟลเดอร์ ocr_system Path ต้องอยู่ที่ ocr_system ก่อนที่จะรัน:
+
+~~~powershell
+py -3.11 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+python -m pip install -e .
+python -m pip install -r lab10_fastapi\curriculum_app\requirements.txt
+~~~
+
+## 4. ตรวจความพร้อมก่อนประมวลผล PDF
+
+ให้เปิด Ollama ไว้ แล้วรันจากโฟลเดอร์โปรเจกต์:
+
+~~~powershell
 python run_all.py --check
-```
+~~~
 
-จะตรวจ:
+คำสั่งนี้ตรวจไฟล์ PDF, Ground Truth, page map, Tesseract, Ollama และความพร้อมของส่วน Lab 7B–Lab 9 แก้รายการที่ขึ้น MISSING ก่อนเริ่มรันจริง
 
-- RAW PDF ทั้ง 4 เล่ม
-- ground truth + page map
-- Ollama + local models
-- Lab 7B environment
-- Lab 8B selftest
-- Lab 9 selftest
+## 5. รัน PDF ตั้งแต่ต้นจนได้ฐานข้อมูลและรายงาน
 
----
+ทดสอบการประมวลผลครั้งเดียว:
 
-## 4. Dry run ก่อน
-
-```powershell
-python run_all.py --program all --dry-run
-```
-
-คำสั่งนี้ยังไม่เรียก AI แต่จะแสดง flow ที่จะรันครบถึง Lab 9
-
----
-
-## 5. รันจริง 4 หลักสูตรตั้งแต่ PDF ดิบจนจบ Lab 9
-
-```powershell
+~~~powershell
 python run_all.py --program all
-```
+~~~
 
-หรือดับเบิลคลิก/รัน:
+### ไฟล์ผลลัพธ์อยู่ที่ไหน
 
-```powershell
-run_all.bat
-```
+ตัวอย่างของหลักสูตร AI:
 
-รันทีละหลักสูตรได้:
-
-```powershell
-python run_all.py --program AI
-python run_all.py --program BIT
-python run_all.py --program IT
-python run_all.py --program DSBA
-```
-
----
-
-## 6. หน้า PDF ที่ pipeline ใช้
-
-source ยังเป็น raw PDF เต็มเล่ม แต่เพื่อลด context และเวลา pipeline เลือกเฉพาะหน้าที่เกี่ยวข้องกับแผนการศึกษา/รายวิชาตอน runtime:
-
-```text
-AI    21-26
-BIT   22-25,31-35
-IT    26-29,38-44
-DSBA  19-22,30-36
-```
-
-แก้ได้ที่ `config/programs.json`
-
-ภาพ page จริงที่ render จาก PDF ดิบจะอยู่ใน:
-
-```text
-work/<PROGRAM>/01_selected_pages/
-```
-
-และ `work/<PROGRAM>/source_manifest.json` จะบันทึก SHA-256 ของ PDF ต้นทาง
-
----
-
-## 7. Output ต่อหลักสูตร
-
-ตัวอย่าง DSBA:
-
-```text
-work/DSBA/
+~~~text
+work/AI/
 ├── source_manifest.json
-├── 01_selected_pages/
-├── 02_lab6/
-│   └── ... evaluation baseline ...
+├── 01_selected_pages/         ภาพหน้าที่เลือกจาก PDF
+├── 02_lab6/                   ผลประเมิน OCR baseline
 ├── 03_lab7b/
 │   ├── pred_baseline.json
 │   ├── pred_text.json
@@ -211,92 +127,66 @@ work/DSBA/
 │   ├── evaluation.json
 │   └── selected_prediction.json
 ├── 04_lab8b/
-│   ├── schema/
-│   │   ├── curriculum.schema.json
-│   │   └── schema.sql
 │   ├── curriculum.json
-│   ├── curriculum.conversion.json
 │   ├── curriculum.db
 │   ├── verify.json
 │   ├── gold_questions.json
-│   ├── gold_questions.meta.json
 │   └── eval_result.json
 └── 05_lab9/
-    ├── lab9_report.json
-    └── lab9_report.md
-```
+    ├── lab9_report.md
+    └── lab9_report.json
+~~~
 
-เมื่อรัน `--program all` จะมี summary รวม:
+### อ่านผลประเมิน
 
-```text
-work/lab9_summary.json
-```
+- 03_lab7b/evaluation.json เปรียบเทียบผลของแต่ละ candidate กับ Ground Truth
+- 04_lab8b/verify.json แสดงผลตรวจฐานข้อมูล
+- 04_lab8b/eval_result.json แสดงผลคำถามประเมิน NL-to-SQL
+- 05_lab9/lab9_report.md เป็นรายงานสรุปที่อ่านได้ และไฟล์ .json เป็นข้อมูลผลประเมิน
 
-ไม่มี `webapp/` และไม่มี combined web database เพราะชุดนี้ตั้งใจ **หยุดที่ Lab 9**
+## 6. เปิดเว็บถามตอบหลักสูตร
 
----
+เว็บใช้ฐานข้อมูลที่สร้างเสร็จจากขั้นก่อนหน้า ตาม lab10_fastapi/curriculum_app/config.py:
 
-## 8. Lab 9 report วัดอะไร
+| หลักสูตร | ไฟล์ฐานข้อมูลที่เว็บใช้ |
+|---|---|
+| IT | work/IT/04_lab8b/curriculum.db |
+| AI | work/AI/04_lab8b/curriculum.db |
+| BIT | work/BIT/04_lab8b/curriculum.db |
+| DSBA | work/DSBA/04_lab8b/curriculum.db |
 
-`05_lab9/lab9_report.json` แยกเป็น 4 ส่วนหลัก:
+### เปิดเซิร์ฟเวอร์
 
-1. `lab7_extraction`
-   - selected pipeline
-   - alignment Precision / Recall / F1
-   - overall micro CER
-   - CER/WER/exact match ราย attribute
+1. รันเว็บ:
 
-2. `lab8_structured_data_and_db`
-   - final JSON validity
-   - conversion statistics
-   - verify 7 checks
+~~~powershell
+python -m uvicorn lab10_fastapi.curriculum_app.main:app --reload --host 127.0.0.1 --port 8000
+~~~
 
-3. `lab9_qa_evaluation`
-   - จำนวน gold questions
-   - Valid SQL Rate
-   - Execution Accuracy
-   - latency
-   - รายการ SQL ที่ error / คำถามที่ตอบผิด
+2. เปิดเบราว์เซอร์ไปที่:
 
-4. `metrics_not_claimed` + `overfitting`
-   - บอก metric ที่ pipeline ยังไม่ได้เก็บหลักฐาน จึงไม่แต่งตัวเลขขึ้นมา
-   - บอกข้อจำกัดเรื่อง overfitting อย่างตรงไปตรงมา
+- หน้าเว็บถามตอบ: <http://127.0.0.1:8000/>
+- สถานะ API/ฐานข้อมูล/Ollama: <http://127.0.0.1:8000/api/health>
+- หน้าทดลอง API: <http://127.0.0.1:8000/docs>
 
----
+## 9. ลำดับคำสั่งฉบับย่อ
 
-## 9. รัน Lab 9 ใหม่อย่างเดียว
+เมื่อ Python, Tesseract และ Ollama ติดตั้งแล้ว คำสั่งหลักคือ:
 
-ถ้า Lab 7B/8B รันเสร็จแล้ว ไม่ต้อง OCR ใหม่:
-
-```powershell
-python lab9_evaluate.py run ^
-  --program DSBA ^
-  --lab7-dir work/DSBA/03_lab7b ^
-  --lab8-dir work/DSBA/04_lab8b ^
-  --output-dir work/DSBA/05_lab9
-```
-
-ทดสอบ Lab 9 evaluator:
-
-```powershell
-python lab9_evaluate.py selftest
-```
-
----
-
-## 10. หมายเหตุเรื่อง final test
-
-`gold_questions.json` สร้าง expected result จาก ground truth และเอาไปทดสอบ database ที่สร้างจาก prediction เพื่อไม่ให้ evaluation วนกลับไปเฉลยจาก database ตัวเอง
-
-ถ้าต้องการใช้ 30 ข้อนี้เป็น final test จริง ไม่ควรปรับ prompt ซ้ำ ๆ โดยดูผล 30 ข้อนี้ทุกครั้ง เพราะจะเริ่มเกิด evaluation leakage ได้
-
----
-
-## คำสั่งสั้นที่สุด
-
-```powershell
+~~~powershell
+cd "C:\path\to\ocr_system"
+py -3.11 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+python -m pip install -e .
+python -m pip install -r lab10_fastapi\curriculum_app\requirements.txt
+ollama pull qwen3:4b
+ollama pull scb10x/typhoon-ocr1.5-3b
 python run_all.py --check
 python run_all.py --program all
-```
+python -m uvicorn lab10_fastapi.curriculum_app.main:app --reload --host 127.0.0.1 --port 8000
+~~~
 
-เมื่อเห็น `PIPELINE COMPLETE` และมี `work/lab9_summary.json` แปลว่า flow จบถึง Lab 9 แล้ว
+จากนั้นเปิด <http://127.0.0.1:8000/> เพื่อเข้าเว็บถามตอบ
+

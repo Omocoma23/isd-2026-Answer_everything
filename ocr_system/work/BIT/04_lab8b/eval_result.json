@@ -14,11 +14,11 @@
     ],
     "error": null,
     "sql_model_output": "{\"sql\": \"SELECT total_credits FROM program\"}",
-    "answer_model_output": "{\"answer\": \"126 หน่วยกิต\"}",
-    "answer": "126 หน่วยกิต",
+    "answer_model_output": "{\"answer\": \"126\"}",
+    "answer": "126",
     "correct": true,
     "why": "ตรง",
-    "seconds": 7.2
+    "seconds": 7.8
   },
   {
     "question": "หลักสูตรนี้ใช้เวลาเรียนกี่ปี",
@@ -39,7 +39,454 @@
     "answer": "4 ปี",
     "correct": true,
     "why": "ตรง",
-    "seconds": 0.8
+    "seconds": 1.0
+  },
+  {
+    "question": "ตามแผนการศึกษา ปี 1 เทอม 1 มีวิชาอะไรบ้าง ขอรหัส ชื่อวิชา และหน่วยกิตของแต่ละวิชา",
+    "expect": {
+      "type": "rows",
+      "value": [
+        {
+          "code": "06036100",
+          "name_th": "พื้นฐานทางด้านเทคโนโลยีสารสนเทศ",
+          "credits": 3
+        },
+        {
+          "code": "06036101",
+          "name_th": "คณิตศาสตร์สำหรับธุรกิจ",
+          "credits": 3
+        },
+        {
+          "code": "06036118",
+          "name_th": "การแก้ปัญหาทางด้านเทคโนโลยีสารสนเทศ",
+          "credits": 3
+        },
+        {
+          "code": "96641001",
+          "name_th": "โรงเรียนสร้างเสน่ห์",
+          "credits": 2
+        },
+        {
+          "code": "96641003",
+          "name_th": "กีฬาและนันทนาการ",
+          "credits": 1
+        },
+        {
+          "code": "96644007",
+          "name_th": "ภาษาอังกฤษพื้นฐาน 1",
+          "credits": 3
+        },
+        {
+          "code": "96644042",
+          "name_th": "การสื่อสารและการนำเสนออย่างมืออาชีพ",
+          "credits": 3
+        }
+      ]
+    },
+    "sql": "SELECT v.year, v.semester, v.code, CASE WHEN lower(v.code) LIKE '%x%' AND v.note IS NOT NULL THEN CASE WHEN v.note IS NULL THEN NULL WHEN instr(v.note, ' | ') > 0 THEN substr(v.note, 1, instr(v.note, ' | ') - 1) ELSE v.note END ELSE COALESCE(v.name_th, CASE WHEN v.note IS NULL THEN NULL WHEN instr(v.note, ' | ') > 0 THEN substr(v.note, 1, instr(v.note, ' | ') - 1) ELSE v.note END) END AS name_th, v.credits FROM v_plan AS v WHERE v.year = 1 AND v.semester = 1 ORDER BY v.code LIMIT 200",
+    "n_rows": 7,
+    "rows": [
+      {
+        "year": 1,
+        "semester": 1,
+        "code": "06036100",
+        "name_th": "พื้นฐานทางด้านเทคโนโลยีสารสนเทศ",
+        "credits": 3
+      },
+      {
+        "year": 1,
+        "semester": 1,
+        "code": "06036101",
+        "name_th": "คณิตศาสตร์สำหรับธุรกิจ",
+        "credits": 3
+      },
+      {
+        "year": 1,
+        "semester": 1,
+        "code": "06036118",
+        "name_th": "การแก้ปัญหาทางด้านเทคโนโลยีสารสนเทศ",
+        "credits": 3
+      },
+      {
+        "year": 1,
+        "semester": 1,
+        "code": "96641001",
+        "name_th": "โรงเรียนสร้างเสน่ห์",
+        "credits": 2
+      },
+      {
+        "year": 1,
+        "semester": 1,
+        "code": "96641003",
+        "name_th": "กีฬาและนันทนาการ",
+        "credits": 1
+      },
+      {
+        "year": 1,
+        "semester": 1,
+        "code": "96644007",
+        "name_th": "ภาษาอังกฤษพื้นฐาน 1",
+        "credits": 3
+      },
+      {
+        "year": 1,
+        "semester": 1,
+        "code": "96644042",
+        "name_th": "การสื่อสารและการนำเสนออย่างมืออาชีพ",
+        "credits": 3
+      }
+    ],
+    "error": null,
+    "sql_model_output": null,
+    "answer_model_output": null,
+    "answer": "ปี 1 เทอม 1 มีรายวิชาตามแผนดังนี้:\n- 06036100 — พื้นฐานทางด้านเทคโนโลยีสารสนเทศ — 3 หน่วยกิต\n- 06036101 — คณิตศาสตร์สำหรับธุรกิจ — 3 หน่วยกิต\n- 06036118 — การแก้ปัญหาทางด้านเทคโนโลยีสารสนเทศ — 3 หน่วยกิต\n- 96641001 — โรงเรียนสร้างเสน่ห์ — 2 หน่วยกิต\n- 96641003 — กีฬาและนันทนาการ — 1 หน่วยกิต\n- 96644007 — ภาษาอังกฤษพื้นฐาน 1 — 3 หน่วยกิต\n- 96644042 — การสื่อสารและการนำเสนออย่างมืออาชีพ — 3 หน่วยกิต",
+    "correct": true,
+    "why": "ตรงครบ 7 แถว",
+    "seconds": 0.0
+  },
+  {
+    "question": "ปี 1 มีวิชาอะไรบ้างในเทอม 1 และเทอม 2 ช่วยแยกรายชื่อ รหัส และหน่วยกิตตามเทอม",
+    "expect": {
+      "type": "rows",
+      "value": [
+        {
+          "year": 1,
+          "semester": 1,
+          "code": "06036100",
+          "name_th": "พื้นฐานทางด้านเทคโนโลยีสารสนเทศ",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 1,
+          "code": "06036101",
+          "name_th": "คณิตศาสตร์สำหรับธุรกิจ",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 1,
+          "code": "06036118",
+          "name_th": "การแก้ปัญหาทางด้านเทคโนโลยีสารสนเทศ",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 1,
+          "code": "96641001",
+          "name_th": "โรงเรียนสร้างเสน่ห์",
+          "credits": 2
+        },
+        {
+          "year": 1,
+          "semester": 1,
+          "code": "96641003",
+          "name_th": "กีฬาและนันทนาการ",
+          "credits": 1
+        },
+        {
+          "year": 1,
+          "semester": 1,
+          "code": "96644007",
+          "name_th": "ภาษาอังกฤษพื้นฐาน 1",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 1,
+          "code": "96644042",
+          "name_th": "การสื่อสารและการนำเสนออย่างมืออาชีพ",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 2,
+          "code": "06036102",
+          "name_th": "การวิเคราะห์เชิงสถิติสำหรับธุรกิจ",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 2,
+          "code": "06036109",
+          "name_th": "กระบวนการและโมเดลทางธุรกิจ",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 2,
+          "code": "06036119",
+          "name_th": "พื้นฐานการเขียนโปรแกรม",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 2,
+          "code": "06036125",
+          "name_th": "สถาปัตยกรรมคอมพิวเตอร์และระบบปฏิบัติการ",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 2,
+          "code": "96641002",
+          "name_th": "ความฉลาดทางดิจิทัล",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 2,
+          "code": "96644008",
+          "name_th": "ภาษาอังกฤษพื้นฐาน 2",
+          "credits": 3
+        }
+      ]
+    },
+    "sql": "SELECT v.year, v.semester, v.code, CASE WHEN lower(v.code) LIKE '%x%' AND v.note IS NOT NULL THEN CASE WHEN v.note IS NULL THEN NULL WHEN instr(v.note, ' | ') > 0 THEN substr(v.note, 1, instr(v.note, ' | ') - 1) ELSE v.note END ELSE COALESCE(v.name_th, CASE WHEN v.note IS NULL THEN NULL WHEN instr(v.note, ' | ') > 0 THEN substr(v.note, 1, instr(v.note, ' | ') - 1) ELSE v.note END) END AS name_th, v.credits FROM v_plan AS v WHERE v.year = 1 AND v.semester IN (1, 2) ORDER BY v.semester, v.code LIMIT 200",
+    "n_rows": 13,
+    "rows": [
+      {
+        "year": 1,
+        "semester": 1,
+        "code": "06036100",
+        "name_th": "พื้นฐานทางด้านเทคโนโลยีสารสนเทศ",
+        "credits": 3
+      },
+      {
+        "year": 1,
+        "semester": 1,
+        "code": "06036101",
+        "name_th": "คณิตศาสตร์สำหรับธุรกิจ",
+        "credits": 3
+      },
+      {
+        "year": 1,
+        "semester": 1,
+        "code": "06036118",
+        "name_th": "การแก้ปัญหาทางด้านเทคโนโลยีสารสนเทศ",
+        "credits": 3
+      },
+      {
+        "year": 1,
+        "semester": 1,
+        "code": "96641001",
+        "name_th": "โรงเรียนสร้างเสน่ห์",
+        "credits": 2
+      },
+      {
+        "year": 1,
+        "semester": 1,
+        "code": "96641003",
+        "name_th": "กีฬาและนันทนาการ",
+        "credits": 1
+      },
+      {
+        "year": 1,
+        "semester": 1,
+        "code": "96644007",
+        "name_th": "ภาษาอังกฤษพื้นฐาน 1",
+        "credits": 3
+      },
+      {
+        "year": 1,
+        "semester": 1,
+        "code": "96644042",
+        "name_th": "การสื่อสารและการนำเสนออย่างมืออาชีพ",
+        "credits": 3
+      },
+      {
+        "year": 1,
+        "semester": 2,
+        "code": "06036102",
+        "name_th": "การวิเคราะห์เชิงสถิติสำหรับธุรกิจ",
+        "credits": 3
+      },
+      {
+        "year": 1,
+        "semester": 2,
+        "code": "06036109",
+        "name_th": "กระบวนการและโมเดลทางธุรกิจ",
+        "credits": 3
+      },
+      {
+        "year": 1,
+        "semester": 2,
+        "code": "06036119",
+        "name_th": "พื้นฐานการเขียนโปรแกรม",
+        "credits": 3
+      },
+      {
+        "year": 1,
+        "semester": 2,
+        "code": "06036125",
+        "name_th": "สถาปัตยกรรมคอมพิวเตอร์และระบบปฏิบัติการ",
+        "credits": 3
+      },
+      {
+        "year": 1,
+        "semester": 2,
+        "code": "96641002",
+        "name_th": "ความฉลาดทางดิจิทัล",
+        "credits": 3
+      },
+      {
+        "year": 1,
+        "semester": 2,
+        "code": "96644008",
+        "name_th": "ภาษาอังกฤษพื้นฐาน 2",
+        "credits": 3
+      }
+    ],
+    "error": null,
+    "sql_model_output": null,
+    "answer_model_output": null,
+    "answer": "ปี 1 เทอม 1:\n- 06036100 — พื้นฐานทางด้านเทคโนโลยีสารสนเทศ — 3 หน่วยกิต\n- 06036101 — คณิตศาสตร์สำหรับธุรกิจ — 3 หน่วยกิต\n- 06036118 — การแก้ปัญหาทางด้านเทคโนโลยีสารสนเทศ — 3 หน่วยกิต\n- 96641001 — โรงเรียนสร้างเสน่ห์ — 2 หน่วยกิต\n- 96641003 — กีฬาและนันทนาการ — 1 หน่วยกิต\n- 96644007 — ภาษาอังกฤษพื้นฐาน 1 — 3 หน่วยกิต\n- 96644042 — การสื่อสารและการนำเสนออย่างมืออาชีพ — 3 หน่วยกิต\nปี 1 เทอม 2:\n- 06036102 — การวิเคราะห์เชิงสถิติสำหรับธุรกิจ — 3 หน่วยกิต\n- 06036109 — กระบวนการและโมเดลทางธุรกิจ — 3 หน่วยกิต\n- 06036119 — พื้นฐานการเขียนโปรแกรม — 3 หน่วยกิต\n- 06036125 — สถาปัตยกรรมคอมพิวเตอร์และระบบปฏิบัติการ — 3 หน่วยกิต\n- 96641002 — ความฉลาดทางดิจิทัล — 3 หน่วยกิต\n- 96644008 — ภาษาอังกฤษพื้นฐาน 2 — 3 หน่วยกิต",
+    "correct": true,
+    "why": "ตรงครบ 13 แถว",
+    "seconds": 0.0
+  },
+  {
+    "question": "ปี 1 เทอม 1 มีทั้งหมดกี่วิชา และมีหน่วยกิตรวมเท่าไร",
+    "expect": {
+      "type": "rows",
+      "value": [
+        {
+          "course_count": 7,
+          "total_credits": 18
+        }
+      ]
+    },
+    "sql": "SELECT n_courses AS course_count, credits AS total_credits FROM v_semester_credits WHERE year = 1 AND semester = 1 LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "course_count": 7,
+        "total_credits": 18
+      }
+    ],
+    "error": null,
+    "sql_model_output": null,
+    "answer_model_output": null,
+    "answer": "ปี 1 เทอม 1 มี 7 วิชา รวม 18 หน่วยกิต",
+    "correct": true,
+    "why": "ตรงครบ 1 แถว",
+    "seconds": 0.0
+  },
+  {
+    "question": "ปี 1 เทอม 1 กับเทอม 2 เทอมไหนมีวิชามากกว่า และต่างกันกี่วิชา",
+    "expect": {
+      "type": "rows",
+      "value": [
+        {
+          "term1_course_count": 7,
+          "term2_course_count": 6,
+          "semester_with_more": 1,
+          "difference": 1
+        }
+      ]
+    },
+    "sql": "WITH term_counts AS (SELECT COALESCE((SELECT n_courses FROM v_semester_credits WHERE year = 1 AND semester = 1), 0) AS term1_course_count, COALESCE((SELECT n_courses FROM v_semester_credits WHERE year = 1 AND semester = 2), 0) AS term2_course_count) SELECT term1_course_count, term2_course_count, CASE WHEN term1_course_count > term2_course_count THEN 1 WHEN term2_course_count > term1_course_count THEN 2 ELSE 0 END AS semester_with_more, ABS(term1_course_count - term2_course_count) AS difference FROM term_counts LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "term1_course_count": 7,
+        "term2_course_count": 6,
+        "semester_with_more": 1,
+        "difference": 1
+      }
+    ],
+    "error": null,
+    "sql_model_output": null,
+    "answer_model_output": null,
+    "answer": "ปี 1 เทอม 1 มี 7 วิชา และเทอม 2 มี 6 วิชา; เทอม 1 มีวิชามากกว่า 1 วิชา",
+    "correct": true,
+    "why": "ตรงครบ 1 แถว",
+    "seconds": 0.0
+  },
+  {
+    "question": "วิชา 06036100 อยู่ในแผนการเรียนปีไหน เทอมไหน และมีชื่อกับหน่วยกิตเท่าไร",
+    "expect": {
+      "type": "rows",
+      "value": [
+        {
+          "year": 1,
+          "semester": 1,
+          "code": "06036100",
+          "name_th": "พื้นฐานทางด้านเทคโนโลยีสารสนเทศ",
+          "credits": 3
+        }
+      ]
+    },
+    "sql": "SELECT v.year, v.semester, v.code, CASE WHEN lower(v.code) LIKE '%x%' AND v.note IS NOT NULL THEN CASE WHEN v.note IS NULL THEN NULL WHEN instr(v.note, ' | ') > 0 THEN substr(v.note, 1, instr(v.note, ' | ') - 1) ELSE v.note END ELSE COALESCE(v.name_th, CASE WHEN v.note IS NULL THEN NULL WHEN instr(v.note, ' | ') > 0 THEN substr(v.note, 1, instr(v.note, ' | ') - 1) ELSE v.note END) END AS name_th, v.credits FROM v_plan AS v WHERE v.code = '06036100' ORDER BY v.year, v.semester, v.code LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "year": 1,
+        "semester": 1,
+        "code": "06036100",
+        "name_th": "พื้นฐานทางด้านเทคโนโลยีสารสนเทศ",
+        "credits": 3
+      }
+    ],
+    "error": null,
+    "sql_model_output": null,
+    "answer_model_output": null,
+    "answer": "วิชา 06036100 อยู่ในแผน: ปี 1 เทอม 1 — 06036100 — พื้นฐานทางด้านเทคโนโลยีสารสนเทศ — 3 หน่วยกิต",
+    "correct": true,
+    "why": "ตรงครบ 1 แถว",
+    "seconds": 0.0
+  },
+  {
+    "question": "ปี 1 เทอม 1 มีวิชาเลือกอะไรบ้าง และมีตัวเลือกใดให้เลือกแทนกันได้",
+    "expect": {
+      "type": "rows",
+      "value": []
+    },
+    "sql": "SELECT v.year, v.semester, v.code, CASE WHEN lower(v.code) LIKE '%x%' AND v.note IS NOT NULL THEN CASE WHEN v.note IS NULL THEN NULL WHEN instr(v.note, ' | ') > 0 THEN substr(v.note, 1, instr(v.note, ' | ') - 1) ELSE v.note END ELSE COALESCE(v.name_th, CASE WHEN v.note IS NULL THEN NULL WHEN instr(v.note, ' | ') > 0 THEN substr(v.note, 1, instr(v.note, ' | ') - 1) ELSE v.note END) END AS name_th, v.credits, v.alt_group, v.note FROM v_plan AS v WHERE v.year = 1 AND v.semester = 1 AND (v.alt_group IS NOT NULL OR v.note LIKE '%เลือก%') ORDER BY COALESCE(v.alt_group, ''), v.code LIMIT 200",
+    "n_rows": 0,
+    "rows": [],
+    "error": null,
+    "sql_model_output": null,
+    "answer_model_output": null,
+    "answer": "ไม่พบรายการวิชาเลือกในแผนปี 1 เทอม 1",
+    "correct": true,
+    "why": "ตรงครบ 0 แถว",
+    "seconds": 0.0
+  },
+  {
+    "question": "ปี 2 เทอม 2 มีวิชาเลือกอะไรบ้าง และมีตัวเลือกใดให้เลือกแทนกันได้",
+    "expect": {
+      "type": "rows",
+      "value": [
+        {
+          "year": 2,
+          "semester": 2,
+          "code": "9664xxxx",
+          "name_th": "วิชาเลือกหมวดวิชาศึกษาทั่วไป สำหรับหลักสูตรนานาชาติ 1",
+          "credits": 3
+        }
+      ]
+    },
+    "sql": "SELECT v.year, v.semester, v.code, CASE WHEN lower(v.code) LIKE '%x%' AND v.note IS NOT NULL THEN CASE WHEN v.note IS NULL THEN NULL WHEN instr(v.note, ' | ') > 0 THEN substr(v.note, 1, instr(v.note, ' | ') - 1) ELSE v.note END ELSE COALESCE(v.name_th, CASE WHEN v.note IS NULL THEN NULL WHEN instr(v.note, ' | ') > 0 THEN substr(v.note, 1, instr(v.note, ' | ') - 1) ELSE v.note END) END AS name_th, v.credits, v.alt_group, v.note FROM v_plan AS v WHERE v.year = 2 AND v.semester = 2 AND (v.alt_group IS NOT NULL OR v.note LIKE '%เลือก%') ORDER BY COALESCE(v.alt_group, ''), v.code LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "year": 2,
+        "semester": 2,
+        "code": "9664xxxx",
+        "name_th": "วิชาเลือกหมวดวิชาศึกษาทั่วไป สำหรับหลักสูตรนานาชาติ 1",
+        "credits": 3,
+        "alt_group": "lab7b_slot_47",
+        "note": "วิชาเลือกหมวดวิชาศึกษาทั่วไป สำหรับหลักสูตรนานาชาติ 1 | หมวดวิชาศึกษาทั่วไป | เลือก"
+      }
+    ],
+    "error": null,
+    "sql_model_output": null,
+    "answer_model_output": null,
+    "answer": "รายการวิชาเลือก/ช่องทางเลือก ปี 2 เทอม 2:\n- 9664xxxx — วิชาเลือกหมวดวิชาศึกษาทั่วไป สำหรับหลักสูตรนานาชาติ 1 — 3 หน่วยกิต",
+    "correct": true,
+    "why": "ตรงครบ 1 แถว",
+    "seconds": 0.0
   },
   {
     "question": "วิชา 06036100 มีกี่หน่วยกิต",
@@ -60,7 +507,7 @@
     "answer": "3 หน่วยกิต",
     "correct": true,
     "why": "ตรง",
-    "seconds": 0.9
+    "seconds": 1.1
   },
   {
     "question": "วิชาพื้นฐานทางด้านเทคโนโลยีสารสนเทศมีรหัสอะไร",
@@ -81,7 +528,7 @@
     "answer": "06036100",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.1
+    "seconds": 1.4
   },
   {
     "question": "วิชา 06036100 ชื่อภาษาอังกฤษว่าอะไร",
@@ -102,7 +549,7 @@
     "answer": "INFORMATION TECHNOLOGY FUNDAMENTALS",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.0
+    "seconds": 1.9
   },
   {
     "question": "วิชา 06036101 มีกี่หน่วยกิต",
@@ -123,7 +570,7 @@
     "answer": "3 หน่วยกิต",
     "correct": true,
     "why": "ตรง",
-    "seconds": 0.9
+    "seconds": 1.1
   },
   {
     "question": "วิชาคณิตศาสตร์สำหรับธุรกิจมีรหัสอะไร",
@@ -144,7 +591,7 @@
     "answer": "06036101",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.0
+    "seconds": 1.2
   },
   {
     "question": "วิชา 06036101 ชื่อภาษาอังกฤษว่าอะไร",
@@ -165,7 +612,7 @@
     "answer": "MATHEMATICS FOR BUSINESS",
     "correct": true,
     "why": "ตรง",
-    "seconds": 0.9
+    "seconds": 1.1
   },
   {
     "question": "วิชา 06036118 มีกี่หน่วยกิต",
@@ -186,7 +633,7 @@
     "answer": "3 หน่วยกิต",
     "correct": true,
     "why": "ตรง",
-    "seconds": 0.9
+    "seconds": 1.1
   },
   {
     "question": "วิชาการแก้ปัญหาทางด้านเทคโนโลยีสารสนเทศมีรหัสอะไร",
@@ -195,15 +642,19 @@
       "value": "06036118"
     },
     "sql": "SELECT code FROM course WHERE name_th LIKE '%การแก้ปัญหาทางด้านเทคโนโลยีสารสนเทศ%' LIMIT 200",
-    "n_rows": 0,
-    "rows": [],
+    "n_rows": 1,
+    "rows": [
+      {
+        "code": "06036118"
+      }
+    ],
     "error": null,
     "sql_model_output": "{\"sql\": \"SELECT code FROM course WHERE name_th LIKE '%การแก้ปัญหาทางด้านเทคโนโลยีสารสนเทศ%'\" }",
-    "answer_model_output": null,
-    "answer": "ไม่พบข้อมูลนี้ในเล่มหลักสูตร",
-    "correct": false,
-    "why": "ไม่พบค่า 06036118 (ได้ [])",
-    "seconds": 0.6
+    "answer_model_output": "{\"answer\": \"06036118\"}",
+    "answer": "06036118",
+    "correct": true,
+    "why": "ตรง",
+    "seconds": 1.3
   },
   {
     "question": "วิชา 06036118 ชื่อภาษาอังกฤษว่าอะไร",
@@ -211,7 +662,7 @@
       "type": "value",
       "value": "PROBLEM SOLVING IN INFORMATION TECHNOLOGY"
     },
-    "sql": "SELECT name_en FROM course WHERE code='06036118' LIMIT 200",
+    "sql": "SELECT name_en FROM course WHERE code = '06036118' LIMIT 200",
     "n_rows": 1,
     "rows": [
       {
@@ -219,12 +670,12 @@
       }
     ],
     "error": null,
-    "sql_model_output": "{\"sql\": \"SELECT name_en FROM course WHERE code='06036118'\" }",
+    "sql_model_output": "{\"sql\": \"SELECT name_en FROM course WHERE code = '06036118'\" }",
     "answer_model_output": "{\"answer\": \"PROBLEM SOLVING IN INFORMATION TECHNOLOGY\"}",
     "answer": "PROBLEM SOLVING IN INFORMATION TECHNOLOGY",
     "correct": true,
     "why": "ตรง",
-    "seconds": 0.9
+    "seconds": 1.2
   },
   {
     "question": "วิชา 96641001 มีกี่หน่วยกิต",
@@ -245,7 +696,7 @@
     "answer": "2 หน่วยกิต",
     "correct": true,
     "why": "ตรง",
-    "seconds": 0.9
+    "seconds": 1.2
   },
   {
     "question": "วิชาโรงเรียนสร้างเสน่ห์มีรหัสอะไร",
@@ -266,7 +717,7 @@
     "answer": "96641001",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.0
+    "seconds": 1.7
   },
   {
     "question": "วิชา 96641001 ชื่อภาษาอังกฤษว่าอะไร",
@@ -287,7 +738,7 @@
     "answer": "CHARM SCHOOL",
     "correct": true,
     "why": "ตรง",
-    "seconds": 0.9
+    "seconds": 1.3
   },
   {
     "question": "วิชา 96641003 มีกี่หน่วยกิต",
@@ -308,7 +759,7 @@
     "answer": "1 หน่วยกิต",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.0
+    "seconds": 1.2
   },
   {
     "question": "วิชากีฬาและนันทนาการมีรหัสอะไร",
@@ -316,7 +767,7 @@
       "type": "value",
       "value": "96641003"
     },
-    "sql": "SELECT code FROM course WHERE name_th LIKE '%กีฬาและนันทนาการ%' LIMIT 200",
+    "sql": "SELECT code FROM course WHERE name_th LIKE '%กีฬา%' OR name_th LIKE '%นันทนาการ%' LIMIT 200",
     "n_rows": 1,
     "rows": [
       {
@@ -324,12 +775,12 @@
       }
     ],
     "error": null,
-    "sql_model_output": "{\"sql\": \"SELECT code FROM course WHERE name_th LIKE '%กีฬาและนันทนาการ%'\" }",
+    "sql_model_output": "{\"sql\": \"SELECT code FROM course WHERE name_th LIKE '%กีฬา%' OR name_th LIKE '%นันทนาการ%'\" }",
     "answer_model_output": "{\"answer\": \"96641003\"}",
     "answer": "96641003",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.0
+    "seconds": 1.3
   },
   {
     "question": "วิชา 96641003 ชื่อภาษาอังกฤษว่าอะไร",
@@ -350,7 +801,7 @@
     "answer": "SPORTS AND RECREATIONAL ACTIVITIES",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.0
+    "seconds": 1.1
   },
   {
     "question": "วิชา 96644007 มีกี่หน่วยกิต",
@@ -387,12 +838,12 @@
       }
     ],
     "error": null,
-    "sql_model_output": "{\"sql\": \"SELECT code FROM course WHERE name_th LIKE '%ภาษาอังกฤษพื้นฐาน 1%'\"}",
+    "sql_model_output": "{\"sql\": \"SELECT code FROM course WHERE name_th LIKE '%ภาษาอังกฤษพื้นฐาน 1%'\" }",
     "answer_model_output": "{\"answer\": \"96644007\"}",
     "answer": "96644007",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.7
+    "seconds": 1.3
   },
   {
     "question": "วิชา 96644007 ชื่อภาษาอังกฤษว่าอะไร",
@@ -413,7 +864,7 @@
     "answer": "FOUNDATION ENGLISH 1",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.4
+    "seconds": 1.2
   },
   {
     "question": "วิชา 96644042 มีกี่หน่วยกิต",
@@ -434,7 +885,7 @@
     "answer": "3 หน่วยกิต",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.0
+    "seconds": 1.4
   },
   {
     "question": "วิชาการสื่อสารและการนำเสนออย่างมืออาชีพมีรหัสอะไร",
@@ -451,11 +902,11 @@
     ],
     "error": null,
     "sql_model_output": "{\"sql\": \"SELECT code FROM course WHERE name_th LIKE '%การสื่อสารและการนำเสนออย่างมืออาชีพ%'\" }",
-    "answer_model_output": "{\"answer\": \"96644042\"}",
-    "answer": "96644042",
+    "answer_model_output": "{\"answer\": \"รหัสวิชาการสื่อสารและการนำเสนออย่างมืออาชีพคือ 96644042\"}",
+    "answer": "รหัสวิชาการสื่อสารและการนำเสนออย่างมืออาชีพคือ 96644042",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.0
+    "seconds": 2.4
   },
   {
     "question": "วิชา 96644042 ชื่อภาษาอังกฤษว่าอะไร",
@@ -463,7 +914,7 @@
       "type": "value",
       "value": "PROFESSIONAL COMMUNICATION AND PRESENTATION"
     },
-    "sql": "SELECT name_en FROM course WHERE code='96644042' LIMIT 200",
+    "sql": "SELECT name_en FROM course WHERE code = '96644042' LIMIT 200",
     "n_rows": 1,
     "rows": [
       {
@@ -471,158 +922,11 @@
       }
     ],
     "error": null,
-    "sql_model_output": "{\"sql\": \"SELECT name_en FROM course WHERE code='96644042'\" }",
+    "sql_model_output": "{\"sql\": \"SELECT name_en FROM course WHERE code = '96644042'\" }",
     "answer_model_output": "{\"answer\": \"PROFESSIONAL COMMUNICATION AND PRESENTATION\"}",
     "answer": "PROFESSIONAL COMMUNICATION AND PRESENTATION",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.0
-  },
-  {
-    "question": "วิชา 06036102 มีกี่หน่วยกิต",
-    "expect": {
-      "type": "value",
-      "value": 3
-    },
-    "sql": "SELECT credits FROM course WHERE code='06036102' LIMIT 200",
-    "n_rows": 1,
-    "rows": [
-      {
-        "credits": 3
-      }
-    ],
-    "error": null,
-    "sql_model_output": "{\"sql\": \"SELECT credits FROM course WHERE code='06036102'\" }",
-    "answer_model_output": "{\"answer\": \"3 หน่วยกิต\"}",
-    "answer": "3 หน่วยกิต",
-    "correct": true,
-    "why": "ตรง",
-    "seconds": 0.9
-  },
-  {
-    "question": "วิชาการวิเคราะห์เชิงสถิติสำหรับธุรกิจมีรหัสอะไร",
-    "expect": {
-      "type": "value",
-      "value": "06036102"
-    },
-    "sql": "SELECT code FROM course WHERE name_th LIKE '%การวิเคราะห์เชิงสถิติสำหรับธุรกิจ%' LIMIT 200",
-    "n_rows": 1,
-    "rows": [
-      {
-        "code": "06036102"
-      }
-    ],
-    "error": null,
-    "sql_model_output": "{\"sql\": \"SELECT code FROM course WHERE name_th LIKE '%การวิเคราะห์เชิงสถิติสำหรับธุรกิจ%'\" }",
-    "answer_model_output": "{\"answer\": \"06036102\"}",
-    "answer": "06036102",
-    "correct": true,
-    "why": "ตรง",
-    "seconds": 1.2
-  },
-  {
-    "question": "วิชา 06036102 ชื่อภาษาอังกฤษว่าอะไร",
-    "expect": {
-      "type": "value",
-      "value": "STATISTICAL ANALYSIS FOR BUSINESS"
-    },
-    "sql": "SELECT name_en FROM course WHERE code='06036102' LIMIT 200",
-    "n_rows": 1,
-    "rows": [
-      {
-        "name_en": "STATISTICAL ANALYSIS FOR BUSINESS"
-      }
-    ],
-    "error": null,
-    "sql_model_output": "{\"sql\": \"SELECT name_en FROM course WHERE code='06036102'\" }",
-    "answer_model_output": "{\"answer\": \"STATISTICAL ANALYSIS FOR BUSINESS\"}",
-    "answer": "STATISTICAL ANALYSIS FOR BUSINESS",
-    "correct": true,
-    "why": "ตรง",
-    "seconds": 0.9
-  },
-  {
-    "question": "วิชา 06036109 มีกี่หน่วยกิต",
-    "expect": {
-      "type": "value",
-      "value": 3
-    },
-    "sql": "SELECT credits FROM course WHERE code='06036109' LIMIT 200",
-    "n_rows": 1,
-    "rows": [
-      {
-        "credits": 3
-      }
-    ],
-    "error": null,
-    "sql_model_output": "{\"sql\": \"SELECT credits FROM course WHERE code='06036109'\" }",
-    "answer_model_output": "{\"answer\": \"3 หน่วยกิต\"}",
-    "answer": "3 หน่วยกิต",
-    "correct": true,
-    "why": "ตรง",
-    "seconds": 0.9
-  },
-  {
-    "question": "วิชากระบวนการและโมเดลทางธุรกิจมีรหัสอะไร",
-    "expect": {
-      "type": "value",
-      "value": "06036109"
-    },
-    "sql": "SELECT code FROM course WHERE name_th LIKE '%กระบวนการและโมเดลทางธุรกิจ%' LIMIT 200",
-    "n_rows": 1,
-    "rows": [
-      {
-        "code": "06036109"
-      }
-    ],
-    "error": null,
-    "sql_model_output": "{\"sql\": \"SELECT code FROM course WHERE name_th LIKE '%กระบวนการและโมเดลทางธุรกิจ%'\" }",
-    "answer_model_output": "{\"answer\": \"06036109\"}",
-    "answer": "06036109",
-    "correct": true,
-    "why": "ตรง",
-    "seconds": 1.0
-  },
-  {
-    "question": "วิชา 06036109 ชื่อภาษาอังกฤษว่าอะไร",
-    "expect": {
-      "type": "value",
-      "value": "BUSINESS PROCESSES AND BUSINESS MODEL"
-    },
-    "sql": "SELECT name_en FROM course WHERE code='06036109' LIMIT 200",
-    "n_rows": 1,
-    "rows": [
-      {
-        "name_en": "BUSINESS PROCESSES AND BUSINESS MODEL"
-      }
-    ],
-    "error": null,
-    "sql_model_output": "{\"sql\": \"SELECT name_en FROM course WHERE code='06036109'\" }",
-    "answer_model_output": "{\"answer\": \"BUSINESS PROCESSES AND BUSINESS MODEL\"}",
-    "answer": "BUSINESS PROCESSES AND BUSINESS MODEL",
-    "correct": true,
-    "why": "ตรง",
-    "seconds": 0.9
-  },
-  {
-    "question": "วิชา 06036119 มีกี่หน่วยกิต",
-    "expect": {
-      "type": "value",
-      "value": 3
-    },
-    "sql": "SELECT credits FROM course WHERE code='06036119' LIMIT 200",
-    "n_rows": 1,
-    "rows": [
-      {
-        "credits": 3
-      }
-    ],
-    "error": null,
-    "sql_model_output": "{\"sql\": \"SELECT credits FROM course WHERE code='06036119'\" }",
-    "answer_model_output": "{\"answer\": \"3 หน่วยกิต\"}",
-    "answer": "3 หน่วยกิต",
-    "correct": true,
-    "why": "ตรง",
-    "seconds": 1.0
+    "seconds": 1.9
   }
 ]

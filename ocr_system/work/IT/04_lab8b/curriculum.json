@@ -560,7 +560,7 @@
     },
     {
       "code": "06016411",
-      "name_th": "ระบบคอมพิวเตอรเ์ บื้องต้น",
+      "name_th": "ระบบคอมพิวเตอร์เบื้องต้น",
       "name_en": "INTRODUCTION TO COMPUTER SYSTEMS",
       "credits": 3,
       "lecture_h": 2,
@@ -620,7 +620,7 @@
     },
     {
       "code": "06066001",
-      "name_th": "ความน่าจะเปน และสถิติ",
+      "name_th": "ความน่าจะเป็นและสถิติ",
       "name_en": "PROBABILITY AND STATISTICS",
       "credits": 3,
       "lecture_h": 3,

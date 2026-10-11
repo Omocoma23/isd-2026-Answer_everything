@@ -260,7 +260,7 @@
     },
     {
       "code": "06036118",
-      "name_th": "การแก้ปญหาทางด้านเทคโนโลยีสารสนเทศ",
+      "name_th": "การแก้ปัญหาทางด้านเทคโนโลยีสารสนเทศ",
       "name_en": "PROBLEM SOLVING IN INFORMATION TECHNOLOGY",
       "credits": 3,
       "lecture_h": 2,
@@ -637,48 +637,48 @@
       "note": "หมวดวิชาศึกษาทั่วไป | บังคับ"
     },
     {
-      "year": 2,
-      "semester": 1,
+      "year": 1,
+      "semester": 2,
       "code": "06036102",
       "credits": 3,
       "alt_group": null,
       "note": "หมวดวิชาเฉพาะ | บังคับ | กระบวนการและโมเดลทางธุรกิจ"
     },
     {
-      "year": 2,
-      "semester": 1,
+      "year": 1,
+      "semester": 2,
       "code": "06036109",
       "credits": 3,
       "alt_group": null,
       "note": "หมวดวิชาเฉพาะ | บังคับ | พื้นฐานการเขียนโปรแกรม"
     },
     {
-      "year": 2,
-      "semester": 1,
+      "year": 1,
+      "semester": 2,
       "code": "06036119",
       "credits": 3,
       "alt_group": null,
       "note": "หมวดวิชาเฉพาะ | บังคับ | สถาปัตยกรรมคอมพิวเตอร์และระบบปฏิบัติการ"
     },
     {
-      "year": 2,
-      "semester": 1,
+      "year": 1,
+      "semester": 2,
       "code": "06036125",
       "credits": 3,
       "alt_group": null,
       "note": "หมวดวิชาเฉพาะ | บังคับ | ภาษาอังกฤษพื้นฐาน 2"
     },
     {
-      "year": 2,
-      "semester": 1,
+      "year": 1,
+      "semester": 2,
       "code": "96644008",
       "credits": 3,
       "alt_group": null,
       "note": "หมวดวิชาศึกษาทั่วไป | บังคับ | ความฉลาดทางดิจิทัล"
     },
     {
-      "year": 2,
-      "semester": 1,
+      "year": 1,
+      "semester": 2,
       "code": "96641002",
       "credits": 3,
       "alt_group": null,
@@ -778,7 +778,7 @@
       "code": "9664xxxx",
       "credits": 3,
       "alt_group": "lab7b_slot_47",
-      "note": "วิชาเลือกหมวดวิชาศึกษาทั่วไป สำหรับหลักสูตรนานาชาติ1 | หมวดวิชาศึกษาทั่วไป | เลือก"
+      "note": "วิชาเลือกหมวดวิชาศึกษาทั่วไป สำหรับหลักสูตรนานาชาติ 1 | หมวดวิชาศึกษาทั่วไป | เลือก"
     },
     {
       "year": 3,

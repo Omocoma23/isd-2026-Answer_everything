@@ -14,24 +14,215 @@
     }
   },
   {
-    "question": "วิชา 06016401 มีกี่หน่วยกิต",
+    "question": "ตามแผนการศึกษา ปี 1 เทอม 1 มีวิชาอะไรบ้าง ขอรหัส ชื่อวิชา และหน่วยกิตของแต่ละวิชา",
     "expect": {
-      "type": "value",
-      "value": 3
+      "type": "rows",
+      "value": [
+        {
+          "code": "06026200",
+          "name_th": "แคลคูลัส 1",
+          "credits": 3
+        },
+        {
+          "code": "06026202",
+          "name_th": "พีชคณิตเชิงเส้น",
+          "credits": 3
+        },
+        {
+          "code": "06066101",
+          "name_th": "พื้นฐานทางธุรกิจสำหรับเทคโนโลยีสารสนเทศ",
+          "credits": 3
+        },
+        {
+          "code": "06066303",
+          "name_th": "การแก้ปัญหาและการโปรแกรมคอมพิวเตอร์",
+          "credits": 3
+        },
+        {
+          "code": "90641001",
+          "name_th": "โรงเรียนสร้างเสน่ห์",
+          "credits": 2
+        },
+        {
+          "code": "90641003",
+          "name_th": "กีฬาและนันทนาการ",
+          "credits": 1
+        },
+        {
+          "code": "90644007",
+          "name_th": "ภาษาอังกฤษพื้นฐาน 1",
+          "credits": 3
+        }
+      ]
     }
   },
   {
-    "question": "วิชาคณิตศาสตร์สำหรับเทคโนโลยีสารสนเทศมีรหัสอะไร",
+    "question": "ปี 1 มีวิชาอะไรบ้างในเทอม 1 และเทอม 2 ช่วยแยกรายชื่อ รหัส และหน่วยกิตตามเทอม",
     "expect": {
-      "type": "value",
-      "value": "06016401"
+      "type": "rows",
+      "value": [
+        {
+          "year": 1,
+          "semester": 1,
+          "code": "06026200",
+          "name_th": "แคลคูลัส 1",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 1,
+          "code": "06026202",
+          "name_th": "พีชคณิตเชิงเส้น",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 1,
+          "code": "06066101",
+          "name_th": "พื้นฐานทางธุรกิจสำหรับเทคโนโลยีสารสนเทศ",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 1,
+          "code": "06066303",
+          "name_th": "การแก้ปัญหาและการโปรแกรมคอมพิวเตอร์",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 1,
+          "code": "90641001",
+          "name_th": "โรงเรียนสร้างเสน่ห์",
+          "credits": 2
+        },
+        {
+          "year": 1,
+          "semester": 1,
+          "code": "90641003",
+          "name_th": "กีฬาและนันทนาการ",
+          "credits": 1
+        },
+        {
+          "year": 1,
+          "semester": 1,
+          "code": "90644007",
+          "name_th": "ภาษาอังกฤษพื้นฐาน 1",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 2,
+          "code": "06026201",
+          "name_th": "แคลคูลัส 2",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 2,
+          "code": "06026203",
+          "name_th": "การโปรแกรมคอมพิวเตอร์",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 2,
+          "code": "06026205",
+          "name_th": "การตลาดเบื้องต้น",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 2,
+          "code": "06066001",
+          "name_th": "ความน่าจะเป็นและสถิติ",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 2,
+          "code": "90641002",
+          "name_th": "ความฉลาดทางดิจิทัล",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 2,
+          "code": "90642033",
+          "name_th": "กฎหมายสำหรับคนรุ่นใหม่",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 2,
+          "code": "90644008",
+          "name_th": "ภาษาอังกฤษพื้นฐาน 2",
+          "credits": 3
+        }
+      ]
     }
   },
   {
-    "question": "วิชา 06016401 ชื่อภาษาอังกฤษว่าอะไร",
+    "question": "ปี 1 เทอม 1 มีทั้งหมดกี่วิชา และมีหน่วยกิตรวมเท่าไร",
     "expect": {
-      "type": "value",
-      "value": "MATHEMATICS FOR INFORMATION TECHNOLOGY"
+      "type": "rows",
+      "value": [
+        {
+          "course_count": 7,
+          "total_credits": 18
+        }
+      ]
+    }
+  },
+  {
+    "question": "ปี 1 เทอม 1 กับเทอม 2 เทอมไหนมีวิชามากกว่า และต่างกันกี่วิชา",
+    "expect": {
+      "type": "rows",
+      "value": [
+        {
+          "term1_course_count": 7,
+          "term2_course_count": 7,
+          "semester_with_more": 0,
+          "difference": 0
+        }
+      ]
+    }
+  },
+  {
+    "question": "วิชา 06026200 อยู่ในแผนการเรียนปีไหน เทอมไหน และมีชื่อกับหน่วยกิตเท่าไร",
+    "expect": {
+      "type": "rows",
+      "value": [
+        {
+          "year": 1,
+          "semester": 1,
+          "code": "06026200",
+          "name_th": "แคลคูลัส 1",
+          "credits": 3
+        }
+      ]
+    }
+  },
+  {
+    "question": "ปี 1 เทอม 1 มีวิชาเลือกอะไรบ้าง และมีตัวเลือกใดให้เลือกแทนกันได้",
+    "expect": {
+      "type": "rows",
+      "value": []
+    }
+  },
+  {
+    "question": "ปี 2 เทอม 1 มีวิชาเลือกอะไรบ้าง และมีตัวเลือกใดให้เลือกแทนกันได้",
+    "expect": {
+      "type": "rows",
+      "value": [
+        {
+          "year": 2,
+          "semester": 1,
+          "code": "90644xxx",
+          "name_th": "วิชาเลือกด้านภาษาและการสื่อสาร",
+          "credits": 3
+        }
+      ]
     }
   },
   {
@@ -179,34 +370,6 @@
     "expect": {
       "type": "value",
       "value": "FOUNDATION ENGLISH 1"
-    }
-  },
-  {
-    "question": "วิชา 06026201 มีกี่หน่วยกิต",
-    "expect": {
-      "type": "value",
-      "value": 3
-    }
-  },
-  {
-    "question": "วิชาแคลคูลัส 2มีรหัสอะไร",
-    "expect": {
-      "type": "value",
-      "value": "06026201"
-    }
-  },
-  {
-    "question": "วิชา 06026201 ชื่อภาษาอังกฤษว่าอะไร",
-    "expect": {
-      "type": "value",
-      "value": "CALCULUS 2"
-    }
-  },
-  {
-    "question": "วิชา 06026203 มีกี่หน่วยกิต",
-    "expect": {
-      "type": "value",
-      "value": 3
     }
   }
 ]

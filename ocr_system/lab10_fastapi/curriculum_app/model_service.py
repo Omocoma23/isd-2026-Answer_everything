@@ -48,35 +48,66 @@ class QwenTextToSQL:
         return self.lab8b.parse_json_loose(raw)
 
     def make_sql(self, question: str) -> str:
-        prompt = f"""แปลงคำถามเป็น SQLite SQL จาก schema นี้
+        structured_sql = self.lab8b.structured_question_sql(question)
+        if structured_sql:
+            return structured_sql
+
+        prompt = f"""แปลงคำถามภาษาไทยเป็น SQLite SQL โดยใช้ schema นี้
+
 {SQL_SCHEMA_CONTEXT}
 
 กติกา:
-- ตอบ SELECT หรือ WITH คำสั่งเดียว
-- ถามหน่วยกิตรายเทอมให้ใช้ v_semester_credits
-- ถามรายวิชาตามแผนให้ใช้ v_plan
-- ห้ามแก้ไขฐานข้อมูล
-- รหัสวิชาเป็นตัวเลข 8 หลักติดกัน
-- ถ้าคำถามมีรหัสวิชา ให้คัดลอกรหัสนั้นตรง ๆ ห้ามเปลี่ยน
-- ถ้าค้นหารายวิชาจากชื่อ ห้ามใช้ = ให้ใช้ LIKE เสมอ
-- การค้นชื่อภาษาไทยใช้รูปแบบ name_th LIKE '%ชื่อวิชา%'
-- คำว่า "วิชา" ในคำถามเป็นคำบอกประเภท ไม่ใช่ส่วนหนึ่งของชื่อวิชา
-- ห้ามเติมคำว่า "วิชา" เข้าไปในค่าที่ค้นหา
+- สร้างคำสั่งอ่านข้อมูลคำสั่งเดียว เริ่มด้วย SELECT หรือ WITH เท่านั้น
+- ใช้เฉพาะตาราง คอลัมน์ และ view ที่ระบุใน schema
+- ถ้ามีหลายเงื่อนไข ให้เชื่อมด้วย AND หรือ OR ตามความหมาย
+- คำถามหารายวิชาตามปีหรือภาคเรียน ให้ใช้ v_plan
+- ถ้าขอรายชื่อวิชา ให้คืน code, ชื่อวิชา และ credits ทุกแถวที่ตรงเงื่อนไข
+- ถ้าถามสองเทอม ให้คืน year และ semester เพื่อแยกกลุ่มผลลัพธ์
+- ถ้าถามจำนวนและหน่วยกิตรวมในเทอม ให้ใช้ n_courses และ credits จาก v_semester_credits
+- ถ้าเปรียบเทียบจำนวนวิชาระหว่างสองเทอม ให้ใช้ v_semester_credits ทั้งสองเทอม
+- ถ้าถามตำแหน่งของรหัสวิชาในแผน ให้ค้น code ใน v_plan และคืน year, semester, name_th, credits
+- ถ้าถามช่องวิชาเลือก ให้คืน alt_group, code, name_th, credits และ note จาก v_plan
+- คำถามหาหน่วยกิตรวม หรือจำนวนรายวิชาในภาคเรียน
+  ให้ใช้ v_semester_credits
+- ห้ามคำนวณ SUM(credits) จาก v_plan เพราะแถววิชาเลือกอาจถูกนับซ้ำ
+- ค้นชื่อวิชาให้ใช้ LIKE
+- ถ้าถามว่ามีวิชาที่ผ่านเกณฑ์หน่วยกิตและขอรหัส ให้คืนทั้ง code และ credits
+  พร้อมระบุ alias ตารางและชื่อคอลัมน์ให้ชัด
+- ถ้าคำถามระบุรหัสวิชา 8 หลัก ให้ใช้รหัสนั้นตรงตามที่ถาม
+- ห้ามเขียนคำอธิบายหรือ Markdown ให้คืน JSON ที่มี key ชื่อ sql เท่านั้น
 
 ตัวอย่าง:
-คำถาม: วิชาพื้นฐานทางธุรกิจสำหรับเทคโนโลยีสารสนเทศมีรหัสอะไร
-SQL: SELECT code FROM course
-     WHERE name_th LIKE '%พื้นฐานทางธุรกิจสำหรับเทคโนโลยีสารสนเทศ%'
 
-คำถาม: วิชา 06026202 มีกี่หน่วยกิต
-คำถาม: หลักสูตรนี้มีกี่หน่วยกิต
-SQL: SELECT total_credits FROM program
+คำถาม: ตามแผนการศึกษา ปี 1 เทอม 1 มีวิชาอะไรบ้าง ขอรหัส ชื่อวิชา และหน่วยกิตของแต่ละวิชา
+SQL: SELECT year, semester, code, name_th, credits
+     FROM v_plan WHERE year = 1 AND semester = 1 ORDER BY code
 
-คำถาม: วิชา 06026202 มีกี่หน่วยกิต
-SQL: SELECT credits FROM course WHERE code='06026202'
+คำถาม: ปี 1 มีวิชาอะไรบ้างในเทอม 1 และเทอม 2 ช่วยแยกรายชื่อ รหัส และหน่วยกิตตามเทอม
+SQL: SELECT year, semester, code, name_th, credits
+     FROM v_plan WHERE year = 1 AND semester IN (1, 2) ORDER BY semester, code
+
+คำถาม: ปี 1 เทอม 1 มีทั้งหมดกี่วิชา และมีหน่วยกิตรวมเท่าไร
+SQL: SELECT n_courses AS course_count, credits AS total_credits
+     FROM v_semester_credits WHERE year = 1 AND semester = 1
+
+คำถาม: ปี 1 เทอม 1 กับเทอม 2 เทอมไหนมีวิชามากกว่า และต่างกันกี่วิชา
+SQL: SELECT year, semester, n_courses FROM v_semester_credits
+     WHERE year = 1 AND semester IN (1, 2) ORDER BY semester
+
+คำถาม: วิชา 06026200 อยู่ในแผนการเรียนปีไหน เทอมไหน และมีชื่อกับหน่วยกิตเท่าไร
+SQL: SELECT year, semester, code, name_th, credits
+     FROM v_plan WHERE code = '06026200' ORDER BY year, semester
+
+คำถาม: ปี 2 เทอม 1 มีวิชาเลือกอะไรบ้าง และมีตัวเลือกใดให้เลือกแทนกันได้
+SQL: SELECT year, semester, alt_group, code, name_th, credits, note
+     FROM v_plan
+     WHERE year = 2 AND semester = 1
+       AND (alt_group IS NOT NULL OR note LIKE '%เลือก%')
+     ORDER BY alt_group, code
 
 คำถาม: {question}
-ตอบ JSON ที่มี key ชื่อ sql"""
+ตอบเป็น JSON รูปแบบ {{\"sql\": \"คำสั่ง SQL\"}} เท่านั้น
+"""
 
         sql = str(
             self._chat(prompt, SQL_SCHEMA).get("sql", "")
@@ -106,14 +137,29 @@ SQL: SELECT credits FROM course WHERE code='06026202'
 
         return sql
 
-    def summarize(self, question: str, rows: list[dict[str, Any]]) -> str:
+    def summarize(
+        self, question: str, rows: list[dict[str, Any]], sql: str = "",
+    ) -> str:
         prompt = f"""ตอบภาษาไทยจากผลฐานข้อมูลเท่านั้น
 คำถาม: {question}
 ผลฐานข้อมูล: {json.dumps(rows[:40], ensure_ascii=False)}
+ถ้าผลฐานข้อมูลมีแถว ห้ามตอบว่าไม่พบข้อมูล
 ตอบ JSON ที่มี key ชื่อ answer และห้ามเพิ่มข้อมูลที่ไม่มีในผล"""
-        return str(self._chat(prompt, ANSWER_SCHEMA).get("answer", "")).strip()
+        answer = str(self._chat(prompt, ANSWER_SCHEMA).get("answer", "")).strip()
+        if self.lab8b.answer_conflicts_with_rows(answer, rows):
+            return self.lab8b.answer_from_rows(question, rows, sql)
+        return answer
 
     def ask(self, database: CurriculumDatabase, question: str) -> dict:
         sql, rows = database.query_from_model(self.make_sql(question))
-        answer = self.summarize(question, rows) if rows else "ไม่พบข้อมูลนี้ในฐานข้อมูลหลักสูตร"
+        structured_answer = self.lab8b.answer_structured_question(question, rows)
+        threshold_answer = self.lab8b.answer_threshold_course_question(
+            question, rows, sql
+        )
+        if structured_answer is not None:
+            answer = structured_answer
+        elif threshold_answer:
+            answer = threshold_answer
+        else:
+            answer = self.summarize(question, rows, sql) if rows else "ไม่พบข้อมูลนี้ในฐานข้อมูลหลักสูตร"
         return {"question": question, "sql": sql, "rows": rows, "answer": answer}

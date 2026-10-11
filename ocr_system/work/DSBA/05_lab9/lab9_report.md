@@ -3,9 +3,9 @@
 ## 1. Extraction (Lab 7B)
 - Selected pipeline: `text`
 - Course alignment Precision: 1.0
-- Course alignment Recall: 0.9889
-- Course alignment F1: 0.9944
-- Overall micro CER: 0.103219
+- Course alignment Recall: 1.0
+- Course alignment F1: 1.0
+- Overall micro CER: 0.092997
 
 ## 2. Structured data + database (Lab 8B)
 - Final JSON valid: yes
@@ -14,8 +14,8 @@
 ## 3. NL-to-SQL / final QA (Lab 9)
 - Questions: 30
 - Valid SQL rate: 1.0 (30/30)
-- Execution Accuracy: 0.9 (27/30)
-- Mean latency: 1.056667 s/question
+- Execution Accuracy: 1.0 (30/30)
+- Mean latency: 1.216667 s/question
 
 ## 4. Metrics intentionally not claimed
 - Natural-language Exact Match / Token-F1: not measured because the gold set stores structured expected SQL results, not one canonical Thai sentence.

@@ -1038,16 +1038,10 @@ def _text_to_json_chunked(md_pages: list[str], catalog_metadata: dict | None = N
             raw = ollama_chat(
                 MODEL_TEXT,
                 [
-                    {
-                        "role": "system",
-                        "content": SYSTEM_PROMPT,
-                    },
-                    {
-                        "role": "user",
-                        "content": EXTRACT_PROMPT.format(
+                    {"role": "system","content": SYSTEM_PROMPT},
+                    {"role": "user","content": EXTRACT_PROMPT.format(
                             document_text=document_text
-                        ),
-                    },
+                        )},
                 ],
                 fmt=COURSE_SCHEMA,
             )

@@ -6,77 +6,77 @@
     "selected_pipeline": "text",
     "alignment": {
       "matched": 89,
-      "missed": 1,
+      "missed": 0,
       "spurious": 0,
       "precision": 1.0,
-      "recall": 0.9889,
-      "f1": 0.9944,
-      "ground_truth_total": 90,
+      "recall": 1.0,
+      "f1": 1.0,
+      "ground_truth_total": 89,
       "prediction_total": 89
     },
-    "overall_micro_cer": 0.103219,
+    "overall_micro_cer": 0.092997,
     "attributes": {
       "code": {
         "label": "รหัสวิชา",
-        "n_items": 90,
-        "cer": 0.010929,
+        "n_items": 89,
+        "cer": 0.0,
         "wer": null,
-        "exact_match_accuracy": 0.988889,
-        "missing": 1,
+        "exact_match_accuracy": 1.0,
+        "missing": 0,
         "hallucinated": 0
       },
       "name_th": {
         "label": "ชื่อวิชา (ไทย) ⭐",
-        "n_items": 90,
-        "cer": 0.140123,
-        "wer": 0.220302,
-        "exact_match_accuracy": 0.8,
-        "missing": 1,
+        "n_items": 89,
+        "cer": 0.127691,
+        "wer": 0.208696,
+        "exact_match_accuracy": 0.831461,
+        "missing": 0,
         "hallucinated": 0
       },
       "name_en": {
         "label": "ชื่อวิชา (อังกฤษ) ⭐",
-        "n_items": 90,
-        "cer": 0.014667,
-        "wer": 0.012438,
-        "exact_match_accuracy": 0.977778,
-        "missing": 1,
+        "n_items": 89,
+        "cer": 0.001524,
+        "wer": 0.002513,
+        "exact_match_accuracy": 0.988764,
+        "missing": 0,
         "hallucinated": 0
       },
       "credits": {
         "label": "หน่วยกิต",
-        "n_items": 90,
-        "cer": 0.009627,
+        "n_items": 89,
+        "cer": 0.0,
         "wer": null,
-        "exact_match_accuracy": 0.988889,
-        "missing": 1,
+        "exact_match_accuracy": 1.0,
+        "missing": 0,
         "hallucinated": 0
       },
       "year_sem": {
         "label": "ปี/ภาค",
-        "n_items": 90,
-        "cer": 0.011111,
+        "n_items": 89,
+        "cer": 0.0,
         "wer": null,
-        "exact_match_accuracy": 0.988889,
-        "missing": 1,
+        "exact_match_accuracy": 1.0,
+        "missing": 0,
         "hallucinated": 0
       },
       "category": {
         "label": "หมวดวิชา",
-        "n_items": 90,
-        "cer": 0.031502,
+        "n_items": 89,
+        "cer": 0.021224,
         "wer": null,
-        "exact_match_accuracy": 0.955556,
-        "missing": 1,
+        "exact_match_accuracy": 0.966292,
+        "missing": 0,
         "hallucinated": 0
       },
       "ctype": {
         "label": "บังคับ/เลือก",
-        "n_items": 90,
-        "cer": 0.012346,
+        "n_items": 89,
+        "cer": 0.0,
         "wer": null,
-        "exact_match_accuracy": 0.988889,
-        "missing": 1,
+        "exact_match_accuracy": 1.0,
+        "missing": 0,
         "hallucinated": 0
       },
       "prereq": {
@@ -233,28 +233,12 @@
     "questions": 30,
     "valid_sql_count": 30,
     "valid_sql_rate": 1.0,
-    "execution_correct_count": 27,
-    "execution_accuracy": 0.9,
-    "mean_seconds_per_question": 1.056667,
-    "median_seconds_per_question": 0.9,
+    "execution_correct_count": 30,
+    "execution_accuracy": 1.0,
+    "mean_seconds_per_question": 1.216667,
+    "median_seconds_per_question": 1.2,
     "failed_sql_questions": [],
-    "wrong_answer_questions": [
-      {
-        "question": "วิชา 06016401 มีกี่หน่วยกิต",
-        "why": "ไม่พบค่า 3 (ได้ [])",
-        "sql": "SELECT credits FROM course WHERE code='06016401' LIMIT 200"
-      },
-      {
-        "question": "วิชาคณิตศาสตร์สำหรับเทคโนโลยีสารสนเทศมีรหัสอะไร",
-        "why": "ไม่พบค่า 06016401 (ได้ [])",
-        "sql": "SELECT code FROM course WHERE name_th LIKE '%คณิตศาสตร์สำหรับเทคโนโลยีสารสนเทศ%' LIMIT 200"
-      },
-      {
-        "question": "วิชา 06016401 ชื่อภาษาอังกฤษว่าอะไร",
-        "why": "ไม่พบค่า MATHEMATICS FOR INFORMATION TECHNOLOGY (ได้ [])",
-        "sql": "SELECT name_en FROM course WHERE code = '06016401' LIMIT 200"
-      }
-    ],
+    "wrong_answer_questions": [],
     "metric_note": "For this Group-B NL-to-SQL task, Execution Accuracy is the key end-to-end correctness metric; Valid SQL Rate is reported separately because syntactically executable SQL can still answer the wrong question."
   },
   "metrics_not_claimed": {

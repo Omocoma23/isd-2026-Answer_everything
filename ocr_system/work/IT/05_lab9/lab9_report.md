@@ -5,7 +5,7 @@
 - Course alignment Precision: 0.9455
 - Course alignment Recall: 0.9811
 - Course alignment F1: 0.963
-- Overall micro CER: 0.141571
+- Overall micro CER: 0.141479
 
 ## 2. Structured data + database (Lab 8B)
 - Final JSON valid: yes
@@ -14,8 +14,8 @@
 ## 3. NL-to-SQL / final QA (Lab 9)
 - Questions: 30
 - Valid SQL rate: 1.0 (30/30)
-- Execution Accuracy: 0.933333 (28/30)
-- Mean latency: 1.113333 s/question
+- Execution Accuracy: 1.0 (30/30)
+- Mean latency: 1.206667 s/question
 
 ## 4. Metrics intentionally not claimed
 - Natural-language Exact Match / Token-F1: not measured because the gold set stores structured expected SQL results, not one canonical Thai sentence.

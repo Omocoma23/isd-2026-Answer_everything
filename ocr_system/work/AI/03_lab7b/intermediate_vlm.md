@@ -1,334 +1,530 @@
-\documentclass[1200.0x1754.0]{standalone}
-\usepackage{amsmath,amsfonts,graphicx,color}
-\usepackage{tikz-cd}
-
-\usetikzlibrary {positioning}
-\tikzset {
-    &gt;={Latex[length=3pt]},
-    myangleектор/.append style={
-        angle eccentricity = 1.5,
-        angle radius = 2mm,
-        angle position = -90:
-    },
-    myangle vector/.append style={
-        angle eccentricity = 1.5,
-        angle radius = 2mm,
-        angle position = 90:
-    },
-    mynode/.append style={draw, fill=white, inner sep=3pt},
-    tcancel/.append style={draw=#1!85},
-}
-
-\begin{document}
-    
-    \begin{table}[h]
-        \caption{รายละเอียดหลักสูตรวท.บ.(สาขาวิชาเทคโนโลยีปัญญาประดิษฐ์) คณะเทคโนโลยีสารสนเทศ สจล.} 
-        \label{tab:1}
-        \begin{tr}
-            <td>รหัสวิชา</td><td>ชื่อวิชา</td><td>หน่วยกิต (บรรยาย-ปฏิบัติ-ศึกษาด้วยตนเอง)</td>
-        </tr>
-        \foreach\x[count=\i] in{06046415, การประมวลผลสัญญาณ 3(3-0-6), SIGNAL PROCESSING,
-            06046416, การเรียนรู้เชิงลึกสำหรับคอมพิวเตอร์วิทัศน์ 3 (3-0-6), DEEP LEARNING FOR COMPUTER VISION,
-            06046417, การประมวลผลภาพ 3(3-0-6), IMAGE PROCESSING,
-            06046418, การระบุตำแหน่งและการสร้างแผนที่ของหุ่นยนต์ 3 (3-0-6), ROBOT LOCALIZATION AND MAPPING,
-            06046419, การเรียนรู้แบบเสริมกำลัง 3(3-0-6), REINFORCEMENT LEARNING,
-            06046420, ระบบให้คำแนะนำอัจฉริยะ 3 (3-0-6), INTELLIGENT RECOMMENDATION SYSTEMS,
-            06046421, การประมวลผลภาษาธรรมชาติขั้นสูง 3(3-0-6), ADVANCED NATURAL LANGUAGE PROCESSING,
-            06046422, จริยธรรมด้านปัญญาประดิษฐ์ 3 (3-0-6), ARTIFICIAL INTELLIGENCE ETHICS,
-            06046423, การออกแบบบริการด้านปัญญาประดิษฐ์ 3(3-0-6), ARTIFICIAL INTELLIGENCE SERVICE DESIGN,
-            06046424, ตรรกะและการแทนความรู้ 3 (3-0-6), LOGIC AND KNOWLEDGE REPRESENTATION,
-            06046425, โมเดลแบบกำเนิด 3(3-0-6), GENERATIVE MODEL,
-            06046430, หัวข้อคัดสรรด้านปัญญาประดิษฐ์ 1 3 (3-0-6), SELECTED TOPICS IN ARTIFICIAL INTELLIGENCE 1,
-            06046431, หัวข้อคัดสรรด้านปัญญาประดิษฐ์ 2 3(3-0-6), SELECTED TOPICS IN ARTIFICIAL INTELLIGENCE 2,
-            06046432, หัวข้อคัดสรรด้านปัญญาประดิษฐ์ 3 3 (3-0-6), SELECTED TOPICS IN ARTIFICIAL INTELLIGENCE 3,
-            06046433, หัวข้อคัดสรรด้านปัญญาประดิษฐ์ 4 3(3-0-6), SELECTED TOPICS IN ARTIFICIAL INTELLIGENCE 4,
-            06046434, หัวข้อคัดสรรด้านปัญญาประดิษฐ์ 5 3 (3-0-6), SELECTED TOPICS IN ARTIFICIAL INTELLIGENCE 5,
-            06046435, หัวข้อคัดสรรด้านปัญญาประดิษฐ์ 6 3(3-0-6), SELECTED TOPICS IN ARTIFICIAL INTELLIGENCE 6}
-        \end{tr}
-    </table>
-    
-\end{document}
-
----
-
-\documentclass[1230.8x1754.2]{article}
+\documentclass[120mm]{article}
 \usepackage{amsmath,amsfonts,graphicx,latexsym,color}
 \usepackage{tikz}%&lt;&lt;&lt;
 \tikzset{
     mycircle/.style={
-        fill=red!6,
+        fill=red!5,
         draw=black,
-        inner sep=1pt
+        inner sep = 0pt
       },
     myrectangle/.style={
         fill=white,
         draw=black,
-        inner sep=2pt
+        inner sep = 0pt
       },
-    myrectangle2/.style={
-        fill=white,
-        draw=black,
-        inner sep=0.5pt
+    tcancel/.style={
+        color=red!85,
+        line width=1.2pt,
+        inner sep = 0pt
       },
-    myrectangle3/.style={
-        fill=white,
-        draw=black,
-        inner sep=1pt
-      },
-    myrectangle4/.style={
-        fill=red!6,
-        draw=black,
-        inner sep=2pt
-      },
-    myrectangle5/.style={
-        fill=red!6,
-        draw=black,
-        inner sep=0.5pt
-      },
-    myrectangle6/.style={
-        fill=white,
-        draw=black,
-        inner sep=1pt
-      },
-    myrectangle7/.style={
-        fill=white,
-        draw=black,
-        inner sep=2pt
-      },
-    myrectangle8/.style={
-        fill=red!6,
-        draw=black,
-        inner sep=0.5pt
+    tcphline/.style={
+        color=red!75,
+        line width=0.4pt,
+        inner sep = 0pt
       }
-  }
+}
+\usepackage{tikz-cd}
 
-\usepackage{tikz}
+\usetikzlibrary {positioning,automata,shapes,arrows,decorations.pathmorphing,decoration.mosaic}
+\tikzset {
+    &gt;={Latex[width=1.5mm,length=1.2cm},
+    &lt;-={Latex[width=1.5mm,length=-1.2cm]},
+    -&gt;={Latex[width=1.5mm,length=0.8cm],
+        decoration={
+            mosaic,
+            mosaic pattern=crossthread,
+            angle radius=3pt
+          },
+        inner sep = 0pt},
+    &lt;-&gt;={Latex[width=2.4mm,length=-1.2cm,decoration=mosaic,mosaic pattern=crossthread],
+        angle radius=6pt}
+}
+
+\begin{document}
+
+\begin{table}[h]
+    \caption{รายละเอียดหลักสูตรวท.บ.(สาขาวิชาเทคโนโลยีปัญญาประดิษฐ์) คณะเทคโนโลยีสารสนเทศ สจล. (2567-1)}% 
+    \label{tab:mytable}
+    \begin{tr}%
+        <td>รหัสวิชา</td><td>ชื่อวิชา</td><td>หน่วยกิต</td></tr>
+    \end{tr>
+    \foreach\x[count=\i] in {06046415, การประมวลผลสัญญาณ 3 (3-0-6), SIGNAL PROCESSING},
+        06046416, การเรียนรู้เชิงลึกสำหรับคอมพิวเตอร์วิทัศน์ 3 (3-0-6), DEEP LEARNING FOR COMPUTER VISION,
+        06046417, การประมวลผลภาพ 3 (3-0-6), IMAGE PROCESSING,
+        06046418, การระบุตำแหน่งและการสร้างแผนที่ของหุ่นยนต์ 3 (3-0-6), ROBOT LOCALIZATION AND MAPPING,
+        06046419, การเรียนรู้แบบเสริมกำลัง 3 (3-0-6), REINFORCEMENT LEARNING,
+        06046420, ระบบให้คำแนะนำอัจฉริยะ 3 (3-0-6), INTELLIGENT RECOMMENDATION SYSTEMS,
+        06046421, การประมวลผลภาษาธรรมชาติขั้นสูง 3 (3-0-6), ADVANCED NATURAL LANGUAGE PROCESSING,
+        06046422, จริยธรรมด้านปัญญาประดิษฐ์ 3 (3-0-6), ARTIFICIAL INTELLIGENCE ETHICS,
+        06046423, การออกแบบบริการด้านปัญญาประดิษฐ์ 3 (3-0-6), ARTIFICIAL INTELLIGENCE SERVICE DESIGN,
+        06046424, ตรรกะและการแทนความรู้ 3 (3-0-6), LOGIC AND KNOWLEDGE REPRESENTATION,
+        06046425, โมเดลแบบกำเนิด 3 (3-0-6), GENERATIVE MODEL,
+        06046430, หัวข้อคัดสรรด้านปัญญาประดิษฐ์ 1 3 (3-0-6), SELECTED TOPICS IN ARTIFICIAL INTELLIGENCE 1,
+        06046431, หัวข้อคัดสรรด้านปัญญาประดิษฐ์ 2 3 (3-0-6), SELECTED TOPICS IN ARTIFICIAL INTELLIGENCE 2,
+        06046432, หัวข้อคัดสรรด้านปัญญาประดิษฐ์ 3 3 (3-0-6), SELECTED TOPICS IN ARTIFICIAL INTELLIGENCE 3,
+        06046433, หัวข้อคัดสรรด้านปัญญาประดิษฐ์ 4 3 (3-0-6), SELECTED TOPICS IN ARTIFICIAL INTELLIGENCE 4,
+        06046434, หัวข้อคัดสรรด้านปัญญาประดิษฐ์ 5 3 (3-0-6), SELECTED TOPICS IN ARTIFICIAL INTELLIGENCE 5,
+        06046435, หัวข้อคัดสรรด้านปัญญาประดิษฐ์ 6 3 (3-0-6), SELECTED TOPICS IN ARTIFICIAL INTELLIGENCE 6}
+    \i
+\end{table}
+
+</td></tr>
+</table>
+
+วท.บ.(สาขาวิชาเทคโนโลยีปัญญาประดิษฐ์) คณะเทคโนโลยีสารสนเทศ สจล.
+<page_number>17</page_number>
+
+---
+
+\documentclass[120mm,168mm]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+\usepackage{tikz}%&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt>&lt>&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt>&lt>&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt>&lt>&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt>&lt>&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt>&lt;&lt;&lt>&lt>&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt>&lt;&lt;&lt>&lt>&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt>&lt;&lt;&lt>&lt>&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt>&lt;&lt;&lt>&lt>&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt>&lt;&lt;&lt>&lt>&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt>&lt;&lt;&lt>&lt>&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt>&lt;&lt;&lt>&lt>&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt>&lt;&lt;&lt>&lt>&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt>&lt;&lt;&lt>&lt>&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt>&lt;&lt;&lt>&lt>&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt>&lt;&lt;&lt>&lt>&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt>&lt;&lt;&lt>&lt>&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt>&lt;&lt;&lt>&lt>&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt>&lt;&lt;&lt>&lt>&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt>&lt;&lt;&lt>&lt>&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt>&lt;&lt;&lt>&lt>&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt>&lt;&lt;&lt>&lt>&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt>&lt;&lt;&lt>&lt>&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt>&lt;&lt;&lt>&lt>&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt>&lt;&lt;&lt>&lt>&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt>&lt;&lt;&lt>&lt>&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt>&lt;&lt;&lt>&lt>&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt>&lt;&lt;&lt>&lt>&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+\usepackage{tikz-cd}
+%&lt;&lt;&lt>&lt;&lt;&lt>&
+
+---
+
+\documentclass[120mm]{a4paper}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz-cd}
+
 \usetikzlibrary {positioning}
 
 \begin{document}
 
 \begin{table}[h]
-\caption{รายละเอียดหลักสูตรกลุ่มวิชาโครงงานและสัมมนา (2018-2019) สาขาวิชาวิศวกรรมศาสตร์อุตสาหกรรมคอมพิวเตอร์ คณะเทคโนโลยีสารสนเทศ สจล.)}
-\begin{tr><td>รหัสวิชา</td><td>ชื่อวิชา</td><td>หน่วยกิต (บรรยาย-ปฏิบัติ-ศึกษาด้วยตนเอง)</td></tr>
-<tr><td>06046440</td><td>วิชาสัมมนาปัญญาประดิษฐ์<br/>SEMINAR IN ARTIFICIAL INTELLIGENCE</td><td>3 (2-2-5)</td></tr>
-<tr><td>06046441</td><td>โครงงานเทคโนโลยีปัญญาประดิษฐ์ 1<br/>PROJECT IN ARTIFICIAL INTELLIGENCE TECHNOLOGY 1</td><td>3 (0-9-0)</td></tr>
-<tr><td>06046442</td><td>โครงงานเทคโนโลยีปัญญาประดิษฐ์ 2<br/>PROJECT IN ARTIFICIAL INTELLIGENCE TECHNOLOGY 2</td><td>3 (0-9-0)</td></tr>
-<tr><td>06046443</td><td>สหกิจศึกษาทางเทคโนโลยีปัญญาประดิษฐ์<br/>COOPERATIVE EDUCATION IN ARTIFICIAL<br/>INTELLIGENCE TECHNOLOGY หรือ<br/>OVERSEA COOPERERATIVE EDUCATION IN ARTIFICIAL<br/>INTELLIGENCE TECHNOLOGY</td><td>6 (0-45-0)</td></tr>
-<tr><td>06046444</td><td>สหกิจศึกษาต่างประเทศทางเทคโนโลยีปัญญาประดิษฐ์<br/>OVERSEA COOPERERATIVE EDUCATION IN ARTIFICIAL<br/>INTELLIGENCE TECHNOLOGY หรือ<br/>COOPERATIVE EDUCATION IN ARTIFICIAL<br/>INTELLIGENCE TECHNOLOGY</td><td>6 (0-45-0)</td></tr></table>
-
-นักศึกษาเลือกลงทะเบียนเรียนวิชาสหกิจศึกษาหรือสหกิจศึกษาต่างประเทศทางเทคโนโลยีปัญญาประดิษฐ์วิชาใดวิชาหนึ่ง จำนวนรวม 6 หน่วยกิต กำหนดระยะเวลาในการทำสหกิจศึกษาเป็นเวลาอย่างน้อย 16 สัปดาห์หรือ 1 ภาคการศึกษา
-
-ค. หมวดวิชาเลือกเสรี
-นักศึกษาสามารถเลือกเรียนในรายวิชาที่เปิดสอนในสถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง จำนวนไม่น้อยกว่า 6 หน่วยกิต
-
-ความหมายของรหัสประจำรายวิชา
-รหัสวิชาที่ใช้กำหนดให้เป็นตัวเลขและตัวอักษร 8 หลัก (จากมติสภาวิชาการ ครั้งที่ 11/2553)
-<table><tr><td>รหัสตัวที่</td><td></td><td>ได้แก่ เลข</td><td>หมายถึง</td><td>คณะเทคโนโลยีสารสนเทศ</td></tr><tr><td>1, 2</td><td></td><td>06</td><td></td><td></td></tr><tr><td>3,4</td><td></td><td>04</td><td>หมายถึง</td><td>สาขาวิชาเทคโนโลยีปัญญาประดิษฐ์</td></tr><tr><td></td><td>ได้แก่ เลข</td><td>06</td><td>หมายถึง</td><td>วิชาเรียนรวม</td></tr><tr><td>5</td><td></td><td>6</td><td>หมายถึง</td><td>ระดับปริญญาตรี</td></tr><tr><td>6, 7, 8</td><td></td><td>หมายถึง</td><td colspan="2">ลำดับที่ของรายวิชา</td></tr></table>
-
-วท.บ.(สาขาวิชาวิศวกรรมศาสตร์อุตสาหกรรมคอมพิวเตอร์) คณะเทคโนโลยีสารสนเทศ สจล.
-
+    \caption{แผนการศึกษา ปีที่ 1 ภาคการศึกษาที่ 1 (บรรยาย-ปฏิบัติ-ศึกษาด้วยตนเอง)} 
+    \centering
+    \begin{tr}
+        <td>รหัสวิชา</td>
+        <td>ชื่อวิชา</td>
+        <td>หน่วยกิต (บรรยาย-ปฏิบัติ-ศึกษาด้วยตนเอง)</td>
+    </tr>
+    \foreach\x[count=\i] in{06046400, แคลคูลัส 1 CALCULUS 1, 3(3-0-6), 06046402, พีชคณิตเชิงเส้น LINEAR ALGEBRA, 3 (3-0-6), 06066000, คณิตศาสตร์ไม่ต่อเนื่อง DISCRETE MATHEMATICS, 3(3-0-6), 06066001, ความน่าจะเป็นและสถิติ PROBABILITY AND STATISTICS, 3 (3-0-6), 06066303, การแก้ปัญหาและการโปรแกรมคอมพิวเตอร์ PROGRAMMING AND COMPUTER PROGRAMMING, 3(2-2-5), 90641008, พื้นฐานทักษะการสื่อสารภาษาอังกฤษ INTRODUCTION TO ENGLISH COMMUNICATION SKILLS, 0 (0-0-45)}, \i}
+    {
+        <td>รวม</td>
+        <td></td>
+        <td>15</td>
+    </tr>
 \end{table}
+
+\begin{table}[h]
+    \caption{แผนการศึกษา ปีที่ 1 ภาคการศึกษาที่ 2 (บรรยาย-ปฏิบัติ-ศึกษาด้วยตนเอง)} 
+    \centering
+    \foreach\x[count=\i] in{06046401, แคลคูลัส 2 CALCULUS 2, 3(3-0-6), 06046403, การโปรแกรมคอมพิวเตอร์ COMPUTER PROGRAMMING, 3 (2-2-5), 06066301, โครงสร้างข้อมูลและอัลกอริทึม DATA STRUCTURES AND ALGORITHMS, 3(2-2-5), 06046404, พื้นฐานของระบบสมองกลฝังตัว FUNDAMENTAL OF EMBEDDED SYSTEM, 3 (3-0-6), 90641007, พลเมืองดิจิทัล DIGITAL CITIZEN, 3(3-0-6), 90641004, โครงงานกลุ่ม 1 TEAM-PROJECT 1, 1 (0-2-1), 9064xxxxx, วิชาเลือกหมวดวิชาศึกษาทั่วไป GENERAL EDUCATION COURSES, 3(x-x-x)}, \i}
+    {
+        <td>รวม</td>
+        <td></td>
+        <td>19</td>
+    </tr>
+\end{table}
+
+วท.บ.(สาขาวิชาเทคโนโลยีปัญญาประดิษฐ์) คณะเทคโนโลยีสารสนเทศ สจล.
 \end{document}
-
----
-
-\documentclass[120mm]{a4paper}
-\usepackage{amsmath,amsfonts,graphicx,latexsym,color}
-\usepackage{tikz}%&lt;&lt;&lt;
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&lt;
-\usepackage{tikz-cd}
-%&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt>&lt;&
 
 ---
 
 \documentclass[120mm]{a4paper}
 \usepackage{amsmath,amsfonts,graphicx,color}
-\usepackage{tikz-cd}
-
-\usetikzlibrary {positioning}
-
-\begin{document}
-
-\pagestyle{fancy}
-\centering
-
-<table><tr><td>รหัสวิชา</td><td>ชื่อวิชา</td><td>หน่วยกิต<br/>(บรรยาย-ปฏิบัติ-ศึกษาด้วยตนเอง)</td></tr><tr><td>06066300</td><td>แนวคิดระบบฐานข้อมูล<br/>DATABASE SYSTEM CONCEPTS</td><td>3 (2-2-5)</td></tr><tr><td>06046405</td><td>การเรียนรู้ของเครื่องเชิงความน่าจะเป็น<br/>PROBABILISTIC MACHINE LEARNING</td><td>3 (3-0-6)</td></tr><tr><td>06046406</td><td>พื้นฐานการเรียนรู้เชิงลึก<br/>FUNDAMENTALS OF DEEP LEARNING</td><td>3 (3-0-6)</td></tr><tr><td>06046409</td><td>คอมพิวเตอร์วิทัศน์เบื้องต้น<br/>INTRODUCTION TO COMPUTER VISION</td><td>3 (3-0-6)</td></tr><tr><td>06046413</td><td>ปัญญาประดิษฐ์และอินเทอร์เน็ตประสานสรรพสิ่ง<br/>ARTIFICIAL INTELLIGENCE AND INTERNET OF THING</td><td>3 (3-0-6)</td></tr><tr><td rowspan="2">90641009</td><td>ทักษะการสื่อสารภาษาอังกฤษระหว่างวัฒนธรรม 1<br/>INTERCULTURAL COMMUNICATION SKILLS IN ENGLISH 1</td><td>3 (3-0-6)</td></tr><tr><td></td><td></td></tr><tr><td colspan="2">รวม</td><td>18</td></tr></table>
-
-\begin{table}
-    \centering
-    \caption{ปีที่ 2 ภาคการศึกษาที่ 2}
-    \label{tab:2nd_semesters_2023-24}
-    \begin{array}{|c|c|c|}
-        \hline 
-        \textbf{รหัสวิชา} &amp; \textbf{ชื่อวิชา} &amp; \textbf{หน่วยกิต<br/>(บรรยาย-ปฏิบัติ-ศึกษาด้วยตนเอง)} \\
-        06046407 &amp; พื้นฐานวิทยาการข้อมูล<br/>FUNDAMENTALS OF DATA SCIENCE &amp; 3 (3-0-6)\\
-        06046408 &amp; การแสดงข้อมูลด้วยแผนภาพ<br/>DATA VISUALIZATION &amp; 3 (2-2-5)\\
-        06046410 &amp; การประมวลผลภาษาธรรมชาติเบื้องต้น<br/>INTRODUCTION TO NATURAL LANGUAGE PROCESSING &amp; 3 (3-0-6)\\
-        06046412 &amp; การเพิ่มประสิทธิภาพโครงข่ายประสาทเทียม<br/>NEURAL NETWORK OPTIMIZATION &amp; 3 (3-0-6)\\
-        06046411 &amp; การวิเคราะห์และเพิ่มประสิทธิภาพเครือข่าย<br/>NETWORK ANALYSIS AND OPTIMIZATION &amp; 3 (3-0-6)\\
-        90641010 &amp; ทักษะการสื่อสารภาษาอังกฤษระหว่างวัฒนธรรม 2<br/>INTERCULTURAL COMMUNICATION SKILLS IN ENGLISH 2 &amp; 3 (3-0-6)\\
-        90641005 &amp; โครงงานกลุ่ม 2<br/>TEAM-PROJECT 2 &amp; 1 (0-2-1)\\
-    \end{array}
-\end{table}
-
-วท.บ.(สาขาวิชาเทคโนโลยีปัญญาประดิษฐ์) คณะเทคโนโลยีสารสนเทศ สจล.
-
-\begin{figure}[center]
-    \includegraphics[width=0.85]{image_url_of_seal}
-</figure>
-
-รายละเอียดหลักสูตร
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+% \begin{document} เป็นคำอธิบายสำหรับหัวข้อหลัก
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt;&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt>&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt>&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt>&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt>&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt>&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt>&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt>&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt>&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt>&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt>&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,graphicx,color}
+\usepackage{tikz}%&lt;&lt;&lt>&lt;
+% &lt;&lt;&lt;&lt; ตัวอย่างสัญลักษณ์ที่ใช้ในรูปแบบนี้
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts
 
 ---
 
-\documentclass[1200.8x1754.2]{standalone}
+\documentclass[120mm]{a4paper}
 \usepackage{amsmath,amsfonts,graphicx,latexsym,color}
 \usepackage{tikz-cd}
 
 \usetikzlibrary {positioning}
+\tikzset {
+    &gt;={Latex[length=3pt]},
+    myanglemark/.append style={
+        angle radius = 1.5cm,
+        inner sep = -0.25cm,
+        outer sep = 0.8cm
+    },
+    myanglemark2/.append style={
+        angle radius = 1.5cm,
+        inner sep = -0.375cm,
+        outer sep = 0.6cm
+    }
+}
 
 \begin{document}
-
-\begin{table}[c] 
-    \caption[ ]{ปีที่ 3 ภาคการศึกษาที่ 1}
-    \label[ ]{p1-3a}
-    \begin{tr} 
-        <td>รหัสวิชา</td><td>ชื่อวิชา</td><td>หน่วยกิต (บรรยาย-ปฏิบัติ-ศึกษาด้วยตนเอง)</td>
-    </tr> 
-    \foreach\x[count=\i] in{06046415, การประมวลผลสัญญาณ SIGNAL PROCESSING, 3(3-0-6), 06046414, การประมวลผลภาษาธรรมชาติด้วยการเรียนรู้อย่างเชิงลึก NATURAL LANGUAGE PROCESSING WITH DEEP LEARNING, 3 (3-0-6), 90642012, กระบวนการคิดเชิงออกแบบ DESIGN THINKING, 3(3-0-6), 060464xx, วิชาเลือกเทคโนโลยีปัญญาประดิษฐ์เฉพาะทาง ELECTIVE IN ARTIFICIAL INTELLIGENCE SPECIALIZATION, 6 (3-0-6), 06046440, วิชาสัมมนาปัญญาประดิษฐ์ SEMINAR IN ARTIFICIAL INTELLIGENCE, 3(2-2-5), รวม, 18}
-    \i
-        \end{tr} 
-\end{table}
-
-\begin{table}[c] 
-    \caption[ ]{ปีที่ 3 ภาคการศึกษาที่ 2}
-    \label[ ]{p1-3b}
-    \begin{tr} 
-        <td>รหัสวิชา</td><td>ชื่อวิชา</td><td>หน่วยกิต (บรรยาย-ปฏิบัติ-ศึกษาด้วยตนเอง)</td>
-    </tr> 
-    \foreach\x[count=\i] in{060464xx, วิชาเลือกเทคโนโลยีปัญญาประดิษฐ์เฉพาะทาง ELECTIVE IN ARTIFICIAL INTELLIGENCE SPECIALIZATION, 6 (3-0-6), 06046441, โครงงานเทคโนโลยีปัญญาประดิษฐ์ 1 PROJECT IN ARTIFICIAL INTELLIGENCE TECHNOLOGY 1, 3(0-9-0), 90641006, โครงงานกลุ่ม 3 TEAM-PROJECT 3, 1 (0-2-1), xxxxxxxxx, วิชาเลือกเสรี 1 FREE ELECTIVE COURSE 1, 3(x-x-x), รวม, 13}
-    \i
-        \end{tr} 
-\end{table}
+    
+    \pagestyle[foot]{%&lt;&lt;&lt;
+    \begin{table}[c] 
+        \tr [td=2,th colspan="1"] {รหัสวิชา} [td=3,th colspan="1"] {ชื่อวิชา} [td=4,th colspan="1"] {หน่วยกิต (บรรยาย-ปฏิบัติ-ศึกษาด้วยตนเอง)} 
+    \end{table}
+    
+    ปีที่ 3 ภาคการศึกษาที่ 1
+    \begin{table}[c] 
+        \tr [td=2,th colspan="1"] {รหัสวิชา} [td=3,th colspan="1"] {ชื่อวิชา} [td=4,th colspan="1"] {หน่วยกิต (บรรยาย-ปฏิบัติ-ศึกษาด้วยตนเอง)} 
+    \end{table}
+    
+    06046415 การประมวลผลสัญญาณ SIGNAL PROCESSING 3 (3-0-6)
+    06046414 การประมวลผลภาษาธรรมชาติด้วยการเรียนรู้อย่างเชิงลึก NATURAL LANGUAGE PROCESSING WITH DEEP LEARNING 3 (3-0-6)
+    90642012 กระบวนการคิดเชิงออกแบบ DESIGN THINKING 3 (3-0-6)
+    060464xx วิชาเลือกเทคโนโลยีปัญญาประดิษฐ์เฉพาะทาง ELECTIVE IN ARTIFICIAL INTELLIGENCE SPECIALIZATION 6 (3-0-6)
+    06046440 วิชาสัมมนาปัญญาประดิษฐ์ SEMINAR IN ARTIFICIAL INTELLIGENCE 3 (2-2-5)
+    \begin{table}[c] 
+        \tr [td=1,th colspan="1"] {รวม} [td=4,th colspan="1"] {18}
+    \end{table}
+    
+    \pagestyle[foot]{&lt;&lt;&lt;}
+    \begin{table}[c] 
+        \tr [td=2,th colspan="1"] {รหัสวิชา} [td=3,th colspan="1"] {ชื่อวิชา} [td=4,th colspan="1"] {หน่วยกิต (บรรยาย-ปฏิบัติ-ศึกษาด้วยตนเอง)} 
+    \end{table}
+    
+    ปีที่ 3 ภาคการศึกษาที่ 2
+    \begin{table}[c] 
+        \tr [td=2,th colspan="1"] {รหัสวิชา} [td=3,th colspan="1"] {ชื่อวิชา} [td=4,th colspan="1"] {หน่วยกิต (บรรยาย-ปฏิบัติ-ศึกษาด้วยตนเอง)} 
+    \end{table}
+    
+    060464xx วิชาเลือกเทคโนโลยีปัญญาประดิษฐ์เฉพาะทาง ELECTIVE IN ARTIFICIAL INTELLIGENCE SPECIALIZATION 6 (3-0-6)
+    06046441 โครงงานเทคโนโลยีปัญญาประดิษฐ์ 1 PROJECT IN ARTIFICIAL INTELLIGENCE TECHNOLOGY 1 3 (0-9-0)
+    90641006 โครงงานกลุ่ม 3 TEAM-PROJECT 3 1 (0-2-1)
+    xxxxxxxxx วิชาเลือกเสรี 1 FREE ELECTIVE COURSE 1 3 (x-x-x)
+    \begin{table}[c] 
+        \tr [td=1,th colspan="1"] {รวม} [td=4,th colspan="1"] {13}
+    \end{table}
+    
+\end{document}
 
 วท.บ.(สาขาวิชาเทคโนโลยีปัญญาประดิษฐ์) คณะเทคโนโลยีสารสนเทศ สจล.
-\end{document}
 
 ---
 

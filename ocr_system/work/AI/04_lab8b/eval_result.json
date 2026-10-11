@@ -14,11 +14,11 @@
     ],
     "error": null,
     "sql_model_output": "{\"sql\": \"SELECT total_credits FROM program\"}",
-    "answer_model_output": "{\"answer\": \"120 หน่วยกิต\"}",
-    "answer": "120 หน่วยกิต",
+    "answer_model_output": "{\"answer\": \"120\"}",
+    "answer": "120",
     "correct": true,
     "why": "ตรง",
-    "seconds": 5.5
+    "seconds": 6.5
   },
   {
     "question": "หลักสูตรนี้ใช้เวลาเรียนกี่ปี",
@@ -39,7 +39,442 @@
     "answer": "4 ปี",
     "correct": true,
     "why": "ตรง",
-    "seconds": 0.7
+    "seconds": 0.9
+  },
+  {
+    "question": "ตามแผนการศึกษา ปี 1 เทอม 1 มีวิชาอะไรบ้าง ขอรหัส ชื่อวิชา และหน่วยกิตของแต่ละวิชา",
+    "expect": {
+      "type": "rows",
+      "value": [
+        {
+          "code": "06046400",
+          "name_th": "แคลคูลัส 1",
+          "credits": 3
+        },
+        {
+          "code": "06046402",
+          "name_th": "พีชคณิตเชิงเส้น",
+          "credits": 3
+        },
+        {
+          "code": "06066000",
+          "name_th": "คณิตศาสตร์ไม่ต่อเนื่อง",
+          "credits": 3
+        },
+        {
+          "code": "06066001",
+          "name_th": "ความน่าจะเป็นและสถิติ",
+          "credits": 3
+        },
+        {
+          "code": "06066303",
+          "name_th": "การแก้ปัญหาและการโปรแกรมคอมพิวเตอร์",
+          "credits": 3
+        },
+        {
+          "code": "90641008",
+          "name_th": "พื้นฐานทักษะการสื่อสารภาษาอังกฤษ",
+          "credits": 0
+        }
+      ]
+    },
+    "sql": "SELECT v.year, v.semester, v.code, CASE WHEN lower(v.code) LIKE '%x%' AND v.note IS NOT NULL THEN CASE WHEN v.note IS NULL THEN NULL WHEN instr(v.note, ' | ') > 0 THEN substr(v.note, 1, instr(v.note, ' | ') - 1) ELSE v.note END ELSE COALESCE(v.name_th, CASE WHEN v.note IS NULL THEN NULL WHEN instr(v.note, ' | ') > 0 THEN substr(v.note, 1, instr(v.note, ' | ') - 1) ELSE v.note END) END AS name_th, v.credits FROM v_plan AS v WHERE v.year = 1 AND v.semester = 1 ORDER BY v.code LIMIT 200",
+    "n_rows": 6,
+    "rows": [
+      {
+        "year": 1,
+        "semester": 1,
+        "code": "06046400",
+        "name_th": "แคลคูลัส 1",
+        "credits": 3
+      },
+      {
+        "year": 1,
+        "semester": 1,
+        "code": "06046402",
+        "name_th": "พีชคณิตเชิงเส้น",
+        "credits": 3
+      },
+      {
+        "year": 1,
+        "semester": 1,
+        "code": "06066000",
+        "name_th": "คณิตศาสตร์ไม่ต่อเนื่อง",
+        "credits": 3
+      },
+      {
+        "year": 1,
+        "semester": 1,
+        "code": "06066001",
+        "name_th": "ความน่าจะเป็นและสถิติ",
+        "credits": 3
+      },
+      {
+        "year": 1,
+        "semester": 1,
+        "code": "06066303",
+        "name_th": "การแก้ปัญหาและการโปรแกรมคอมพิวเตอร์",
+        "credits": 3
+      },
+      {
+        "year": 1,
+        "semester": 1,
+        "code": "90641008",
+        "name_th": "พื้นฐานทักษะการสื่อสารภาษาอังกฤษ",
+        "credits": 0
+      }
+    ],
+    "error": null,
+    "sql_model_output": null,
+    "answer_model_output": null,
+    "answer": "ปี 1 เทอม 1 มีรายวิชาตามแผนดังนี้:\n- 06046400 — แคลคูลัส 1 — 3 หน่วยกิต\n- 06046402 — พีชคณิตเชิงเส้น — 3 หน่วยกิต\n- 06066000 — คณิตศาสตร์ไม่ต่อเนื่อง — 3 หน่วยกิต\n- 06066001 — ความน่าจะเป็นและสถิติ — 3 หน่วยกิต\n- 06066303 — การแก้ปัญหาและการโปรแกรมคอมพิวเตอร์ — 3 หน่วยกิต\n- 90641008 — พื้นฐานทักษะการสื่อสารภาษาอังกฤษ — 0 หน่วยกิต",
+    "correct": true,
+    "why": "ตรงครบ 6 แถว",
+    "seconds": 0.0
+  },
+  {
+    "question": "ปี 1 มีวิชาอะไรบ้างในเทอม 1 และเทอม 2 ช่วยแยกรายชื่อ รหัส และหน่วยกิตตามเทอม",
+    "expect": {
+      "type": "rows",
+      "value": [
+        {
+          "year": 1,
+          "semester": 1,
+          "code": "06046400",
+          "name_th": "แคลคูลัส 1",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 1,
+          "code": "06046402",
+          "name_th": "พีชคณิตเชิงเส้น",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 1,
+          "code": "06066000",
+          "name_th": "คณิตศาสตร์ไม่ต่อเนื่อง",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 1,
+          "code": "06066001",
+          "name_th": "ความน่าจะเป็นและสถิติ",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 1,
+          "code": "06066303",
+          "name_th": "การแก้ปัญหาและการโปรแกรมคอมพิวเตอร์",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 1,
+          "code": "90641008",
+          "name_th": "พื้นฐานทักษะการสื่อสารภาษาอังกฤษ",
+          "credits": 0
+        },
+        {
+          "year": 1,
+          "semester": 2,
+          "code": "06046401",
+          "name_th": "แคลคูลัส 2",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 2,
+          "code": "06046403",
+          "name_th": "การโปรแกรมคอมพิวเตอร์",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 2,
+          "code": "06066301",
+          "name_th": "โครงสร้างข้อมูลและอัลกอริทึม",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 2,
+          "code": "06046404",
+          "name_th": "พื้นฐานของระบบสมองกลฝังตัว",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 2,
+          "code": "90641007",
+          "name_th": "พลเมืองดิจิทัล",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 2,
+          "code": "90641004",
+          "name_th": "โครงงานกลุ่ม 1",
+          "credits": 1
+        },
+        {
+          "year": 1,
+          "semester": 2,
+          "code": "9064xxxx",
+          "name_th": "วิชาเลือกหมวดวิชาศึกษาทั่วไป",
+          "credits": 3
+        }
+      ]
+    },
+    "sql": "SELECT v.year, v.semester, v.code, CASE WHEN lower(v.code) LIKE '%x%' AND v.note IS NOT NULL THEN CASE WHEN v.note IS NULL THEN NULL WHEN instr(v.note, ' | ') > 0 THEN substr(v.note, 1, instr(v.note, ' | ') - 1) ELSE v.note END ELSE COALESCE(v.name_th, CASE WHEN v.note IS NULL THEN NULL WHEN instr(v.note, ' | ') > 0 THEN substr(v.note, 1, instr(v.note, ' | ') - 1) ELSE v.note END) END AS name_th, v.credits FROM v_plan AS v WHERE v.year = 1 AND v.semester IN (1, 2) ORDER BY v.semester, v.code LIMIT 200",
+    "n_rows": 13,
+    "rows": [
+      {
+        "year": 1,
+        "semester": 1,
+        "code": "06046400",
+        "name_th": "แคลคูลัส 1",
+        "credits": 3
+      },
+      {
+        "year": 1,
+        "semester": 1,
+        "code": "06046402",
+        "name_th": "พีชคณิตเชิงเส้น",
+        "credits": 3
+      },
+      {
+        "year": 1,
+        "semester": 1,
+        "code": "06066000",
+        "name_th": "คณิตศาสตร์ไม่ต่อเนื่อง",
+        "credits": 3
+      },
+      {
+        "year": 1,
+        "semester": 1,
+        "code": "06066001",
+        "name_th": "ความน่าจะเป็นและสถิติ",
+        "credits": 3
+      },
+      {
+        "year": 1,
+        "semester": 1,
+        "code": "06066303",
+        "name_th": "การแก้ปัญหาและการโปรแกรมคอมพิวเตอร์",
+        "credits": 3
+      },
+      {
+        "year": 1,
+        "semester": 1,
+        "code": "90641008",
+        "name_th": "พื้นฐานทักษะการสื่อสารภาษาอังกฤษ",
+        "credits": 0
+      },
+      {
+        "year": 1,
+        "semester": 2,
+        "code": "06046401",
+        "name_th": "แคลคูลัส 2",
+        "credits": 3
+      },
+      {
+        "year": 1,
+        "semester": 2,
+        "code": "06046403",
+        "name_th": "การโปรแกรมคอมพิวเตอร์",
+        "credits": 3
+      },
+      {
+        "year": 1,
+        "semester": 2,
+        "code": "06046404",
+        "name_th": "พื้นฐานของระบบสมองกลฝังตัว",
+        "credits": 3
+      },
+      {
+        "year": 1,
+        "semester": 2,
+        "code": "06066301",
+        "name_th": "โครงสร้างข้อมูลและอัลกอริทึม",
+        "credits": 3
+      },
+      {
+        "year": 1,
+        "semester": 2,
+        "code": "90641004",
+        "name_th": "โครงงานกลุ่ม 1",
+        "credits": 1
+      },
+      {
+        "year": 1,
+        "semester": 2,
+        "code": "90641007",
+        "name_th": "พลเมืองดิจิทัล",
+        "credits": 3
+      },
+      {
+        "year": 1,
+        "semester": 2,
+        "code": "9064xxxx",
+        "name_th": "วิชาเลือกหมวดวิชาศึกษาทั่วไป",
+        "credits": 3
+      }
+    ],
+    "error": null,
+    "sql_model_output": null,
+    "answer_model_output": null,
+    "answer": "ปี 1 เทอม 1:\n- 06046400 — แคลคูลัส 1 — 3 หน่วยกิต\n- 06046402 — พีชคณิตเชิงเส้น — 3 หน่วยกิต\n- 06066000 — คณิตศาสตร์ไม่ต่อเนื่อง — 3 หน่วยกิต\n- 06066001 — ความน่าจะเป็นและสถิติ — 3 หน่วยกิต\n- 06066303 — การแก้ปัญหาและการโปรแกรมคอมพิวเตอร์ — 3 หน่วยกิต\n- 90641008 — พื้นฐานทักษะการสื่อสารภาษาอังกฤษ — 0 หน่วยกิต\nปี 1 เทอม 2:\n- 06046401 — แคลคูลัส 2 — 3 หน่วยกิต\n- 06046403 — การโปรแกรมคอมพิวเตอร์ — 3 หน่วยกิต\n- 06046404 — พื้นฐานของระบบสมองกลฝังตัว — 3 หน่วยกิต\n- 06066301 — โครงสร้างข้อมูลและอัลกอริทึม — 3 หน่วยกิต\n- 90641004 — โครงงานกลุ่ม 1 — 1 หน่วยกิต\n- 90641007 — พลเมืองดิจิทัล — 3 หน่วยกิต\n- 9064xxxx — วิชาเลือกหมวดวิชาศึกษาทั่วไป — 3 หน่วยกิต",
+    "correct": true,
+    "why": "ตรงครบ 13 แถว",
+    "seconds": 0.0
+  },
+  {
+    "question": "ปี 1 เทอม 1 มีทั้งหมดกี่วิชา และมีหน่วยกิตรวมเท่าไร",
+    "expect": {
+      "type": "rows",
+      "value": [
+        {
+          "course_count": 6,
+          "total_credits": 15
+        }
+      ]
+    },
+    "sql": "SELECT n_courses AS course_count, credits AS total_credits FROM v_semester_credits WHERE year = 1 AND semester = 1 LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "course_count": 6,
+        "total_credits": 15
+      }
+    ],
+    "error": null,
+    "sql_model_output": null,
+    "answer_model_output": null,
+    "answer": "ปี 1 เทอม 1 มี 6 วิชา รวม 15 หน่วยกิต",
+    "correct": true,
+    "why": "ตรงครบ 1 แถว",
+    "seconds": 0.0
+  },
+  {
+    "question": "ปี 1 เทอม 1 กับเทอม 2 เทอมไหนมีวิชามากกว่า และต่างกันกี่วิชา",
+    "expect": {
+      "type": "rows",
+      "value": [
+        {
+          "term1_course_count": 6,
+          "term2_course_count": 7,
+          "semester_with_more": 2,
+          "difference": 1
+        }
+      ]
+    },
+    "sql": "WITH term_counts AS (SELECT COALESCE((SELECT n_courses FROM v_semester_credits WHERE year = 1 AND semester = 1), 0) AS term1_course_count, COALESCE((SELECT n_courses FROM v_semester_credits WHERE year = 1 AND semester = 2), 0) AS term2_course_count) SELECT term1_course_count, term2_course_count, CASE WHEN term1_course_count > term2_course_count THEN 1 WHEN term2_course_count > term1_course_count THEN 2 ELSE 0 END AS semester_with_more, ABS(term1_course_count - term2_course_count) AS difference FROM term_counts LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "term1_course_count": 6,
+        "term2_course_count": 7,
+        "semester_with_more": 2,
+        "difference": 1
+      }
+    ],
+    "error": null,
+    "sql_model_output": null,
+    "answer_model_output": null,
+    "answer": "ปี 1 เทอม 1 มี 6 วิชา และเทอม 2 มี 7 วิชา; เทอม 2 มีวิชามากกว่า 1 วิชา",
+    "correct": true,
+    "why": "ตรงครบ 1 แถว",
+    "seconds": 0.0
+  },
+  {
+    "question": "วิชา 06046400 อยู่ในแผนการเรียนปีไหน เทอมไหน และมีชื่อกับหน่วยกิตเท่าไร",
+    "expect": {
+      "type": "rows",
+      "value": [
+        {
+          "year": 1,
+          "semester": 1,
+          "code": "06046400",
+          "name_th": "แคลคูลัส 1",
+          "credits": 3
+        }
+      ]
+    },
+    "sql": "SELECT v.year, v.semester, v.code, CASE WHEN lower(v.code) LIKE '%x%' AND v.note IS NOT NULL THEN CASE WHEN v.note IS NULL THEN NULL WHEN instr(v.note, ' | ') > 0 THEN substr(v.note, 1, instr(v.note, ' | ') - 1) ELSE v.note END ELSE COALESCE(v.name_th, CASE WHEN v.note IS NULL THEN NULL WHEN instr(v.note, ' | ') > 0 THEN substr(v.note, 1, instr(v.note, ' | ') - 1) ELSE v.note END) END AS name_th, v.credits FROM v_plan AS v WHERE v.code = '06046400' ORDER BY v.year, v.semester, v.code LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "year": 1,
+        "semester": 1,
+        "code": "06046400",
+        "name_th": "แคลคูลัส 1",
+        "credits": 3
+      }
+    ],
+    "error": null,
+    "sql_model_output": null,
+    "answer_model_output": null,
+    "answer": "วิชา 06046400 อยู่ในแผน: ปี 1 เทอม 1 — 06046400 — แคลคูลัส 1 — 3 หน่วยกิต",
+    "correct": true,
+    "why": "ตรงครบ 1 แถว",
+    "seconds": 0.0
+  },
+  {
+    "question": "ปี 1 เทอม 1 มีวิชาเลือกอะไรบ้าง และมีตัวเลือกใดให้เลือกแทนกันได้",
+    "expect": {
+      "type": "rows",
+      "value": []
+    },
+    "sql": "SELECT v.year, v.semester, v.code, CASE WHEN lower(v.code) LIKE '%x%' AND v.note IS NOT NULL THEN CASE WHEN v.note IS NULL THEN NULL WHEN instr(v.note, ' | ') > 0 THEN substr(v.note, 1, instr(v.note, ' | ') - 1) ELSE v.note END ELSE COALESCE(v.name_th, CASE WHEN v.note IS NULL THEN NULL WHEN instr(v.note, ' | ') > 0 THEN substr(v.note, 1, instr(v.note, ' | ') - 1) ELSE v.note END) END AS name_th, v.credits, v.alt_group, v.note FROM v_plan AS v WHERE v.year = 1 AND v.semester = 1 AND (v.alt_group IS NOT NULL OR v.note LIKE '%เลือก%') ORDER BY COALESCE(v.alt_group, ''), v.code LIMIT 200",
+    "n_rows": 0,
+    "rows": [],
+    "error": null,
+    "sql_model_output": null,
+    "answer_model_output": null,
+    "answer": "ไม่พบรายการวิชาเลือกในแผนปี 1 เทอม 1",
+    "correct": true,
+    "why": "ตรงครบ 0 แถว",
+    "seconds": 0.0
+  },
+  {
+    "question": "ปี 1 เทอม 2 มีวิชาเลือกอะไรบ้าง และมีตัวเลือกใดให้เลือกแทนกันได้",
+    "expect": {
+      "type": "rows",
+      "value": [
+        {
+          "year": 1,
+          "semester": 2,
+          "code": "9064xxxx",
+          "name_th": "วิชาเลือกหมวดวิชาศึกษาทั่วไป",
+          "credits": 3
+        }
+      ]
+    },
+    "sql": "SELECT v.year, v.semester, v.code, CASE WHEN lower(v.code) LIKE '%x%' AND v.note IS NOT NULL THEN CASE WHEN v.note IS NULL THEN NULL WHEN instr(v.note, ' | ') > 0 THEN substr(v.note, 1, instr(v.note, ' | ') - 1) ELSE v.note END ELSE COALESCE(v.name_th, CASE WHEN v.note IS NULL THEN NULL WHEN instr(v.note, ' | ') > 0 THEN substr(v.note, 1, instr(v.note, ' | ') - 1) ELSE v.note END) END AS name_th, v.credits, v.alt_group, v.note FROM v_plan AS v WHERE v.year = 1 AND v.semester = 2 AND (v.alt_group IS NOT NULL OR v.note LIKE '%เลือก%') ORDER BY COALESCE(v.alt_group, ''), v.code LIMIT 200",
+    "n_rows": 1,
+    "rows": [
+      {
+        "year": 1,
+        "semester": 2,
+        "code": "9064xxxx",
+        "name_th": "วิชาเลือกหมวดวิชาศึกษาทั่วไป",
+        "credits": 3,
+        "alt_group": "lab7b_slot_31",
+        "note": "วิชาเลือกหมวดวิชาศึกษาทั่วไป | หมวดวิชาศึกษาทั่วไป | เลือก"
+      }
+    ],
+    "error": null,
+    "sql_model_output": null,
+    "answer_model_output": null,
+    "answer": "รายการวิชาเลือก/ช่องทางเลือก ปี 1 เทอม 2:\n- 9064xxxx — วิชาเลือกหมวดวิชาศึกษาทั่วไป — 3 หน่วยกิต",
+    "correct": true,
+    "why": "ตรงครบ 1 แถว",
+    "seconds": 0.0
   },
   {
     "question": "วิชา 06046400 มีกี่หน่วยกิต",
@@ -60,7 +495,7 @@
     "answer": "3 หน่วยกิต",
     "correct": true,
     "why": "ตรง",
-    "seconds": 0.9
+    "seconds": 1.1
   },
   {
     "question": "วิชาแคลคูลัส 1มีรหัสอะไร",
@@ -81,7 +516,7 @@
     "answer": "06046400",
     "correct": true,
     "why": "ตรง",
-    "seconds": 0.9
+    "seconds": 1.1
   },
   {
     "question": "วิชา 06046400 ชื่อภาษาอังกฤษว่าอะไร",
@@ -102,7 +537,7 @@
     "answer": "CALCULUS 1",
     "correct": true,
     "why": "ตรง",
-    "seconds": 0.9
+    "seconds": 1.1
   },
   {
     "question": "วิชา 06046402 มีกี่หน่วยกิต",
@@ -123,7 +558,7 @@
     "answer": "3 หน่วยกิต",
     "correct": true,
     "why": "ตรง",
-    "seconds": 0.9
+    "seconds": 1.1
   },
   {
     "question": "วิชาพีชคณิตเชิงเส้นมีรหัสอะไร",
@@ -132,15 +567,19 @@
       "value": "06046402"
     },
     "sql": "SELECT code FROM course WHERE name_th LIKE '%พีชคณิตเชิงเส้น%' LIMIT 200",
-    "n_rows": 0,
-    "rows": [],
+    "n_rows": 1,
+    "rows": [
+      {
+        "code": "06046402"
+      }
+    ],
     "error": null,
     "sql_model_output": "{\"sql\": \"SELECT code FROM course WHERE name_th LIKE '%พีชคณิตเชิงเส้น%'\" }",
-    "answer_model_output": null,
-    "answer": "ไม่พบข้อมูลนี้ในเล่มหลักสูตร",
-    "correct": false,
-    "why": "ไม่พบค่า 06046402 (ได้ [])",
-    "seconds": 0.5
+    "answer_model_output": "{\"answer\": \"06046402\"}",
+    "answer": "06046402",
+    "correct": true,
+    "why": "ตรง",
+    "seconds": 1.9
   },
   {
     "question": "วิชา 06046402 ชื่อภาษาอังกฤษว่าอะไร",
@@ -148,7 +587,7 @@
       "type": "value",
       "value": "LINEAR ALGEBRA"
     },
-    "sql": "SELECT name_en FROM course WHERE code='06046402' LIMIT 200",
+    "sql": "SELECT name_en FROM course WHERE code = '06046402' LIMIT 200",
     "n_rows": 1,
     "rows": [
       {
@@ -156,12 +595,12 @@
       }
     ],
     "error": null,
-    "sql_model_output": "{\"sql\": \"SELECT name_en FROM course WHERE code='06046402'\" }",
+    "sql_model_output": "{\"sql\": \"SELECT name_en FROM course WHERE code = '06046402'\" }",
     "answer_model_output": "{\"answer\": \"LINEAR ALGEBRA\"}",
     "answer": "LINEAR ALGEBRA",
     "correct": true,
     "why": "ตรง",
-    "seconds": 0.8
+    "seconds": 1.3
   },
   {
     "question": "วิชา 06066000 มีกี่หน่วยกิต",
@@ -182,7 +621,7 @@
     "answer": "3 หน่วยกิต",
     "correct": true,
     "why": "ตรง",
-    "seconds": 0.9
+    "seconds": 1.1
   },
   {
     "question": "วิชาคณิตศาสตร์ไม่ต่อเนื่องมีรหัสอะไร",
@@ -203,7 +642,7 @@
     "answer": "06066000",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.0
+    "seconds": 1.4
   },
   {
     "question": "วิชา 06066000 ชื่อภาษาอังกฤษว่าอะไร",
@@ -211,7 +650,7 @@
       "type": "value",
       "value": "DISCRETE MATHEMATICS"
     },
-    "sql": "SELECT name_en FROM course WHERE code='06066000' LIMIT 200",
+    "sql": "SELECT name_en FROM course WHERE code = '06066000' LIMIT 200",
     "n_rows": 1,
     "rows": [
       {
@@ -219,12 +658,12 @@
       }
     ],
     "error": null,
-    "sql_model_output": "{\"sql\": \"SELECT name_en FROM course WHERE code='06066000'\" }",
+    "sql_model_output": "{\"sql\": \"SELECT name_en FROM course WHERE code = '06066000'\" }",
     "answer_model_output": "{\"answer\": \"DISCRETE MATHEMATICS\"}",
     "answer": "DISCRETE MATHEMATICS",
     "correct": true,
     "why": "ตรง",
-    "seconds": 0.9
+    "seconds": 1.7
   },
   {
     "question": "วิชา 06066001 มีกี่หน่วยกิต",
@@ -245,7 +684,7 @@
     "answer": "3 หน่วยกิต",
     "correct": true,
     "why": "ตรง",
-    "seconds": 0.9
+    "seconds": 1.5
   },
   {
     "question": "วิชาความน่าจะเป็นและสถิติมีรหัสอะไร",
@@ -254,15 +693,19 @@
       "value": "06066001"
     },
     "sql": "SELECT code FROM course WHERE name_th LIKE '%ความน่าจะเป็นและสถิติ%' LIMIT 200",
-    "n_rows": 0,
-    "rows": [],
+    "n_rows": 1,
+    "rows": [
+      {
+        "code": "06066001"
+      }
+    ],
     "error": null,
     "sql_model_output": "{\"sql\": \"SELECT code FROM course WHERE name_th LIKE '%ความน่าจะเป็นและสถิติ%'\" }",
-    "answer_model_output": null,
-    "answer": "ไม่พบข้อมูลนี้ในเล่มหลักสูตร",
-    "correct": false,
-    "why": "ไม่พบค่า 06066001 (ได้ [])",
-    "seconds": 0.5
+    "answer_model_output": "{\"answer\": \"06066001\"}",
+    "answer": "06066001",
+    "correct": true,
+    "why": "ตรง",
+    "seconds": 1.8
   },
   {
     "question": "วิชา 06066001 ชื่อภาษาอังกฤษว่าอะไร",
@@ -270,7 +713,7 @@
       "type": "value",
       "value": "PROBABILITY AND STATISTICS"
     },
-    "sql": "SELECT name_en FROM course WHERE code='06066001' LIMIT 200",
+    "sql": "SELECT name_en FROM course WHERE code = '06066001' LIMIT 200",
     "n_rows": 1,
     "rows": [
       {
@@ -278,12 +721,12 @@
       }
     ],
     "error": null,
-    "sql_model_output": "{\"sql\": \"SELECT name_en FROM course WHERE code='06066001'\" }",
+    "sql_model_output": "{\"sql\": \"SELECT name_en FROM course WHERE code = '06066001'\" }",
     "answer_model_output": "{\"answer\": \"PROBABILITY AND STATISTICS\"}",
     "answer": "PROBABILITY AND STATISTICS",
     "correct": true,
     "why": "ตรง",
-    "seconds": 0.8
+    "seconds": 1.2
   },
   {
     "question": "วิชา 06066303 มีกี่หน่วยกิต",
@@ -304,7 +747,7 @@
     "answer": "3 หน่วยกิต",
     "correct": true,
     "why": "ตรง",
-    "seconds": 0.9
+    "seconds": 1.2
   },
   {
     "question": "วิชาการแก้ปัญหาและการโปรแกรมคอมพิวเตอร์มีรหัสอะไร",
@@ -325,15 +768,15 @@
     "answer": "06066303",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.0
+    "seconds": 1.4
   },
   {
     "question": "วิชา 06066303 ชื่อภาษาอังกฤษว่าอะไร",
     "expect": {
       "type": "value",
-      "value": "PROBLEM SOLVING AND COMPUTER PROGRAMMING\nPROGRAMMING"
+      "value": "PROBLEM SOLVING AND COMPUTER PROGRAMMING"
     },
-    "sql": "SELECT name_en FROM course WHERE code='06066303' LIMIT 200",
+    "sql": "SELECT name_en FROM course WHERE code = '06066303' LIMIT 200",
     "n_rows": 1,
     "rows": [
       {
@@ -341,12 +784,12 @@
       }
     ],
     "error": null,
-    "sql_model_output": "{\"sql\": \"SELECT name_en FROM course WHERE code='06066303'\" }",
+    "sql_model_output": "{\"sql\": \"SELECT name_en FROM course WHERE code = '06066303'\" }",
     "answer_model_output": "{\"answer\": \"PROBLEM SOLVING AND COMPUTER PROGRAMMING\"}",
     "answer": "PROBLEM SOLVING AND COMPUTER PROGRAMMING",
-    "correct": false,
-    "why": "ไม่พบค่า PROBLEM SOLVING AND COMPUTER PROGRAMMING PROGRAMMING (ได้ ['PROBLEM SOLVING AND COMPUTER PROGRAMMING'])",
-    "seconds": 0.9
+    "correct": true,
+    "why": "ตรง",
+    "seconds": 1.3
   },
   {
     "question": "วิชา 90641008 มีกี่หน่วยกิต",
@@ -363,11 +806,11 @@
     ],
     "error": null,
     "sql_model_output": "{\"sql\": \"SELECT credits FROM course WHERE code='90641008'\" }",
-    "answer_model_output": "{\"answer\": \"ไม่พบข้อมูลนี้ในเล่มหลักสูตร\"}",
-    "answer": "ไม่พบข้อมูลนี้ในเล่มหลักสูตร",
+    "answer_model_output": "{\"answer\": \"0 หน่วยกิต\"}",
+    "answer": "0 หน่วยกิต",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.0
+    "seconds": 1.9
   },
   {
     "question": "วิชาพื้นฐานทักษะการสื่อสารภาษาอังกฤษมีรหัสอะไร",
@@ -388,7 +831,7 @@
     "answer": "90641008",
     "correct": true,
     "why": "ตรง",
-    "seconds": 1.1
+    "seconds": 1.6
   },
   {
     "question": "วิชา 90641008 ชื่อภาษาอังกฤษว่าอะไร",
@@ -409,7 +852,7 @@
     "answer": "INTRODUCTION TO ENGLISH COMMUNICATION SKILLS",
     "correct": true,
     "why": "ตรง",
-    "seconds": 0.9
+    "seconds": 1.2
   },
   {
     "question": "วิชา 06046401 มีกี่หน่วยกิต",
@@ -430,7 +873,7 @@
     "answer": "3 หน่วยกิต",
     "correct": true,
     "why": "ตรง",
-    "seconds": 0.9
+    "seconds": 2.0
   },
   {
     "question": "วิชาแคลคูลัส 2มีรหัสอะไร",
@@ -446,12 +889,12 @@
       }
     ],
     "error": null,
-    "sql_model_output": "{\"sql\": \"SELECT code FROM course WHERE name_th LIKE '%แคลคูลัส 2%'\" }",
+    "sql_model_output": "{\"sql\": \"SELECT code FROM course WHERE name_th LIKE '%แคลคูลัส 2%'\"}",
     "answer_model_output": "{\"answer\": \"06046401\"}",
     "answer": "06046401",
     "correct": true,
     "why": "ตรง",
-    "seconds": 0.9
+    "seconds": 1.4
   },
   {
     "question": "วิชา 06046401 ชื่อภาษาอังกฤษว่าอะไร",
@@ -459,7 +902,7 @@
       "type": "value",
       "value": "CALCULUS 2"
     },
-    "sql": "SELECT name_en FROM course WHERE code='06046401' LIMIT 200",
+    "sql": "SELECT name_en FROM course WHERE code = '06046401' LIMIT 200",
     "n_rows": 1,
     "rows": [
       {
@@ -467,161 +910,11 @@
       }
     ],
     "error": null,
-    "sql_model_output": "{\"sql\": \"SELECT name_en FROM course WHERE code='06046401'\" }",
+    "sql_model_output": "{\"sql\": \"SELECT name_en FROM course WHERE code = '06046401'\" }",
     "answer_model_output": "{\"answer\": \"CALCULUS 2\"}",
     "answer": "CALCULUS 2",
     "correct": true,
     "why": "ตรง",
-    "seconds": 0.9
-  },
-  {
-    "question": "วิชา 06046403 มีกี่หน่วยกิต",
-    "expect": {
-      "type": "value",
-      "value": 3
-    },
-    "sql": "SELECT credits FROM course WHERE code='06046403' LIMIT 200",
-    "n_rows": 1,
-    "rows": [
-      {
-        "credits": 3
-      }
-    ],
-    "error": null,
-    "sql_model_output": "{\"sql\": \"SELECT credits FROM course WHERE code='06046403'\" }",
-    "answer_model_output": "{\"answer\": \"3 หน่วยกิต\"}",
-    "answer": "3 หน่วยกิต",
-    "correct": true,
-    "why": "ตรง",
-    "seconds": 0.9
-  },
-  {
-    "question": "วิชาการโปรแกรมคอมพิวเตอร์มีรหัสอะไร",
-    "expect": {
-      "type": "value",
-      "value": "06046403"
-    },
-    "sql": "SELECT code FROM course WHERE name_th LIKE '%การโปรแกรมคอมพิวเตอร์%' LIMIT 200",
-    "n_rows": 2,
-    "rows": [
-      {
-        "code": "06066303"
-      },
-      {
-        "code": "06046403"
-      }
-    ],
-    "error": null,
-    "sql_model_output": "{\"sql\": \"SELECT code FROM course WHERE name_th LIKE '%การโปรแกรมคอมพิวเตอร์%'\" }",
-    "answer_model_output": "{\"answer\": \"06066303, 06046403\"}",
-    "answer": "06066303, 06046403",
-    "correct": true,
-    "why": "ตรง",
-    "seconds": 1.1
-  },
-  {
-    "question": "วิชา 06046403 ชื่อภาษาอังกฤษว่าอะไร",
-    "expect": {
-      "type": "value",
-      "value": "COMPUTER PROGRAMMING"
-    },
-    "sql": "SELECT name_en FROM course WHERE code = '06046403' LIMIT 200",
-    "n_rows": 1,
-    "rows": [
-      {
-        "name_en": "COMPUTER PROGRAMMING"
-      }
-    ],
-    "error": null,
-    "sql_model_output": "{\"sql\": \"SELECT name_en FROM course WHERE code = '06046403'\" }",
-    "answer_model_output": "{\"answer\": \"COMPUTER PROGRAMMING\"}",
-    "answer": "COMPUTER PROGRAMMING",
-    "correct": true,
-    "why": "ตรง",
-    "seconds": 0.9
-  },
-  {
-    "question": "วิชา 06066301 มีกี่หน่วยกิต",
-    "expect": {
-      "type": "value",
-      "value": 3
-    },
-    "sql": "SELECT credits FROM course WHERE code='06066301' LIMIT 200",
-    "n_rows": 1,
-    "rows": [
-      {
-        "credits": 3
-      }
-    ],
-    "error": null,
-    "sql_model_output": "{\"sql\": \"SELECT credits FROM course WHERE code='06066301'\" }",
-    "answer_model_output": "{\"answer\": \"3 หน่วยกิต\"}",
-    "answer": "3 หน่วยกิต",
-    "correct": true,
-    "why": "ตรง",
-    "seconds": 0.9
-  },
-  {
-    "question": "วิชาโครงสร้างข้อมูลและอัลกอริทึมมีรหัสอะไร",
-    "expect": {
-      "type": "value",
-      "value": "06066301"
-    },
-    "sql": "SELECT code FROM course WHERE name_th LIKE '%โครงสร้างข้อมูล%' OR name_th LIKE '%อัลกอริทึม%' LIMIT 200",
-    "n_rows": 1,
-    "rows": [
-      {
-        "code": "06066301"
-      }
-    ],
-    "error": null,
-    "sql_model_output": "{\"sql\": \"SELECT code FROM course WHERE name_th LIKE '%โครงสร้างข้อมูล%' OR name_th LIKE '%อัลกอริทึม%'\" }",
-    "answer_model_output": "{\"answer\": \"06066301\"}",
-    "answer": "06066301",
-    "correct": true,
-    "why": "ตรง",
     "seconds": 1.2
-  },
-  {
-    "question": "วิชา 06066301 ชื่อภาษาอังกฤษว่าอะไร",
-    "expect": {
-      "type": "value",
-      "value": "DATA STRUCTURES AND ALGORITHMS"
-    },
-    "sql": "SELECT name_en FROM course WHERE code='06066301' LIMIT 200",
-    "n_rows": 1,
-    "rows": [
-      {
-        "name_en": "DATA STRUCTURES AND ALGORITHMS"
-      }
-    ],
-    "error": null,
-    "sql_model_output": "{\"sql\": \"SELECT name_en FROM course WHERE code='06066301'\" }",
-    "answer_model_output": "{\"answer\": \"DATA STRUCTURES AND ALGORITHMS\"}",
-    "answer": "DATA STRUCTURES AND ALGORITHMS",
-    "correct": true,
-    "why": "ตรง",
-    "seconds": 0.9
-  },
-  {
-    "question": "วิชา 06046404 มีกี่หน่วยกิต",
-    "expect": {
-      "type": "value",
-      "value": 3
-    },
-    "sql": "SELECT credits FROM course WHERE code='06046404' LIMIT 200",
-    "n_rows": 1,
-    "rows": [
-      {
-        "credits": 3
-      }
-    ],
-    "error": null,
-    "sql_model_output": "{\"sql\": \"SELECT credits FROM course WHERE code='06046404'\" }",
-    "answer_model_output": "{\"answer\": \"3 หน่วยกิต\"}",
-    "answer": "3 หน่วยกิต",
-    "correct": true,
-    "why": "ตรง",
-    "seconds": 0.9
   }
 ]

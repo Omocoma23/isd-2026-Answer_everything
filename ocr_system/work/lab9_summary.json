@@ -5,37 +5,37 @@
       "program": "AI",
       "selected_lab7_pipeline": "text",
       "lab7_alignment_f1": 0.9483,
-      "lab7_micro_cer": 0.126897,
+      "lab7_micro_cer": 0.125238,
       "verify_pass_rate": 0.857143,
       "valid_sql_rate": 1.0,
-      "execution_accuracy": 0.9
+      "execution_accuracy": 1.0
     },
     {
       "program": "BIT",
       "selected_lab7_pipeline": "text",
       "lab7_alignment_f1": 0.8906,
       "lab7_micro_cer": 0.137679,
-      "verify_pass_rate": 0.857143,
+      "verify_pass_rate": 1.0,
       "valid_sql_rate": 1.0,
-      "execution_accuracy": 0.966667
+      "execution_accuracy": 1.0
     },
     {
       "program": "IT",
       "selected_lab7_pipeline": "text",
       "lab7_alignment_f1": 0.963,
-      "lab7_micro_cer": 0.141571,
+      "lab7_micro_cer": 0.141479,
       "verify_pass_rate": 0.714286,
       "valid_sql_rate": 1.0,
-      "execution_accuracy": 0.933333
+      "execution_accuracy": 1.0
     },
     {
       "program": "DSBA",
       "selected_lab7_pipeline": "text",
-      "lab7_alignment_f1": 0.9944,
-      "lab7_micro_cer": 0.103219,
+      "lab7_alignment_f1": 1.0,
+      "lab7_micro_cer": 0.092997,
       "verify_pass_rate": 1.0,
       "valid_sql_rate": 1.0,
-      "execution_accuracy": 0.9
+      "execution_accuracy": 1.0
     }
   ],
   "note": "Per-stage metrics; no single overall score is manufactured."

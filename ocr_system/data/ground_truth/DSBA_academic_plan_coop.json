@@ -5,19 +5,6 @@
   "plan": "coop",
   "courses": [
     {
-      "code": "06016401",
-      "name_th": "คณิตศาสตร์สำหรับเทคโนโลยีสารสนเทศ",
-      "name_en": "MATHEMATICS FOR INFORMATION TECHNOLOGY",
-      "credits": "3(3-0-6)",
-      "year": "1",
-      "semester": "1",
-      "category": "หมวดวิชาเฉพาะ",
-      "type": "บังคับ",
-      "prerequisite": "ไม่มี",
-      "flexible_year_semester": null,
-      "note": null
-    },
-    {
       "code": "06026200",
       "name_th": "แคลคูลัส 1",
       "name_en": "CALCULUS 1",
@@ -136,7 +123,7 @@
     },
     {
       "code": "06026205",
-      "name_th": "การตลาดเบื้อต้น",
+      "name_th": "การตลาดเบื้องต้น",
       "name_en": "INTRODUCTION TO MARKETING",
       "credits": "3(3-0-6)",
       "year": 1,
@@ -266,7 +253,7 @@
     },
     {
       "code": "90644xxx",
-      "name_th": "วิชาเลือกภาษาและการสื่อสาร",
+      "name_th": "วิชาเลือกด้านภาษาและการสื่อสาร",
       "name_en": "ELECTIVE IN LANGUAGE AND COMMUNICATION",
       "credits": "3(3-0-6) หรือ 3(2-2-5)",
       "year": 2,

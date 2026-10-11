@@ -9,13 +9,13 @@
 
 ## 2. Structured data + database (Lab 8B)
 - Final JSON valid: yes
-- Verify checks: 6/7 (rate=0.857143)
+- Verify checks: 7/7 (rate=1.0)
 
 ## 3. NL-to-SQL / final QA (Lab 9)
 - Questions: 30
 - Valid SQL rate: 1.0 (30/30)
-- Execution Accuracy: 0.966667 (29/30)
-- Mean latency: 1.2 s/question
+- Execution Accuracy: 1.0 (30/30)
+- Mean latency: 1.243333 s/question
 
 ## 4. Metrics intentionally not claimed
 - Natural-language Exact Match / Token-F1: not measured because the gold set stores structured expected SQL results, not one canonical Thai sentence.

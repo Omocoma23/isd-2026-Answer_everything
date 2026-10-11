@@ -14,7 +14,7 @@
       "ground_truth_total": 106,
       "prediction_total": 110
     },
-    "overall_micro_cer": 0.141571,
+    "overall_micro_cer": 0.141479,
     "attributes": {
       "code": {
         "label": "รหัสวิชา",
@@ -28,9 +28,9 @@
       "name_th": {
         "label": "ชื่อวิชา (ไทย) ⭐",
         "n_items": 106,
-        "cer": 0.038561,
-        "wer": 0.265306,
-        "exact_match_accuracy": 0.688679,
+        "cer": 0.038237,
+        "wer": 0.260246,
+        "exact_match_accuracy": 0.698113,
         "missing": 2,
         "hallucinated": 0
       },
@@ -249,23 +249,12 @@
     "questions": 30,
     "valid_sql_count": 30,
     "valid_sql_rate": 1.0,
-    "execution_correct_count": 28,
-    "execution_accuracy": 0.933333,
-    "mean_seconds_per_question": 1.113333,
-    "median_seconds_per_question": 0.9,
+    "execution_correct_count": 30,
+    "execution_accuracy": 1.0,
+    "mean_seconds_per_question": 1.206667,
+    "median_seconds_per_question": 1.25,
     "failed_sql_questions": [],
-    "wrong_answer_questions": [
-      {
-        "question": "วิชาระบบคอมพิวเตอร์เบื้องต้นมีรหัสอะไร",
-        "why": "ไม่พบค่า 06016411 (ได้ [])",
-        "sql": "SELECT code FROM course WHERE name_th LIKE '%ระบบคอมพิวเตอร์เบื้องต้น%' LIMIT 200"
-      },
-      {
-        "question": "วิชาความน่าจะเป็นและสถิติมีรหัสอะไร",
-        "why": "ไม่พบค่า 06066001 (ได้ [])",
-        "sql": "SELECT code FROM course WHERE name_th LIKE '%ความน่าจะเป็นและสถิติ%' LIMIT 200"
-      }
-    ],
+    "wrong_answer_questions": [],
     "metric_note": "For this Group-B NL-to-SQL task, Execution Accuracy is the key end-to-end correctness metric; Valid SQL Rate is reported separately because syntactically executable SQL can still answer the wrong question."
   },
   "metrics_not_claimed": {

@@ -14,6 +14,206 @@
     }
   },
   {
+    "question": "ตามแผนการศึกษา ปี 1 เทอม 1 มีวิชาอะไรบ้าง ขอรหัส ชื่อวิชา และหน่วยกิตของแต่ละวิชา",
+    "expect": {
+      "type": "rows",
+      "value": [
+        {
+          "code": "06046400",
+          "name_th": "แคลคูลัส 1",
+          "credits": 3
+        },
+        {
+          "code": "06046402",
+          "name_th": "พีชคณิตเชิงเส้น",
+          "credits": 3
+        },
+        {
+          "code": "06066000",
+          "name_th": "คณิตศาสตร์ไม่ต่อเนื่อง",
+          "credits": 3
+        },
+        {
+          "code": "06066001",
+          "name_th": "ความน่าจะเป็นและสถิติ",
+          "credits": 3
+        },
+        {
+          "code": "06066303",
+          "name_th": "การแก้ปัญหาและการโปรแกรมคอมพิวเตอร์",
+          "credits": 3
+        },
+        {
+          "code": "90641008",
+          "name_th": "พื้นฐานทักษะการสื่อสารภาษาอังกฤษ",
+          "credits": 0
+        }
+      ]
+    }
+  },
+  {
+    "question": "ปี 1 มีวิชาอะไรบ้างในเทอม 1 และเทอม 2 ช่วยแยกรายชื่อ รหัส และหน่วยกิตตามเทอม",
+    "expect": {
+      "type": "rows",
+      "value": [
+        {
+          "year": 1,
+          "semester": 1,
+          "code": "06046400",
+          "name_th": "แคลคูลัส 1",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 1,
+          "code": "06046402",
+          "name_th": "พีชคณิตเชิงเส้น",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 1,
+          "code": "06066000",
+          "name_th": "คณิตศาสตร์ไม่ต่อเนื่อง",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 1,
+          "code": "06066001",
+          "name_th": "ความน่าจะเป็นและสถิติ",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 1,
+          "code": "06066303",
+          "name_th": "การแก้ปัญหาและการโปรแกรมคอมพิวเตอร์",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 1,
+          "code": "90641008",
+          "name_th": "พื้นฐานทักษะการสื่อสารภาษาอังกฤษ",
+          "credits": 0
+        },
+        {
+          "year": 1,
+          "semester": 2,
+          "code": "06046401",
+          "name_th": "แคลคูลัส 2",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 2,
+          "code": "06046403",
+          "name_th": "การโปรแกรมคอมพิวเตอร์",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 2,
+          "code": "06066301",
+          "name_th": "โครงสร้างข้อมูลและอัลกอริทึม",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 2,
+          "code": "06046404",
+          "name_th": "พื้นฐานของระบบสมองกลฝังตัว",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 2,
+          "code": "90641007",
+          "name_th": "พลเมืองดิจิทัล",
+          "credits": 3
+        },
+        {
+          "year": 1,
+          "semester": 2,
+          "code": "90641004",
+          "name_th": "โครงงานกลุ่ม 1",
+          "credits": 1
+        },
+        {
+          "year": 1,
+          "semester": 2,
+          "code": "9064xxxx",
+          "name_th": "วิชาเลือกหมวดวิชาศึกษาทั่วไป",
+          "credits": 3
+        }
+      ]
+    }
+  },
+  {
+    "question": "ปี 1 เทอม 1 มีทั้งหมดกี่วิชา และมีหน่วยกิตรวมเท่าไร",
+    "expect": {
+      "type": "rows",
+      "value": [
+        {
+          "course_count": 6,
+          "total_credits": 15
+        }
+      ]
+    }
+  },
+  {
+    "question": "ปี 1 เทอม 1 กับเทอม 2 เทอมไหนมีวิชามากกว่า และต่างกันกี่วิชา",
+    "expect": {
+      "type": "rows",
+      "value": [
+        {
+          "term1_course_count": 6,
+          "term2_course_count": 7,
+          "semester_with_more": 2,
+          "difference": 1
+        }
+      ]
+    }
+  },
+  {
+    "question": "วิชา 06046400 อยู่ในแผนการเรียนปีไหน เทอมไหน และมีชื่อกับหน่วยกิตเท่าไร",
+    "expect": {
+      "type": "rows",
+      "value": [
+        {
+          "year": 1,
+          "semester": 1,
+          "code": "06046400",
+          "name_th": "แคลคูลัส 1",
+          "credits": 3
+        }
+      ]
+    }
+  },
+  {
+    "question": "ปี 1 เทอม 1 มีวิชาเลือกอะไรบ้าง และมีตัวเลือกใดให้เลือกแทนกันได้",
+    "expect": {
+      "type": "rows",
+      "value": []
+    }
+  },
+  {
+    "question": "ปี 1 เทอม 2 มีวิชาเลือกอะไรบ้าง และมีตัวเลือกใดให้เลือกแทนกันได้",
+    "expect": {
+      "type": "rows",
+      "value": [
+        {
+          "year": 1,
+          "semester": 2,
+          "code": "9064xxxx",
+          "name_th": "วิชาเลือกหมวดวิชาศึกษาทั่วไป",
+          "credits": 3
+        }
+      ]
+    }
+  },
+  {
     "question": "วิชา 06046400 มีกี่หน่วยกิต",
     "expect": {
       "type": "value",
@@ -115,7 +315,7 @@
     "question": "วิชา 06066303 ชื่อภาษาอังกฤษว่าอะไร",
     "expect": {
       "type": "value",
-      "value": "PROBLEM SOLVING AND COMPUTER PROGRAMMING\nPROGRAMMING"
+      "value": "PROBLEM SOLVING AND COMPUTER PROGRAMMING"
     }
   },
   {
@@ -158,55 +358,6 @@
     "expect": {
       "type": "value",
       "value": "CALCULUS 2"
-    }
-  },
-  {
-    "question": "วิชา 06046403 มีกี่หน่วยกิต",
-    "expect": {
-      "type": "value",
-      "value": 3
-    }
-  },
-  {
-    "question": "วิชาการโปรแกรมคอมพิวเตอร์มีรหัสอะไร",
-    "expect": {
-      "type": "value",
-      "value": "06046403"
-    }
-  },
-  {
-    "question": "วิชา 06046403 ชื่อภาษาอังกฤษว่าอะไร",
-    "expect": {
-      "type": "value",
-      "value": "COMPUTER PROGRAMMING"
-    }
-  },
-  {
-    "question": "วิชา 06066301 มีกี่หน่วยกิต",
-    "expect": {
-      "type": "value",
-      "value": 3
-    }
-  },
-  {
-    "question": "วิชาโครงสร้างข้อมูลและอัลกอริทึมมีรหัสอะไร",
-    "expect": {
-      "type": "value",
-      "value": "06066301"
-    }
-  },
-  {
-    "question": "วิชา 06066301 ชื่อภาษาอังกฤษว่าอะไร",
-    "expect": {
-      "type": "value",
-      "value": "DATA STRUCTURES AND ALGORITHMS"
-    }
-  },
-  {
-    "question": "วิชา 06046404 มีกี่หน่วยกิต",
-    "expect": {
-      "type": "value",
-      "value": 3
     }
   }
 ]

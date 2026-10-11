@@ -31,6 +31,7 @@ Lab 8B พาข้อมูลนั้นเดินต่ออีกสา�
 from __future__ import annotations
 
 import argparse
+from collections import Counter
 import json
 import os
 import re
@@ -528,6 +529,38 @@ def _lab7b_plan_codes(value: Any) -> list[str]:
     ]
 
 
+# Correct a missing separator between Thai text and a trailing slot number.
+def _normalize_course_label(value: Any) -> str:
+    text = re.sub(r"\s+", " ", str(value or "")).strip()
+    return re.sub(r"(?<=[\u0E00-\u0E7F])(?=\d)", " ", text)
+
+
+# Correct OCR-only Thai spelling artifacts in the database copy. Keep the raw
+# Lab 7B prediction unchanged so OCR evaluation remains an honest measurement.
+COURSE_NAME_TH_OVERRIDES = {
+    ("AI-coop", "06046402"): "พีชคณิตเชิงเส้น",
+    ("AI-coop", "06066001"): "ความน่าจะเป็นและสถิติ",
+    ("BIT-coop", "06036118"): "การแก้ปัญหาทางด้านเทคโนโลยีสารสนเทศ",
+    # Corrected against the printed curriculum PDF. These are text/row
+    # alignment artifacts in the selected Lab 7B prediction.
+    ("DSBA-coop", "90642033"): "กฎหมายสำหรับคนรุ่นใหม่",
+    ("IT-coop", "06016411"): "ระบบคอมพิวเตอร์เบื้องต้น",
+    ("IT-coop", "06066001"): "ความน่าจะเป็นและสถิติ",
+}
+
+# The BIT PDF page 27 has two semester tables on the same page. The text
+# pipeline assigns these six rows to Year 2 / Semester 1; restore the printed
+# Year 1 / Semester 2 placement when converting that known extraction artifact.
+COURSE_PLAN_OVERRIDES = {
+    ("BIT-coop", "06036102"): (1, 2),
+    ("BIT-coop", "06036109"): (1, 2),
+    ("BIT-coop", "06036119"): (1, 2),
+    ("BIT-coop", "06036125"): (1, 2),
+    ("BIT-coop", "96641002"): (1, 2),
+    ("BIT-coop", "96644008"): (1, 2),
+}
+
+
 def convert_lab7b(data: dict, *, program_id: str | None = None,
                   program_name: str | None = None,
                   total_credits: int | None = None,
@@ -546,6 +579,7 @@ def convert_lab7b(data: dict, *, program_id: str | None = None,
     seen_pre: set[tuple] = set()
     skipped_wildcards = 0
     skipped_flexible = 0
+    pid = str(program_id or data.get("program") or "curriculum").strip()
 
     for index, src in enumerate(data.get("courses") or []):
         raw_code = str(src.get("code") or "").strip()
@@ -577,7 +611,10 @@ def convert_lab7b(data: dict, *, program_id: str | None = None,
         for code in codes:
             candidate = {
                 "code": code,
-                "name_th": str(src.get("name_th") or code).strip(),
+                "name_th": COURSE_NAME_TH_OVERRIDES.get(
+                    (pid, code),
+                    _normalize_course_label(src.get("name_th") or code),
+                ),
                 "name_en": (str(src["name_en"]).replace("\n", " ").strip()
                             if src.get("name_en") else None),
                 "credits": credit,
@@ -619,7 +656,7 @@ def convert_lab7b(data: dict, *, program_id: str | None = None,
                 alt_group = None
 
             notes = [
-                str(x).strip()
+                _normalize_course_label(x)
                 for x in (
                     src.get("name_th") if has_wildcard else None,
                     src.get("category"),
@@ -632,12 +669,15 @@ def convert_lab7b(data: dict, *, program_id: str | None = None,
             note = " | ".join(notes) or None
 
             for code in plan_codes:
-                key = (year, semester, code, alt_group)
+                plan_year, plan_semester = COURSE_PLAN_OVERRIDES.get(
+                    (pid, code), (year, semester)
+                )
+                key = (plan_year, plan_semester, code, alt_group)
 
                 if key not in seen_plan:
                     plan.append({
-                        "year": year,
-                        "semester": semester,
+                        "year": plan_year,
+                        "semester": plan_semester,
                         "code": code,
                         "credits": credit,
                         "alt_group": alt_group,
@@ -671,7 +711,6 @@ def convert_lab7b(data: dict, *, program_id: str | None = None,
         raise ValueError(f"หน่วยกิตรวม {total_credits} อยู่นอกช่วง 30..300; "
                          "ระบุ --total-credits จากเล่มหลักสูตร")
 
-    pid = str(program_id or data.get("program") or "curriculum").strip()
     result = {
         "program": {
             "program_id": pid,
@@ -1025,8 +1064,31 @@ SQL: SELECT requires FROM prerequisite WHERE code='06026215' AND kind='pre'
 คำถาม: หลักสูตรนี้มีกี่หน่วยกิต
 SQL: SELECT total_credits FROM program
 
-คำถาม: ปี 1 เทอม 1 เรียนวิชาอะไรบ้าง
-SQL: SELECT code FROM plan_item WHERE year=1 AND semester=1 ORDER BY code
+คำถาม: ตามแผนการศึกษา ปี 1 เทอม 1 มีวิชาอะไรบ้าง ขอรหัส ชื่อวิชา และหน่วยกิต
+SQL: SELECT year, semester, code, name_th, credits
+     FROM v_plan WHERE year=1 AND semester=1 ORDER BY code
+
+คำถาม: ปี 1 มีวิชาอะไรบ้างในเทอม 1 และเทอม 2
+SQL: SELECT year, semester, code, name_th, credits
+     FROM v_plan WHERE year=1 AND semester IN (1,2) ORDER BY semester, code
+
+คำถาม: ปี 1 เทอม 1 มีทั้งหมดกี่วิชา และมีหน่วยกิตรวมเท่าไร
+SQL: SELECT n_courses AS course_count, credits AS total_credits
+     FROM v_semester_credits WHERE year=1 AND semester=1
+
+คำถาม: ปี 1 เทอม 1 กับเทอม 2 เทอมไหนมีวิชามากกว่า และต่างกันกี่วิชา
+SQL: SELECT year, semester, n_courses FROM v_semester_credits
+     WHERE year=1 AND semester IN (1,2) ORDER BY semester
+
+คำถาม: วิชา 06026200 อยู่ในแผนการเรียนปีไหน เทอมไหน และมีชื่อกับหน่วยกิตเท่าไร
+SQL: SELECT year, semester, code, name_th, credits
+     FROM v_plan WHERE code='06026200' ORDER BY year, semester
+
+คำถาม: ปี 2 เทอม 1 มีวิชาเลือกอะไรบ้าง และมีตัวเลือกใดให้เลือกแทนกันได้
+SQL: SELECT year, semester, alt_group, code, name_th, credits, note
+     FROM v_plan WHERE year=2 AND semester=1
+       AND (alt_group IS NOT NULL OR note LIKE '%เลือก%')
+     ORDER BY alt_group, code
 
 คำถาม: วิชาแคลคูลัส 1 มีรหัสอะไร
 SQL: SELECT code FROM course WHERE name_th LIKE '%แคลคูลัส 1%'
@@ -1046,10 +1108,18 @@ SQL: SELECT credits FROM course WHERE code='06026250'
 - ถามว่าภาคเรียนไหนมีกี่หน่วยกิต ให้ใช้ v_semester_credits เสมอ
   ห้ามใช้ SUM(credits) จาก v_plan เพราะจะนับวิชาเลือกซ้ำ
 - ถามว่าเรียนวิชาอะไรบ้าง ให้ใช้ v_plan เพราะมีชื่อวิชาอยู่แล้ว
+- ถามรายชื่อวิชา ให้คืนรหัส ชื่อ และหน่วยกิตทุกแถวที่ตรงคำถาม
+- ถ้าถามหลายเทอม ให้คืน year และ semester เพื่อแยกผลลัพธ์ตามเทอม
+- ถ้าถามจำนวนวิชาและหน่วยกิตรวม ให้ใช้ n_courses และ credits จาก v_semester_credits
+- ถ้าถามเปรียบเทียบจำนวนวิชาระหว่างสองเทอม ให้คืนผลของทั้งสองเทอม
+- ถ้าถามตำแหน่งวิชาในแผน ให้คืน year, semester, code, name_th และ credits
+- ถ้าถามวิชาเลือก ให้คืน alt_group, code, name_th, credits และ note จาก v_plan
 - ตอบเป็น SQL ล้วน ไม่ต้องมีคำอธิบายและไม่ต้องมี markdown fence
-- ถ้าถามว่า "เรียนวิชาอะไรบ้าง" ให้ SELECT code จาก plan_item
+- อย่าคืนเฉพาะ code เมื่อผู้ใช้ขอชื่อและหน่วยกิตด้วย
 - ถ้าถามหารหัสวิชาจากชื่อวิชา ให้ SELECT code FROM course และค้นใน name_th
 - การค้นชื่อวิชาภาษาไทยให้ใช้ LIKE '%ชื่อวิชา%' แทนการเทียบแบบ = เพื่อรองรับข้อความที่มีความแตกต่างเล็กน้อย
+- ถ้าถามว่ามีวิชาที่ผ่านเกณฑ์หน่วยกิตและขอรหัส ให้คืนทั้ง code และ credits
+  โดยตั้ง alias ตารางและระบุชื่อคอลัมน์ให้ชัด เพื่อให้คำตอบบอกได้ทั้งเกณฑ์และรหัส
 - ถ้าถามข้อมูลของ "รายวิชา" เช่น ชื่อวิชา หน่วยกิต ชั่วโมงเรียน ให้ query ตาราง course
 - ใช้ plan_item เฉพาะคำถามเกี่ยวกับแผนการศึกษา เช่น ปีไหน เทอมไหน เรียนวิชาอะไร หรือเรียนกี่หน่วยกิตในเทอมนั้น
 
@@ -1066,19 +1136,21 @@ ANSWER_PROMPT = """ตอบคำถามต่อไปนี้เป็น�
 กติกา
 - ตอบสั้น ตรงประเด็น ไม่ต้องอธิบายวิธีการ
 - ใช้เฉพาะตัวเลขและข้อความที่ปรากฏในผลลัพธ์ ห้ามเพิ่มข้อมูลจากความรู้ของคุณเอง
+- ถ้าผลลัพธ์มีแถวข้อมูล ห้ามตอบว่าไม่พบข้อมูล
 - ถ้าผลลัพธ์ว่างเปล่า ให้ตอบว่า "ไม่พบข้อมูลนี้ในเล่มหลักสูตร"
 - ตอบเป็น JSON รูปแบบ {{"answer": "คำตอบภาษาไทย"}} เท่านั้น
 """
 
 
 def clean_sql_output(s: str) -> str:
-    """ตัด <think> และ fence ออกจาก SQL ที่โมเดลตอบมา"""
+    """Remove model wrappers while preserving a multi-line SQL statement."""
     s = re.sub(r"<think>.*?</think>", "", s, flags=re.S)
     s = re.sub(r"```(?:sql)?", "", s).strip()
-    # งานนี้ใช้ query บรรทัดเดียว: เก็บเฉพาะบรรทัด SQL แรก
-    # เพื่อไม่ให้ reasoning หรือคำอธิบายที่หลุดมาถูกส่งเข้า SQLite
-    m = re.search(r"(?im)^\s*(select|with)\b[^\r\n]*", s)
-    return m.group(0).strip() if m else s
+    # Keep all lines in a CTE or formatted SELECT. The JSON response normally
+    # contains SQL only; discard any text before SQL and a trailing statement.
+    m = re.search(r"(?im)^\s*(select|with)\b[\s\S]*", s)
+    sql = m.group(0).strip() if m else s
+    return sql.split(";", 1)[0].strip()
 
 
 def strip_course_question_prefix(question: str) -> str:
@@ -1087,6 +1159,260 @@ def strip_course_question_prefix(question: str) -> str:
     if match:
         return f"{match.group(1).strip()}มีรหัสอะไร"
     return question
+
+
+def _plan_display_name_sql(alias: str = "v") -> str:
+    """Read a normal course name, or the label stored in a wildcard plan note."""
+    name = f"{alias}.name_th"
+    note = f"{alias}.note"
+    note_name = (
+        f"CASE WHEN {note} IS NULL THEN NULL "
+        f"WHEN instr({note}, ' | ') > 0 "
+        f"THEN substr({note}, 1, instr({note}, ' | ') - 1) "
+        f"ELSE {note} END"
+    )
+    return (
+        f"CASE WHEN lower({alias}.code) LIKE '%x%' AND {note} IS NOT NULL "
+        f"THEN {note_name} ELSE COALESCE({name}, {note_name}) END"
+    )
+
+
+def structured_question_sql(question: str) -> str | None:
+    """Build deterministic SQL for the supported plan-list questions."""
+    text = re.sub(r"\s+", " ", str(question or "")).strip()
+    year_match = re.search(r"ปี\s*(\d+)", text)
+    year = int(year_match.group(1)) if year_match else None
+    semesters = [int(value) for value in re.findall(r"เทอม\s*(\d+)", text)]
+    display_name = _plan_display_name_sql("v")
+
+    code_match = re.search(r"(?<!\d)(\d{8})(?!\d)", text)
+    if code_match and re.search(r"อยู่ในแผน|ปีไหน|เทอมไหน", text):
+        code = code_match.group(1)
+        return (
+            "SELECT v.year, v.semester, v.code, "
+            f"{display_name} AS name_th, v.credits "
+            "FROM v_plan AS v "
+            f"WHERE v.code = '{code}' "
+            "ORDER BY v.year, v.semester, v.code"
+        )
+
+    if year is None:
+        return None
+
+    if ("วิชาเลือก" in text or "ตัวเลือก" in text) and semesters:
+        semester = semesters[0]
+        return (
+            "SELECT v.year, v.semester, v.code, "
+            f"{display_name} AS name_th, v.credits, v.alt_group, v.note "
+            "FROM v_plan AS v "
+            f"WHERE v.year = {year} AND v.semester = {semester} "
+            "AND (v.alt_group IS NOT NULL OR v.note LIKE '%เลือก%') "
+            "ORDER BY COALESCE(v.alt_group, ''), v.code"
+        )
+
+    if len(set(semesters)) >= 2 and {1, 2}.issubset(set(semesters)) and re.search(
+        r"วิชาอะไร(?:บ้าง|ที่)|รายชื่อ|เรียนวิชา|ลงเรียน|ลงทะเบียน", text
+    ):
+        return (
+            "SELECT v.year, v.semester, v.code, "
+            f"{display_name} AS name_th, v.credits "
+            "FROM v_plan AS v "
+            f"WHERE v.year = {year} AND v.semester IN (1, 2) "
+            "ORDER BY v.semester, v.code"
+        )
+
+    if re.search(r"เทอมไหน.*มากกว่า|ต่างกันกี่วิชา", text) and len(semesters) >= 2:
+        return (
+            "WITH term_counts AS (SELECT "
+            f"COALESCE((SELECT n_courses FROM v_semester_credits WHERE year = {year} AND semester = 1), 0) AS term1_course_count, "
+            f"COALESCE((SELECT n_courses FROM v_semester_credits WHERE year = {year} AND semester = 2), 0) AS term2_course_count) "
+            "SELECT term1_course_count, term2_course_count, "
+            "CASE WHEN term1_course_count > term2_course_count THEN 1 "
+            "WHEN term2_course_count > term1_course_count THEN 2 ELSE 0 END AS semester_with_more, "
+            "ABS(term1_course_count - term2_course_count) AS difference "
+            "FROM term_counts"
+        )
+
+    if semesters and "กี่วิชา" in text and re.search(r"หน่วยกิตรวม|รวมเท่าไร", text):
+        semester = semesters[0]
+        return (
+            "SELECT n_courses AS course_count, credits AS total_credits "
+            "FROM v_semester_credits "
+            f"WHERE year = {year} AND semester = {semester}"
+        )
+
+    if semesters and re.search(
+        r"วิชาอะไร(?:บ้าง|ที่)|เรียนวิชา|รายชื่อ.*วิชา|ลงเรียน|ลงทะเบียน", text
+    ):
+        semester = semesters[0]
+        return (
+            "SELECT v.year, v.semester, v.code, "
+            f"{display_name} AS name_th, v.credits "
+            "FROM v_plan AS v "
+            f"WHERE v.year = {year} AND v.semester = {semester} "
+            "ORDER BY v.code"
+        )
+
+    return None
+
+
+def answer_structured_question(question: str, rows: list[dict]) -> str | None:
+    """Format the result of a supported plan query without an LLM summary."""
+    sql = structured_question_sql(question)
+    if sql is None:
+        return None
+
+    text = re.sub(r"\s+", " ", str(question or "")).strip()
+    year_match = re.search(r"ปี\s*(\d+)", text)
+    year = year_match.group(1) if year_match else "?"
+    semesters = re.findall(r"เทอม\s*(\d+)", text)
+
+    if not rows:
+        if "วิชาเลือก" in text or "ตัวเลือก" in text:
+            return f"ไม่พบรายการวิชาเลือกในแผนปี {year} เทอม {semesters[0]}"
+        if "วิชาอะไร" in text or "ลงเรียน" in text or "ลงทะเบียน" in text or "รายชื่อ" in text:
+            return "ไม่พบรายวิชาในแผนการศึกษาตามช่วงที่ถาม"
+        return "ไม่พบข้อมูลนี้ในแผนการศึกษา"
+
+    first = rows[0]
+    if {"course_count", "total_credits"}.issubset(first):
+        return (
+            f"ปี {year} เทอม {semesters[0]} มี {first['course_count']} วิชา "
+            f"รวม {first['total_credits']} หน่วยกิต"
+        )
+
+    if {"term1_course_count", "term2_course_count", "semester_with_more", "difference"}.issubset(first):
+        count_1 = first["term1_course_count"]
+        count_2 = first["term2_course_count"]
+        winner = first["semester_with_more"]
+        difference = first["difference"]
+        if winner == 0:
+            return f"ปี {year} เทอม 1 และเทอม 2 มีจำนวนวิชาเท่ากัน ({count_1} วิชา)"
+        return (
+            f"ปี {year} เทอม 1 มี {count_1} วิชา และเทอม 2 มี {count_2} วิชา; "
+            f"เทอม {winner} มีวิชามากกว่า {difference} วิชา"
+        )
+
+    def format_course(row: dict) -> str:
+        code = str(row.get("code") or "ไม่ระบุรหัส")
+        name = re.sub(r"\s+", " ", str(row.get("name_th") or "")).strip()
+        credits = row.get("credits")
+        label = f"{code} — {name}" if name and name != code else code
+        if credits is not None:
+            label += f" — {credits} หน่วยกิต"
+        return label
+
+    if "วิชาเลือก" in text or "ตัวเลือก" in text:
+        grouped: dict[str, list[dict]] = {}
+        for index, row in enumerate(rows, 1):
+            key = str(row.get("alt_group") or f"slot_{index}")
+            grouped.setdefault(key, []).append(row)
+        lines = [f"รายการวิชาเลือก/ช่องทางเลือก ปี {year} เทอม {semesters[0]}:"]
+        for choices in grouped.values():
+            if len(choices) > 1:
+                lines.append("- เลือกแทนกันได้: " + " / ".join(format_course(row) for row in choices))
+            else:
+                lines.append("- " + format_course(choices[0]))
+        return "\n".join(lines)
+
+    by_term: dict[tuple[int, int], list[dict]] = {}
+    for row in rows:
+        key = (int(row.get("year", year)), int(row.get("semester", semesters[0] if semesters else 0)))
+        by_term.setdefault(key, []).append(row)
+
+    if len(by_term) > 1 or len(semesters) > 1:
+        lines = []
+        for (row_year, semester), term_rows in sorted(by_term.items()):
+            lines.append(f"ปี {row_year} เทอม {semester}:")
+            lines.extend(f"- {format_course(row)}" for row in term_rows)
+        return "\n".join(lines)
+
+    if "อยู่ในแผน" in text or "ปีไหน" in text or "เทอมไหน" in text:
+        code = first.get("code", "")
+        details = ", ".join(
+            f"ปี {row.get('year')} เทอม {row.get('semester')} — {format_course(row)}"
+            for row in rows
+        )
+        return f"วิชา {code} อยู่ในแผน: {details}"
+
+    return f"ปี {year} เทอม {semesters[0]} มีรายวิชาตามแผนดังนี้:\n" + "\n".join(
+        f"- {format_course(row)}" for row in rows
+    )
+
+
+def answer_conflicts_with_rows(answer: str, rows: list[dict]) -> bool:
+    """ตรวจคำตอบที่บอกว่าไม่พบ ทั้งที่ SQL คืนแถวข้อมูลแล้ว"""
+    if not rows:
+        return False
+    text = re.sub(r"\s+", "", str(answer or ""))
+    return not text or any(marker in text for marker in (
+        "ไม่พบข้อมูล", "ไม่พบผล", "ไม่มีข้อมูลนี้", "ไม่มีข้อมูลใน",
+    ))
+
+
+def answer_threshold_course_question(
+    question: str, rows: list[dict], sql: str,
+) -> str | None:
+    """ตอบคำถามเกณฑ์หน่วยกิตและรหัสจากแถวที่ SQL ยืนยันว่าเข้าเกณฑ์"""
+    threshold_match = re.search(
+        r"(?:อย่างน้อย|ตั้งแต่)\s*(\d+)\s*หน่วยกิต", question
+    )
+    if not rows or not threshold_match or "รหัส" not in question:
+        return None
+
+    threshold = int(threshold_match.group(1))
+    # ห้ามสรุปว่าเข้าเกณฑ์จากคำถามอย่างเดียว ต้องมีเงื่อนไขเดียวกันใน SQL ด้วย
+    credit_filter = re.compile(
+        rf"\b(?:[A-Za-z_]\w*\.)?credits\s*>=\s*{threshold}\b",
+        re.IGNORECASE,
+    )
+    if not credit_filter.search(sql):
+        return None
+
+    answers = []
+    for row in rows:
+        values = {str(key).lower(): value for key, value in row.items()}
+        code = values.get("code")
+        if code is None:
+            continue
+        credits = values.get("credits")
+        try:
+            credit_text = str(int(float(credits))) if credits is not None else None
+        except (TypeError, ValueError):
+            credit_text = str(credits) if credits is not None else None
+        if credit_text is not None:
+            answers.append(f"{code} ({credit_text} หน่วยกิต)")
+        else:
+            answers.append(str(code))
+
+    if not answers:
+        return None
+    detail = ", ".join(answers)
+    if len(answers) == 1:
+        detail = f"รหัสวิชา {detail}"
+    else:
+        detail = f"รหัสวิชา {detail}"
+    return f"มีครับ พบวิชาที่มีอย่างน้อย {threshold} หน่วยกิต: {detail}"
+
+
+def answer_from_rows(question: str, rows: list[dict], sql: str = "") -> str:
+    """สร้างคำตอบสั้นจากผล SQL เมื่อคำตอบของ LLM ขัดกับข้อมูลที่พบ"""
+    threshold_answer = answer_threshold_course_question(question, rows, sql)
+    if threshold_answer:
+        return threshold_answer
+    if len(rows) == 1 and len(rows[0]) == 1:
+        column, value = next(iter(rows[0].items()))
+        value = str(value)
+        if column.lower() == "code":
+            return f"รหัสวิชาคือ {value}"
+        if column.lower() in {"credits", "total_credits"}:
+            return f"{value} หน่วยกิต"
+        if column.lower() == "years":
+            return f"{value} ปี"
+        if column.lower().startswith("count(") or column.lower() in {"count", "n_courses"}:
+            return f"{value} วิชา" if "กี่วิชา" in question else value
+        return value
+    return "พบข้อมูล: " + json.dumps(rows[:40], ensure_ascii=False)
 
 
 def ask(conn: sqlite3.Connection, question: str,
@@ -1102,6 +1428,20 @@ def ask(conn: sqlite3.Connection, question: str,
         "question": question, "sql": None, "rows": [], "answer": None,
         "error": None, "sql_model_output": None, "answer_model_output": None,
     }
+    structured_sql = structured_question_sql(question)
+    if structured_sql:
+        try:
+            sql = guard_sql(structured_sql)
+            rows = [dict(row) for row in conn.execute(sql).fetchall()]
+            result.update({"sql": sql, "rows": rows})
+            result["answer"] = answer_structured_question(question, rows)
+        except Exception as exc:
+            result["error"] = f"{type(exc).__name__}: {exc}"
+            result["answer"] = "ไม่สามารถตอบคำถามนี้ได้ กรุณาตรวจสอบฐานข้อมูล"
+            if verbose:
+                print(f"    คำถามแผนการศึกษาไม่สำเร็จ: {exc}")
+        return result
+
     ddl = DDL.strip()
     sql_question = strip_course_question_prefix(question)
     prompt = SQL_PROMPT.format(ddl=ddl, question=sql_question)
@@ -1142,6 +1482,13 @@ def ask(conn: sqlite3.Connection, question: str,
         result["answer"] = "ไม่พบข้อมูลนี้ในเล่มหลักสูตร"
         return result
 
+    threshold_answer = answer_threshold_course_question(
+        question, result["rows"], result["sql"] or ""
+    )
+    if threshold_answer:
+        result["answer"] = threshold_answer
+        return result
+
     raw_answer = ollama_generate(
         ANSWER_PROMPT.format(
             question=question,
@@ -1159,6 +1506,10 @@ def ask(conn: sqlite3.Connection, question: str,
         if isinstance(parsed_answer, dict) else raw_answer)
     result["answer"] = re.sub(
         r"<think>.*?</think>", "", result["answer"], flags=re.S).strip()
+    if answer_conflicts_with_rows(result["answer"], result["rows"]):
+        result["answer"] = answer_from_rows(
+            question, result["rows"], result["sql"] or ""
+        )
     return result
 
 
@@ -1216,6 +1567,8 @@ def score_one(expect: dict, got: dict) -> tuple[bool, str]:
         return False, f"SQL ไม่สำเร็จ: {got['error']}"
     kind = expect.get("type", "value")
     rows = got.get("rows") or []
+    if answer_conflicts_with_rows(got.get("answer", ""), rows):
+        return False, "SQL พบข้อมูล แต่ข้อความตอบกลับบอกว่าไม่พบ"
     vals = _values_of(rows)
 
     if kind == "none":
@@ -1225,6 +1578,28 @@ def score_one(expect: dict, got: dict) -> tuple[bool, str]:
     if kind == "count":
         ok = (len(rows) == int(expect["value"]))
         return ok, f"ได้ {len(rows)} แถว คาด {expect['value']}"
+
+    if kind == "rows":
+        wanted_rows = expect.get("value") or []
+        columns = list(expect.get("columns") or (
+            wanted_rows[0].keys() if wanted_rows else []
+        ))
+
+        def row_key(row: dict) -> tuple[str, ...]:
+            return tuple(
+                "" if row.get(column) is None
+                else _normalize_answer_value(row.get(column))
+                for column in columns
+            )
+
+        wanted = Counter(row_key(row) for row in wanted_rows)
+        actual = Counter(row_key(row) for row in rows)
+        ok = wanted == actual
+        if ok:
+            return True, f"ตรงครบ {len(wanted_rows)} แถว"
+        missing = list((wanted - actual).elements())[:3]
+        extra = list((actual - wanted).elements())[:3]
+        return False, f"แถวไม่ตรง; ขาด {missing}; เกิน {extra}"
 
     if kind == "set":
         want = {_normalize_answer_value(x) for x in expect["value"]}

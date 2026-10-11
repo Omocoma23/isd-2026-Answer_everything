@@ -161,44 +161,20 @@ def post_course(
 def ask(request: AskRequest) -> dict:
     try:
         database = databases[request.program]
-
-        result = model.ask(
-            database,
-            request.question
-        )
-
-        return {
-            "program": request.program,
-            **result,
-        }
+        result = model.ask(database,request.question)
+        return {"program": request.program,**result,}
 
     except KeyError:
-        raise HTTPException(
-            status_code=400,
-            detail="ไม่พบหลักสูตรที่เลือก"
-        )
+        raise HTTPException(status_code=400,detail="ไม่พบหลักสูตรที่เลือก")
 
     except FileNotFoundError as exc:
-        raise HTTPException(
-            status_code=503,
-            detail=str(exc)
-        ) from exc
+        raise HTTPException(status_code=503,detail=str(exc)) from exc
 
     except requests.RequestException as exc:
-        raise HTTPException(
-            status_code=503,
-            detail="ติดต่อ Ollama ไม่ได้"
-        ) from exc
+        raise HTTPException(status_code=503,detail="ติดต่อ Ollama ไม่ได้") from exc
 
-    except (
-        ValueError,
-        json.JSONDecodeError,
-        sqlite3.Error,
-    ) as exc:
-        raise HTTPException(
-            status_code=422,
-            detail=str(exc)
-        ) from exc
+    except (ValueError,json.JSONDecodeError,sqlite3.Error,) as exc:
+        raise HTTPException(status_code=422,detail=str(exc)) from exc
 
 @app.get("/api/programs")
 def get_programs() -> list[dict]:

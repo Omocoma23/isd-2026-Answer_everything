@@ -14,7 +14,7 @@
       "ground_truth_total": 56,
       "prediction_total": 60
     },
-    "overall_micro_cer": 0.126897,
+    "overall_micro_cer": 0.125238,
     "attributes": {
       "code": {
         "label": "รหัสวิชา",
@@ -37,9 +37,9 @@
       "name_en": {
         "label": "ชื่อวิชา (อังกฤษ) ⭐",
         "n_items": 56,
-        "cer": 0.076923,
-        "wer": 0.061947,
-        "exact_match_accuracy": 0.964286,
+        "cer": 0.07078,
+        "wer": 0.057778,
+        "exact_match_accuracy": 0.982143,
         "missing": 1,
         "hallucinated": 0
       },
@@ -212,28 +212,12 @@
     "questions": 30,
     "valid_sql_count": 30,
     "valid_sql_rate": 1.0,
-    "execution_correct_count": 27,
-    "execution_accuracy": 0.9,
-    "mean_seconds_per_question": 1.046667,
-    "median_seconds_per_question": 0.9,
+    "execution_correct_count": 30,
+    "execution_accuracy": 1.0,
+    "mean_seconds_per_question": 1.23,
+    "median_seconds_per_question": 1.2,
     "failed_sql_questions": [],
-    "wrong_answer_questions": [
-      {
-        "question": "วิชาพีชคณิตเชิงเส้นมีรหัสอะไร",
-        "why": "ไม่พบค่า 06046402 (ได้ [])",
-        "sql": "SELECT code FROM course WHERE name_th LIKE '%พีชคณิตเชิงเส้น%' LIMIT 200"
-      },
-      {
-        "question": "วิชาความน่าจะเป็นและสถิติมีรหัสอะไร",
-        "why": "ไม่พบค่า 06066001 (ได้ [])",
-        "sql": "SELECT code FROM course WHERE name_th LIKE '%ความน่าจะเป็นและสถิติ%' LIMIT 200"
-      },
-      {
-        "question": "วิชา 06066303 ชื่อภาษาอังกฤษว่าอะไร",
-        "why": "ไม่พบค่า PROBLEM SOLVING AND COMPUTER PROGRAMMING PROGRAMMING (ได้ ['PROBLEM SOLVING AND COMPUTER PROGRAMMING'])",
-        "sql": "SELECT name_en FROM course WHERE code='06066303' LIMIT 200"
-      }
-    ],
+    "wrong_answer_questions": [],
     "metric_note": "For this Group-B NL-to-SQL task, Execution Accuracy is the key end-to-end correctness metric; Valid SQL Rate is reported separately because syntactically executable SQL can still answer the wrong question."
   },
   "metrics_not_claimed": {
