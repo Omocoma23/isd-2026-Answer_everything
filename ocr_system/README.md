@@ -169,6 +169,9 @@ python -m uvicorn lab10_fastapi.curriculum_app.main:app --reload --host 127.0.0.
 - สถานะ API/ฐานข้อมูล/Ollama: <http://127.0.0.1:8000/api/health>
 - หน้าทดลอง API: <http://127.0.0.1:8000/docs>
 
+3. คำถามที่สามารถใช้ถามอยู่สามารถดูในไฟล์ชื่อ all_questions.csv
+- C:\Users\Thiti\Downloads\Real_Ocr_system\isd-2026-Answer_everything\ocr_system\work\all_questions.csv
+
 ## 9. ลำดับคำสั่งฉบับย่อ
 
 เมื่อ Python, Tesseract และ Ollama ติดตั้งแล้ว คำสั่งหลักคือ:
